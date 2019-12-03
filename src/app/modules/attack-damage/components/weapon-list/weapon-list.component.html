@@ -1,1 +1,5 @@
 <p>weapon-list works!</p>
+<div *ngFor="let weapon of weapons">
+    <div>a {{weapon.slaying}} {{weapon.name}} <span *ngIf="weapon.brand">({{weapon.brand}})</span>
+    </div>
+</div>

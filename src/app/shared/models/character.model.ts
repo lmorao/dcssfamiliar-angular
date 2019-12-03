@@ -1,31 +1,31 @@
-import { Inventory } from ".inventory.model";
-import { Skills } from ".skills.model"
-import { Weapon } from ".weapon.model"
+import { Inventory } from "./inventory.model";
+import { Skills } from "./skills.model"
+import { Weapon } from "./weapon.model"
 
 export class Character {
-    username: string;
-    name: string;
-    race: string;
-    class: string;
+    public username: string;
+    public name: string;
+    public race: string;
+    public class: string;
 
-    health: string;
-    magic: string;
-    gold: number;
+    public health: string;
+    public magic: string;
+    public gold: number;
 
-    ac: number;
-    ev: number;
-    sh: number;
+    public ac: number;
+    public ev: number;
+    public sh: number;
 
-    str: number;
-    int: number;
-    sh: number;
+    public str: number;
+    public int: number;
+    public dex: number;
 
-    xl: number;
-    god: string;
-    spells: string;
+    public xl: number;
+    public god: string;
+    public spells: string;
 
-    inventory: Inventory;
-    skills: Skills;
+    public inventory: Inventory;
+    public skills: Skills;
 
-    c_weapon: Weapon;
+    public c_weapon: Weapon;
 }
