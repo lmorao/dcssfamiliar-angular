@@ -1,9 +1,12 @@
 <p>weapon-list works!</p>
+
+<p>{{selectedWeapon.name}}</p>
 <div class="panel">
     <mat-list>
-<mat-list-item  *ngFor="let weapon of weapons" (click)="selectWeapon(weapon)">
-    <div class="items">a {{weapon.slaying}} {{weapon.name}} <span *ngIf="weapon.brand">({{weapon.brand}})</span>
-    </div>
-</mat-list-item>
+        <mat-list-item  *ngFor="let weapon of weapons" (click)="selectWeapon(weapon)">
+            <div  >
+                <span [ngClass]="weapon==selectedWeapon ? 'selected' : '' "> a {{weapon.slaying}} {{weapon.name}}</span> <span *ngIf="weapon.brand">({{weapon.brand}})</span>
+            </div>
+        </mat-list-item>
 </mat-list>
 </div>

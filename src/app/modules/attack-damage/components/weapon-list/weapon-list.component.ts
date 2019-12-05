@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Weapon } from '../../../../shared/models/weapon.model'
+import { SelectedWeaponService } from '../../../../core/services/selected-weapon.service'
 
 @Component({
   selector: 'weapon-list',
@@ -13,12 +14,19 @@ export class WeaponListComponent implements OnInit {
   weapons = [
   new Weapon("dagger","+1","elec"),
   new Weapon("hunting sling",),
-  ]
+  ];
 
-  selectedWeapon;
-  selectWeapon (weapon) {}
+  selectedWeapon = "lala";
 
-  constructor() { 
+  selectWeapon (weapon) {
+    this.selectedWeaponService.selectWeapon(weapon)
+    this.selectedWeapon = weapon;
+  }
+
+  constructor(
+    private selectedWeaponService: SelectedWeaponService,
+
+  ) { 
 
   }
 
