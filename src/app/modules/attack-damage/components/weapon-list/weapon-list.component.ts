@@ -13,10 +13,14 @@ export class WeaponListComponent implements OnInit {
   weapons = [
   new Weapon("dagger","+1","elec"),
   new Weapon("hunting sling",),
-
   ]
 
-  constructor() { }
+  selectedWeapon;
+  selectWeapon (weapon) {}
+
+  constructor() { 
+
+  }
 
   ngOnInit() {
   }
