@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Weapon } from '../../../../shared/models/weapon.model'
 
 @Component({
-  selector: 'app-weapon-list',
+  selector: 'weapon-list',
   templateUrl: './weapon-list.component.html',
   styleUrls: ['./weapon-list.component.sass']
 })

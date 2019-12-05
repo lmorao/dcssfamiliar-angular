@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { WeaponListComponent } from './modules/attack-damage/components/weapon-list/weapon-list.component';
+import { AttackDamageComponent } from './modules/attack-damage/attack-damage.component';
 
 
 
 const routes: Routes = [
-  { path: "weaponlist", component: WeaponListComponent },
+  { path: "attackdamage", component: AttackDamageComponent },
 ];
 
 @NgModule({
