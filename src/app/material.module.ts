@@ -1,7 +1,8 @@
 
 import {NgModule} from '@angular/core';
 import { MatSliderModule } from '@angular/material/slider';
-import {MatListModule} from '@angular/material/list';
+import { MatListModule } from '@angular/material/list';
+import { MatGridListModule } from '@angular/material/grid-list';
 
 /*
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
@@ -23,10 +24,12 @@ import { MatMomentDateModule } from '@angular/material-moment-adapter';
   imports: [
     MatSliderModule,
     MatListModule,
+    MatGridListModule,
   ],
   exports: [
     MatSliderModule,
     MatListModule,
+    MatGridListModule,
   ]
 })
 export class MaterialModule {}

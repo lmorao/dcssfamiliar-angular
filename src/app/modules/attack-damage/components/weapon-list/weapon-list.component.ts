@@ -8,15 +8,17 @@ import { SelectedWeaponService } from '../../../../core/services/selected-weapon
   styleUrls: ['./weapon-list.component.sass']
 })
 export class WeaponListComponent implements OnInit {
+
   //TODO hardcoded weapon list
 
     //new Weapon{"dagger", "elec", 1),
   weapons = [
   new Weapon("dagger","+1","elec"),
   new Weapon("hunting sling",),
+  new Weapon("long sword","+3","elec"),
   ];
 
-  selectedWeapon = "lala";
+  selectedWeapon = {"name":"TODO"};
 
   selectWeapon (weapon) {
     this.selectedWeaponService.selectWeapon(weapon)
@@ -25,12 +27,11 @@ export class WeaponListComponent implements OnInit {
 
   constructor(
     private selectedWeaponService: SelectedWeaponService,
-
   ) { 
-
   }
 
   ngOnInit() {
+    this.selectedWeaponService.weapon.subscribe(weapon => this.selectedWeapon = weapon)
   }
 
 }
