@@ -1,31 +1,42 @@
 import { Inventory } from "./inventory.model";
 import { Skills } from "./skills.model"
 import { Weapon } from "./weapon.model"
+import { Deserializable } from "./deserializable.model"
 
-export class Character {
-    public username: string;
-    public name: string;
-    public race: string;
-    public class: string;
+export class Character implements Deserializable{
 
-    public health: string;
-    public magic: string;
-    public gold: number;
+    deserialize(input: any): this {
+        return Object.assign(this, input);
+    }
+    private static USERNAME = "";
+    constructor (
 
-    public ac: number;
-    public ev: number;
-    public sh: number;
+    public username:string = Character.USERNAME,
+    public name:string = "",
+    public race: string = "",
+    public background: string = "",
 
-    public str: number;
-    public int: number;
-    public dex: number;
+    public health: string = "",
+    public magic: string = "",
+    public gold: number = 0,
 
-    public xl: number;
-    public god: string;
-    public spells: string;
+    public ac: number = 0,
+    public ev: number = 0,
+    public sh: number = 0,
 
-    public inventory: Inventory;
-    public skills: Skills;
+    public str: number = 1,
+    public int: number = 1,
+    public dex: number = 1,
 
-    public c_weapon: Weapon;
+    public xl: number = 1,
+    public god: string = "",
+    public spells: string = "",
+
+    public inventory: Inventory,
+    public skills: Skills,
+
+    public c_weapon: Weapon,
+
+
+    ) {}
 }

@@ -7,8 +7,8 @@ import { Character } from '../../shared/models/character.model'
   styleUrls: ['./profile.component.sass']
 })
 export class ProfileComponent implements OnInit {
-  char = new Character
-  str: number
+  char = new Character(<Character> {"dex":5});
+  str:number 
   int: number
   dex: number
   xl: number
@@ -27,6 +27,9 @@ export class ProfileComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+  this.str = this.char['str']
+  this.int = this.char['int']
+  this.dex = this.char['dex']
   }
 
 }

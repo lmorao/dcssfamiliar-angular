@@ -7,7 +7,7 @@ export class Weapon implements Deserializable {
 
     deserialize(input: any): this {
         return Object.assign(this, input);
-      }
+    }
 
     constructor(
         public name = name,
