@@ -1,4 +1,4 @@
 <p>{{selectedWeapon.name}}</p>
-<p>{{min_damage}}</p>
-<p>{{exp_damage}}</p>
-<p>{{max_damage}}</p>
+<p>avg: {{exp_damage | number:'1.1-1'}}, range: [{{min_damage | number:'1.1-1'}}, {{max_damage | number:'1.1-1'}}]</p>
+
+<p>Damage per turn: {{attack_speed}}</p>

@@ -14,8 +14,9 @@ export class WeaponDamageComponent implements OnInit {
   min_damage = 0;
   max_damage = 0;
   exp_damage = 0;
-  weapon_skill = 10
-  fighting_skill = 10
+  weapon_skill = 13
+  fighting_skill = 3
+  attack_speed
   dice_min = function (n) { return 1}
   dice_max = function (n) { return n}
   dice_exp = function (n) { 
@@ -72,7 +73,23 @@ export class WeaponDamageComponent implements OnInit {
     return total
   }
 
-  
+  damage_per_turn = function (damage,speed) {
+    return damage/(speed/10)
+  }
+
+  calc_attack_speed = function (base, min, skill) {
+    var a = base - skill/2
+    if (a < min) {a = min}
+    return a
+  }
+  calc_w_speed = function(weapon) {
+    var weapon_spec = this.wt[weapon.name];
+    var speed = weapon_spec['speed'];
+    var base = speed['base']
+    var min = speed['min']
+    return this.calc_attack_speed(base, min, this.weapon_skill)
+  }
+
  
 
   constructor(
@@ -84,7 +101,8 @@ export class WeaponDamageComponent implements OnInit {
       this.selectedWeapon = weapon;
       this.min_damage = this.calculate_damage(weapon,this.dice_min);
       this.max_damage = this.calculate_damage(weapon,this.dice_max);
-      this.exp_damage = this.calculate_damage(weapon,this.dice_exp)
+      this.exp_damage = this.calculate_damage(weapon,this.dice_exp);
+      this.attack_speed = this.damage_per_turn(this.exp_damage, this.calc_w_speed(weapon))
     })
   }
 
