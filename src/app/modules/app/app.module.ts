@@ -12,6 +12,7 @@ import { WeaponListComponent } from '../attack-damage/components/weapon-list/wea
 import { AttackDamageComponent } from '../attack-damage/attack-damage.component';
 import { WeaponDamageComponent } from '../attack-damage/components/weapon-damage/weapon-damage.component';
 import { ProfileComponent } from '../profile/profile.component'
+import { SkillsMenuComponent } from '../skills-menu/skills-menu.component'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
@@ -21,6 +22,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AttackDamageComponent,
     WeaponDamageComponent,
     ProfileComponent,
+    SkillsMenuComponent,
   ],
   imports: [
     BrowserModule,
