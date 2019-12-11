@@ -1,9 +1,8 @@
-
 <div class="panel">
   <mat-list>
-    <mat-list-item *ngFor="let skill of s_melee_names">
+    <mat-list-item *ngFor="let skill of s_melee_temp">
       <div >
-        <span > {{skill}} </span>
+        <span > {{s_melee[skill].display}}: {{s_melee[skill].level}} </span>
       </div>
     </mat-list-item>
   </mat-list>

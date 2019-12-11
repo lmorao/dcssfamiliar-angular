@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Skills } from '../../shared/models/skills.model'
-import { Deserializable } from "./deserializable.model"
 
 @Component({
   selector: 'app-skills-menu',
@@ -11,17 +10,18 @@ export class SkillsMenuComponent implements OnInit {
     deserialize(input: any): this {
         return Object.assign(this, input);
     }
+  // TODO: dont separate skills, but use attribute instead. easy to pass between components
   s_melee = {
-    fighting: 0,
-    "short blades": 0,
-    "long blades":0,
-    maces:0,
-    axes:0,
-    polearms:0,
-    staves:0,
-    unarmed:0
+    fighting: { level: 0, display: "Fighting"},
+    "short blades": { level: 0, display: "Short Blades"},
+    "long blades":{ level: 0,display: "Long Blades"},
+    maces:{ level: 0,display: "Maces & Flails"},
+    axes:{ level: 0,display: "Axes"},
+    polearms:{ level: 0,display: "Polearms"},
+    staves:{ level: 0,display: "Staves"},
+    unarmed:{ level: 0,display: "Unarmed"},
   }
-  s_melee_names = ["Fighting","Short Blades", "Long Blades", "Maces & Flails", "Axes", "Polearms", "Staves", "Unarmed"]
+  s_melee_temp = ["fighting","short blades", "long blades", "maces", "axes", "polearms", "staves", "unarmed"]
 
   s_ranged = {
     bows:0,
