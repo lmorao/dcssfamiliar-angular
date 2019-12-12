@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SelectedWeaponService } from '../../../../core/services/selected-weapon.service'
+import { SkillsService } from '../../../../core/services/skills.service'
 import { weapon_types } from '../../../../weapon_types'
 
 @Component({
@@ -9,13 +10,12 @@ import { weapon_types } from '../../../../weapon_types'
 })
 export class WeaponDamageComponent implements OnInit {
   selectedWeapon;
+  skills
   wt=weapon_types
   str = 15;
   min_damage = 0;
   max_damage = 0;
   exp_damage = 0;
-  weapon_skill = 13
-  fighting_skill = 3
   attack_speed
   dice_min = function (n) { return 1}
   dice_max = function (n) { return n}
@@ -51,15 +51,20 @@ export class WeaponDamageComponent implements OnInit {
     return  slaying
   }
 
+  debug = 'l'
   calculate_damage = function (weapon,dice) {
+    if (weapon.name == "") { return 0}
     var weapon_spec = this.wt[weapon.name];
     var base_damage = weapon_spec['damage']
     var preslaying = weapon.slaying
     var tempslaying = this.calc_slaying(preslaying,dice)
     var slaying = tempslaying
+    var weapon_skill = this.skills[weapon_spec['category']]['level']
+    var fighting_skill = this.skills['fighting']['level']
+    this.debug = this.skills['long blades']['level']
 
-    var wsm = (2499 + dice(100 * this.weapon_skill +1))/2500
-    var fm = (3999 + dice(100 * this.fighting_skill +1))/4000
+    var wsm = (2499 + dice(100 * weapon_skill +1))/2500
+    var fm = (3999 + dice(100 * fighting_skill +1))/4000
     var total = 0;
     var strm  
     if (this.str > 10) {
@@ -83,17 +88,20 @@ export class WeaponDamageComponent implements OnInit {
     return a
   }
   calc_w_speed = function(weapon) {
+    if (weapon.name == "") { return 0}
     var weapon_spec = this.wt[weapon.name];
+    var weapon_skill = this.skills[weapon_spec['category']]['level']
     var speed = weapon_spec['speed'];
     var base = speed['base']
     var min = speed['min']
-    return this.calc_attack_speed(base, min, this.weapon_skill)
+    return this.calc_attack_speed(base, min, weapon_skill)
   }
 
  
 
   constructor(
     private selectedWeaponService: SelectedWeaponService,
+    private skillsService: SkillsService,
   ) { }
 
   ngOnInit() {
@@ -103,6 +111,13 @@ export class WeaponDamageComponent implements OnInit {
       this.max_damage = this.calculate_damage(weapon,this.dice_max);
       this.exp_damage = this.calculate_damage(weapon,this.dice_exp);
       this.attack_speed = this.damage_per_turn(this.exp_damage, this.calc_w_speed(weapon))
+    })
+    this.skillsService.skills.subscribe(skills => {
+      this.skills = skills
+      this.min_damage = this.calculate_damage(this.selectedWeapon,this.dice_min);
+      this.max_damage = this.calculate_damage(this.selectedWeapon,this.dice_max);
+      this.exp_damage = this.calculate_damage(this.selectedWeapon,this.dice_exp);
+      this.attack_speed = this.damage_per_turn(this.exp_damage, this.calc_w_speed(this.selectedWeapon))
     })
   }
 

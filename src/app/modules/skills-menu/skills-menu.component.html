@@ -1,8 +1,14 @@
 <div class="panel">
   <mat-list>
     <mat-list-item *ngFor="let skill of s_melee_temp">
-      <div >
-        <span > {{s_melee[skill].display}}: {{s_melee[skill].level}} </span>
+      <div>
+        <button mat-icon-button color="primary" (click)=lessb(skill)>
+          <mat-icon>arrow_left</mat-icon>
+        </button>
+        <span> {{s_melee[skill].display}}: {{s_melee[skill].level}} </span>
+        <button mat-icon-button color="primary" (click)=moreb(skill)>
+          <mat-icon>arrow_right</mat-icon>
+        </button>
       </div>
     </mat-list-item>
   </mat-list>

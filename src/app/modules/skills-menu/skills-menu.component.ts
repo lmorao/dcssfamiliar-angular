@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Skills } from '../../shared/models/skills.model'
+import { SkillsService } from '../../core/services/skills.service'
 
 @Component({
   selector: 'app-skills-menu',
@@ -11,17 +12,11 @@ export class SkillsMenuComponent implements OnInit {
         return Object.assign(this, input);
     }
   // TODO: dont separate skills, but use attribute instead. easy to pass between components
-  s_melee = {
-    fighting: { level: 0, display: "Fighting"},
-    "short blades": { level: 0, display: "Short Blades"},
-    "long blades":{ level: 0,display: "Long Blades"},
-    maces:{ level: 0,display: "Maces & Flails"},
-    axes:{ level: 0,display: "Axes"},
-    polearms:{ level: 0,display: "Polearms"},
-    staves:{ level: 0,display: "Staves"},
-    unarmed:{ level: 0,display: "Unarmed"},
-  }
+  s_melee
+  skills 
   s_melee_temp = ["fighting","short blades", "long blades", "maces", "axes", "polearms", "staves", "unarmed"]
+  lessb = function (skill) {if (this.s_melee[skill]['level'] >0) {this.s_melee[skill]['level'] -=1}; this.skillsService.updateSkills(this.s_melee)}
+  moreb = function (skill) {if (this.s_melee[skill]['level'] <27) {this.s_melee[skill]['level'] +=1}; this.skillsService.updateSkills(this.s_melee)}
 
   s_ranged = {
     bows:0,
@@ -57,9 +52,14 @@ export class SkillsMenuComponent implements OnInit {
     evocations:0,
     stealth:0
   }
-  constructor() { }
+  constructor(
+        private skillsService: SkillsService,
+  ) { }
 
   ngOnInit() {
+    this.skillsService.skills.subscribe(skills => {
+      this.s_melee = skills
+    })
   }
 
 }

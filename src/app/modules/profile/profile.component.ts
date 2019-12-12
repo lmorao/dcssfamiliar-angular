@@ -14,14 +14,14 @@ export class ProfileComponent implements OnInit {
   xl: number
   mutations: []
   
-  lessxl = function () {this.xl -=1}
-  morexl = function () {this.xl +=1}
-  lessstr = function () {this.str -=1}
-  morestr = function () {this.str +=1}
-  lessint = function () {this.int -=1}
-  moreint = function () {this.int +=1}
-  lessdex = function () {this.dex -=1}
-  moredex = function () {this.dex +=1}
+  lessxl = function () {if (this.xl >1) {this.xl -=1}}
+  morexl = function () {if (this.xl <27) {this.xl +=1}}
+  lessstr = function () {if (this.str >1) {this.str -=1}}
+  morestr = function () {if (this.str <60) {this.str +=1}}
+  lessint = function () {if (this.int >1) {this.int -=1}}
+  moreint = function () {if (this.str <60) {this.int +=1}}
+  lessdex = function () {if (this.dex >1) {this.dex -=1}}
+  moredex = function () {if (this.str <60) {this.dex +=1}}
 
 
   constructor() { }
