@@ -18,11 +18,11 @@ export class WeaponDamageComponent implements OnInit {
   max_damage = 0;
   exp_damage = 0;
   attack_speed
-  dice_min = function (n) { return 1}
-  dice_max = function (n) { return n}
+  dice_min = function (n) { return 0}
+  dice_max = function (n) { return n-1}
   dice_exp = function (n) { 
     var total = 0;
-    for ( var i=0; i<=n; i+=1 ) {
+    for ( var i=0; i<n; i+=1 ) {
       total += i
     }
     return total/n
@@ -44,16 +44,17 @@ export class WeaponDamageComponent implements OnInit {
     if (re) { var s1 = /\d+/.exec(preslaying); slaying =s1[0] ; } else { slaying = 0; }
     slaying = slaying * pos
     if (slaying > 0) {
-      slaying = dice(1 + slaying ) -1
+      slaying = dice(1 + slaying ) 
     } else {
-      slaying = -1 * dice(1 - slaying ) -1
+      slaying = -1 * dice(1 - slaying ) 
     }
 
     return  slaying
   }
 
   debug = 'l'
-  calculate_damage = function (weapon,dice) {
+  calculate_damage = function (weapon,dice, inverse=false) {
+    // inverse is used for max damage formula
     if (weapon.name == "") { return 0}
     var weapon_spec = this.wt[weapon.name];
     var base_damage = weapon_spec['damage']
@@ -62,20 +63,26 @@ export class WeaponDamageComponent implements OnInit {
     var slaying = tempslaying
     var weapon_skill = this.skills[weapon_spec['category']]['level']
     var fighting_skill = this.skills['fighting']['level']
-    this.debug = this.str
 
-    var wsm = (2499 + dice(100 * weapon_skill +1))/2500
-    var fm = (3999 + dice(100 * fighting_skill +1))/4000
+    var wsm = (2500 + dice(100 * weapon_skill +1))/2500
+    var fm = (4000 + dice(100 * fighting_skill +1))/4000
     var total = 0;
     var strm  
+    var dammod = 39;
     if (this.str > 10) {
-      strm = (39+((dice(this.str-8)-1)*2))/39
+      strm = (dammod+(dice(this.str-9)*2))/39
     } else if (this.str <10) {
-      strm = (39-((dice(12-this.str)-1)*3))/39
+      if (inverse) {strm = dammod/39} else {
+      strm = (dammod-(dice(11-this.str)*3))/39
+      }
     } else {
       strm=1
     }
-    total = (( dice(base_damage * strm + 1) - 1) * wsm * fm + this.misc + slaying) * this.final + this.stabbing - this.ac_reduction
+
+    //total = (( dice(base_damage * strm + 1) - 1) * wsm * fm + this.misc + slaying) * this.final + this.stabbing - this.ac_reduction
+    //TODO stabbing is not right
+    total = ( dice(base_damage * strm + 1)  * wsm * fm + this.misc + slaying) * this.final + this.stabbing - this.ac_reduction
+    if (0 > total) {total = 0}
     return total
   }
 
@@ -110,21 +117,21 @@ export class WeaponDamageComponent implements OnInit {
     this.selectedWeaponService.weapon.subscribe(weapon => {
       this.selectedWeapon = weapon;
       this.min_damage = this.calculate_damage(weapon,this.dice_min);
-      this.max_damage = this.calculate_damage(weapon,this.dice_max);
+      this.max_damage = this.calculate_damage(weapon,this.dice_max, true);
       this.exp_damage = this.calculate_damage(weapon,this.dice_exp);
       this.attack_speed = this.damage_per_turn(this.exp_damage, this.calc_w_speed(weapon))
     })
     this.skillsService.skills.subscribe(skills => {
       this.skills = skills
       this.min_damage = this.calculate_damage(this.selectedWeapon,this.dice_min);
-      this.max_damage = this.calculate_damage(this.selectedWeapon,this.dice_max);
+      this.max_damage = this.calculate_damage(this.selectedWeapon,this.dice_max, true);
       this.exp_damage = this.calculate_damage(this.selectedWeapon,this.dice_exp);
       this.attack_speed = this.damage_per_turn(this.exp_damage, this.calc_w_speed(this.selectedWeapon))
     })
     this.profileService.profile.subscribe(profile => {
       this.str = profile['str']
       this.min_damage = this.calculate_damage(this.selectedWeapon,this.dice_min);
-      this.max_damage = this.calculate_damage(this.selectedWeapon,this.dice_max);
+      this.max_damage = this.calculate_damage(this.selectedWeapon,this.dice_max, true);
       this.exp_damage = this.calculate_damage(this.selectedWeapon,this.dice_exp);
       this.attack_speed = this.damage_per_turn(this.exp_damage, this.calc_w_speed(this.selectedWeapon))
 

@@ -14,7 +14,8 @@ export class SkillsMenuComponent implements OnInit {
   // TODO: dont separate skills, but use attribute instead. easy to pass between components
   s_melee
   skills 
-  s_melee_temp = ["fighting","short blades", "long blades", "maces", "axes", "polearms", "staves", "unarmed"]
+  s_melee_temp = ["fighting","short blades", "long blades", "maces", "axes", "polearms", "staves", "unarmed",
+"slings"]
   lessb = function (skill) {if (this.s_melee[skill]['level'] >0) {this.s_melee[skill]['level'] -=1}; this.skillsService.updateSkills(this.s_melee)}
   moreb = function (skill) {if (this.s_melee[skill]['level'] <27) {this.s_melee[skill]['level'] +=1}; this.skillsService.updateSkills(this.s_melee)}
 
