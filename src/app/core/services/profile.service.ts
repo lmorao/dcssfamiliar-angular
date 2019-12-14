@@ -5,7 +5,6 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root'
 })
 export class ProfileService {
-
   private profileSource = new BehaviorSubject(
     {
       "str": 1,

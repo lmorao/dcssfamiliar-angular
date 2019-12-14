@@ -22,5 +22,5 @@ export const weapon_types = {
    "great sword": {'category': "long blades", "name": 'great_sword', 'damage': '15', 'hit':'-3', 'speed': '17','ohms':'little', 'thms':'little','damage_type':"slicing", 'prob':10},
    "triple sword": {'category': "long blades", "name": 'triple_sword', 'damage': '17', 'hit':'-4', 'speed': {base:'19',min:7},'ohms':'little', 'thms':'little','damage_type':"slicing", 'prob':2},
 
-   "hunting sling": {'category': "long blades", "name": 'triple_sword', 'damage': '5', 'hit':'+2', 'speed': '12','ohms':'little', 'thms':'little','damage_type':"slicing", 'prob':2},
+   "hunting sling": {'category': "slings", "name": 'triple_sword', 'damage': '5', 'hit':'+2', 'speed': '12','ohms':'little', 'thms':'little','damage_type':"slicing", 'prob':2},
 };
