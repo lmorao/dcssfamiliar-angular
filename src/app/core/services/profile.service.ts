@@ -6,5 +6,19 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class ProfileService {
 
+  private profileSource = new BehaviorSubject(
+    {
+      "str": 1,
+      "int": 1,
+      "dex": 1,
+      "xl": 1,
+    }
+  );
+
+  profile = this.profileSource.asObservable();
+
+  updateProfile(profile) {
+    this.profileSource.next(profile);
+  }
   constructor() { }
 }
