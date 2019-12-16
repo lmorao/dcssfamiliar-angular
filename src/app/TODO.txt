@@ -1,0 +1,6 @@
+
+unarmed as a default weapon
+skills load with parser
+unarmed damage calculation
+unarmed and forms
+how is the rounding done, because damage still decreases sometimes when we have more skill

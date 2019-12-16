@@ -103,7 +103,6 @@ export class WeaponDamageComponent implements OnInit {
     var speed = weapon_spec['speed'];
     var base = speed['base']
     var min = speed['min']
-    console.log(base)
     return this.calc_attack_speed(base, min, weapon_skill)
   }
 

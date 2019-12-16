@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Skills } from '../../shared/models/skills.model'
 import { SkillsService } from '../../core/services/skills.service'
+import { CfParserService } from '../../core/services/cf-parser.service'
 
 @Component({
   selector: 'app-skills-menu',
@@ -55,9 +56,13 @@ export class SkillsMenuComponent implements OnInit {
   }
   constructor(
         private skillsService: SkillsService,
+    private parserService: CfParserService,
   ) { }
 
   ngOnInit() {
+    this.parserService.skills.subscribe(skills => { this.s_melee = skills; 
+      this.skillsService.updateSkills(this.s_melee)
+      })
     this.skillsService.skills.subscribe(skills => {
       this.s_melee = skills
     })

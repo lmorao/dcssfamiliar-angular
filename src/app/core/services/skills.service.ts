@@ -15,8 +15,6 @@ export class SkillsService {
     polearms:{ level: 0,display: "Polearms"},
     staves:{ level: 0,display: "Staves"},
     unarmed:{ level: 0,display: "Unarmed"},
-
-
     slings:{ level: 0,display: "Slings"},
     }
     );
