@@ -33,3 +33,18 @@
   </button>
   <br>
 </p>
+<form  #heroForm="ngForm">
+    <div class="form-group">
+      <label for="name">Character File (dump)</label>
+      <input type="text" class="form-control" id="name"
+              [(ngModel)]="model.name" name="name"
+              maxlength="20000"
+              #name="ngModel">
+      <div [hidden]="name.valid || name.pristine"
+            class="alert alert-danger">
+        Name is required
+      </div>
+    </div>
+
+  <button type="submit" class="btn btn-success" (click)=tryParser()>Submit</button> 
+</form>

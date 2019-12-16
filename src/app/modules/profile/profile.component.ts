@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Character } from '../../shared/models/character.model'
 import { ProfileService } from '../../core/services/profile.service'
+import { CfParserService } from '../../core/services/cf-parser.service'
 
 @Component({
   selector: 'app-profile',
@@ -21,15 +22,29 @@ export class ProfileComponent implements OnInit {
   lessdex = function () {if (this.profile.dex >1) {this.profile.dex -=1}; this.profileService.updateProfile(this.profile)}
   moredex = function () {if (this.profile.str <60) {this.profile.dex +=1}; this.profileService.updateProfile(this.profile)}
 
+  model = {name : ""}
+  contents
+  tryParser () {
+    var temp = this.parserService.parseCharacterFile(this.model.name)
+    /*
+    this.profile['xl'] = temp['xl']
+    this.profile['str'] = temp['str']
+    this.profile['int'] = temp['int']
+    this.profile['dex'] = temp['dex']
+    */
+    this.profile = temp
+    this.profileService.updateProfile(this.profile)
+  }
+  
+
 
   constructor(
     private profileService: ProfileService,
+    private parserService: CfParserService,
   ) { }
 
   ngOnInit() {
-    this.profileService.profile.subscribe(profile => {
-      this.profile = profile
-    })
+    this.parserService.profile.subscribe(profile => {this.profile = profile})
 
   }
 

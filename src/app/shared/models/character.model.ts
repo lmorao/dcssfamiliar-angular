@@ -12,7 +12,7 @@ export class Character implements Deserializable{
     constructor (
 
     public username:string = Character.USERNAME,
-    public name:string = "",
+    public name: string = "",
     public race: string = "",
     public background: string = "",
 

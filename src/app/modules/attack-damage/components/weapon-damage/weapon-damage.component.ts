@@ -96,12 +96,14 @@ export class WeaponDamageComponent implements OnInit {
     return a
   }
   calc_w_speed = function(weapon) {
+
     if (weapon.name == "") { return 0}
     var weapon_spec = this.wt[weapon.name];
     var weapon_skill = this.skills[weapon_spec['category']]['level']
     var speed = weapon_spec['speed'];
     var base = speed['base']
     var min = speed['min']
+    console.log(base)
     return this.calc_attack_speed(base, min, weapon_skill)
   }
 
