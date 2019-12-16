@@ -1,4 +1,5 @@
 
+parse the selectedWeapon
 unarmed as a default weapon
 skills load with parser
 unarmed damage calculation
