@@ -11,7 +11,7 @@ export class CfParserService {
   //the weaponlist is a property to share, but the profile
   // its returned because it is bugging with the profile service on the profile page...
 
-  private weaponListSource = new BehaviorSubject([]);
+  private weaponListSource = new BehaviorSubject([{"name":"unarmed", "slaying":"+0"}]);
   private profileSource = new BehaviorSubject({});
   private skillsSource = new BehaviorSubject(
     {
@@ -50,7 +50,7 @@ export class CfParserService {
     if (re1.test(txt)) {
       var inventory  = maHandWeapons[0]
       var weapons = inventory.split(/[a-zA-Z] - (?:a|the)/)
-      var weaponList  = new Array();
+      var weaponList  = new Array({"name":"unarmed", "slaying":"+0"});
       for (var line=0; line < weapons.length; line +=1) {
         var found1 = weapons[line]
         var wtRe= "("

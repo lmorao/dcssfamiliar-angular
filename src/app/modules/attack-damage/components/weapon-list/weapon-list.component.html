@@ -1,10 +1,16 @@
+<h3>Weapon List
+  <!-- <button mat-raised-button color="primary" (click)=addWeapon() style="float: right;">+ weapon</button> -->
+</h3>   
 <div class="panel">
   <mat-list>
-    <mat-list-item *ngFor="let weapon of weapons" (click)="selectWeapon(weapon)">
-      <div>
-        <span [ngClass]="weapon==selectedWeapon ? 'selected' : '' "> a {{weapon.slaying}} {{weapon.name}}</span> <span
-          *ngIf="weapon.brand" [ngClass]="weapon==selectedWeapon ? 'selected' : '' ">({{weapon.brand}})</span>
-      </div>
+    <mat-list-item *ngFor="let weapon of weapons ; let i = index" (click)="selectWeapon(weapon)">
+        <span [ngClass]="weapon==selectedWeapon ? 'selected' : '' "> 
+          <span *ngIf="weapon.name != 'unarmed'">a {{weapon.slaying}}</span> 
+          {{weapon.name}}
+        </span> 
+        <span *ngIf="weapon.brand" [ngClass]="weapon==selectedWeapon ? 'selected' : '' ">
+          ({{weapon.brand}})
+        </span>
     </mat-list-item>
   </mat-list>
 </div>

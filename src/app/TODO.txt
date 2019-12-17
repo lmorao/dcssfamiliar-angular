@@ -1,7 +1,9 @@
 
-parse the selectedWeapon
-unarmed as a default weapon
-skills load with parser
-unarmed damage calculation
+
+edit weapon
 unarmed and forms
-how is the rounding done, because damage still decreases sometimes when we have more skill
+display parsed selectedWeapon
+add weapon to list
+artifact
+brand damage
+bug highlighted weapon slaying not lime green

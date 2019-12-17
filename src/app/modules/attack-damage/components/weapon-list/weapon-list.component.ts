@@ -14,6 +14,7 @@ export class WeaponListComponent implements OnInit {
 
     //new Weapon{"dagger", "elec", 1),
   weapons = [
+    {name: 'unarmed', slaying:"+0"},
   new Weapon("dagger","+1","elec"),
   new Weapon("hunting sling",),
   new Weapon("long sword","+3","elec"),

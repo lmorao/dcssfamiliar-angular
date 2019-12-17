@@ -56,10 +56,15 @@ export class WeaponDamageComponent implements OnInit {
     if (weapon.name == "") { return 0}
     var weapon_spec = this.wt[weapon.name];
     var base_damage = weapon_spec['damage']
+
     var preslaying = weapon.slaying
     var tempslaying = this.calc_slaying(preslaying,dice)
     var slaying = tempslaying
     var weapon_skill = this.skills[weapon_spec['category']]['level']
+    var form = 3
+    if (weapon.name == "unarmed") {
+      base_damage = form + weapon_skill
+    }
     var fighting_skill = this.skills['fighting']['level']
 
     var wsm = (2500 + dice(100 * weapon_skill +1))/2500
@@ -82,7 +87,6 @@ export class WeaponDamageComponent implements OnInit {
     total = ( dice(base_damage * strm + 1)  * wsm * fm + this.misc + slaying) * this.final + this.stabbing - this.ac_reduction
     if (0 > total) {total = 0}
 
-    console.log(total)
     return total
   }
 
@@ -100,6 +104,9 @@ export class WeaponDamageComponent implements OnInit {
     if (weapon.name == "") { return 0}
     var weapon_spec = this.wt[weapon.name];
     var weapon_skill = this.skills[weapon_spec['category']]['level']
+    if (weapon.name == "unarmed") {
+      return 10-5/27 * weapon_skill
+    }
     var speed = weapon_spec['speed'];
     var base = speed['base']
     var min = speed['min']

@@ -1,4 +1,6 @@
 export const weapon_types = {
+   "unarmed": {'category': "unarmed", "name": 'unarmed', 'damage': '3', 'hit':'+6', 'speed': {base: 10, min: 5},'ohms':'little', 'thms':'little','damage_type':"piercing", 'prob':''},
+
   "dagger": { name: 'dagger', category: "short blades",
     damage: "4",
     hit: "+6",
