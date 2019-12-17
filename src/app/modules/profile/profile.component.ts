@@ -9,7 +9,7 @@ import { CfParserService } from '../../core/services/cf-parser.service'
   styleUrls: ['./profile.component.sass']
 })
 export class ProfileComponent implements OnInit {
-  char = new Character(<Character> {"dex":5});
+  char = {"dex":5};
   profile;
   mutations: []
   

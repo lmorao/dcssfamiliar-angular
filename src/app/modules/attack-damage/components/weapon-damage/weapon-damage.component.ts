@@ -22,10 +22,8 @@ export class WeaponDamageComponent implements OnInit {
   dice_max = function (n) { return n-1}
   dice_exp = function (n) { 
     var total = 0;
-    for ( var i=0; i<n; i+=1 ) {
-      total += i
-    }
-    return total/n
+    total = (n-1)/2
+    return total
   }
   //TODO not to unarmed
   misc = 0 
@@ -83,6 +81,8 @@ export class WeaponDamageComponent implements OnInit {
     //TODO stabbing is not right
     total = ( dice(base_damage * strm + 1)  * wsm * fm + this.misc + slaying) * this.final + this.stabbing - this.ac_reduction
     if (0 > total) {total = 0}
+
+    console.log(total)
     return total
   }
 
