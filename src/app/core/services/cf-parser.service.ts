@@ -50,7 +50,7 @@ export class CfParserService {
     if (re1.test(txt)) {
       var inventory  = maHandWeapons[0]
       var weapons = inventory.split(/[a-zA-Z] - (?:a|the)/)
-      var weaponList  = new Array({"name":"unarmed", "slaying":"+0"});
+      var weaponList  = new Array({"name":"unarmed", "slaying":"+0", brand:""});
       for (var line=0; line < weapons.length; line +=1) {
         var found1 = weapons[line]
         var wtRe= "("
@@ -70,7 +70,11 @@ export class CfParserService {
 
         if (retype.test(weapons[line])) {
           var maType = retype.exec(weapons[line])
-          var maBrand = /(?:freezing|flaming|holy wrath|protection|piercing|speed|vamp)/.exec(weapons[line])
+          var brandRe = /(?:freezing|flaming|holy wrath|protection|piercing|speed|vamp)/
+          if (brandRe.test(weapons[line]))
+          {
+            var maBrand = brandRe.exec(weapons[line])[0]
+          } else {maBrand = ""}
           if (currentWeapon.test(weapons[line])) {
             cWeapon = {name: maType[3], slaying: maType[1] + maType[2], brand: maBrand[0]}
           }
