@@ -36,7 +36,11 @@ export class WeaponListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.selectedWeaponService.weapon.subscribe(weapon => this.selectedWeapon = weapon)
+    this.selectedWeaponService.weapon.subscribe(weapon => {this.selectedWeapon = weapon; console.log('this got updated');
+    console.log ( this.weapons[0])
+    console.log ( weapon)
+    console.log ( weapon === this.weapons[0])
+  })
     this.parserService.weaponList.subscribe(weaponList => this.weapons = weaponList)
   }
 

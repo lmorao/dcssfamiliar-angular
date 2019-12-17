@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { SelectedWeaponService } from './selected-weapon.service';
 
 
 @Injectable({
@@ -52,19 +53,36 @@ export class CfParserService {
       var weaponList  = new Array();
       for (var line=0; line < weapons.length; line +=1) {
         var found1 = weapons[line]
-        var wtRe= "(dire flail|shortbow|eveningstar|great mace|dagger|flail|hunting sling|falchion|club)"
-        var retype = new RegExp("(\\+|-)(\\d+)\\s+" + wtRe)
+        var wtRe= "("
+        wtRe += "dagger|quick blade|short sword|rapier"
+        wtRe += "|falchion|long sword|scimitar|demon blade|eudemon blade|double sword|great sword"
+        wtRe += "|hand axe|war axe|broad axe|battleaxe|executioner's axe"
+        wtRe += "|whip|club|mace|flail|morningstar|demon whip|sacred scourge|dire flail|eveningstar|great mace|giant club|giant spiked club"
+        wtRe += "|spear|trident|halberd|scythe|demon trident|trishula|glaive|bardiche"
+        wtRe += "|staff|quarterstaff|lajatang"
+        wtRe += "|hunting sling|fustibalus"
+        wtRe += "|shortbow|longbow"
+        wtRe += "|hand crossbow|arbalest|triple crossbow"
+        wtRe += ")"
+        var retype = new RegExp("(\\+|-)(\\d+)\\s+(?:vampiric\\s+)?" + wtRe)
+        var currentWeapon= /\(weapon\)/
+        var cWeapon
 
         if (retype.test(weapons[line])) {
           var maType = retype.exec(weapons[line])
           var maBrand = /(?:freezing|flaming|holy wrath|protection|piercing|speed|vamp)/.exec(weapons[line])
+          if (currentWeapon.test(weapons[line])) {
+            cWeapon = {name: maType[3], slaying: maType[1] + maType[2], brand: maBrand[0]}
+          }
 
           weaponList.push({name: maType[3], slaying: maType[1] + maType[2], brand: maBrand[0]})
         }
       }
       this.weaponListSource.next(weaponList)
+      this.selectedWeaponService.selectWeapon(cWeapon)
 
     }
+    //skills
     var skillsTemp = {
       fighting: { level: 0, display: "Fighting"},
       "short blades": { level: 0, display: "Short Blades"},
@@ -94,5 +112,6 @@ export class CfParserService {
   }
 
   constructor(
+    private selectedWeaponService: SelectedWeaponService,
   ) { }
 }
