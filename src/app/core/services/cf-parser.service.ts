@@ -12,7 +12,7 @@ export class CfParserService {
   // its returned because it is bugging with the profile service on the profile page...
 
   private weaponListSource = new BehaviorSubject([{"name":"unarmed", "slaying":"+0"}]);
-  private profileSource = new BehaviorSubject({});
+  private profileSource = new BehaviorSubject({xl:1,str:1,int:1,dex:1});
   private skillsSource = new BehaviorSubject(
     {
       fighting: { level: 0, display: "Fighting"},

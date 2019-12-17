@@ -19,23 +19,22 @@
   <div style="float: left;">
     <p>
       <button mat-icon-button color="primary" (click)=lessxl()> <mat-icon>arrow_left</mat-icon> </button>
-      XL: {{profile.xl}}
+      XL: <span class="menu">{{profile.xl}}</span>
       <button mat-icon-button color="primary" (click)=morexl()> <mat-icon>arrow_right</mat-icon> </button>
     </p>
   </div>
   <div style="float: right;">
-    <p>
+      Str: 
       <button mat-icon-button color="primary" (click)=lessstr()> <mat-icon>arrow_left</mat-icon> </button>
-      Str: {{profile.str}}
+      <span class="menu">{{profile.str}}</span>
       <button mat-icon-button color="primary" (click)=morestr()> <mat-icon>arrow_right</mat-icon> </button>
       <br>
       <button mat-icon-button color="primary" (click)=lessint()> <mat-icon>arrow_left</mat-icon> </button>
-      Int: {{profile.int}}
+      Int: <span class="menu">{{profile.int}}</span>
       <button mat-icon-button color="primary" (click)=moreint()> <mat-icon>arrow_right</mat-icon> </button>
       <br>
       <button mat-icon-button color="primary" (click)=lessdex()> <mat-icon>arrow_left</mat-icon> </button>
-      Dex: {{profile.dex}}
+      Dex: <span class="menu">{{profile.dex}}</span>
       <button mat-icon-button color="primary" (click)=moredex()> <mat-icon>arrow_right</mat-icon> </button>
-    </p>
 </div>
 </div>
