@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Skills } from '../../shared/models/skills.model'
 import { SkillsService } from '../../core/services/skills.service'
 import { CfParserService } from '../../core/services/cf-parser.service'
+import { SelectedWeaponService } from '../../core/services/selected-weapon.service'
+import { weapon_types } from '../../weapon_types'
+
 
 @Component({
   selector: 'app-skills-menu',
@@ -17,6 +20,8 @@ export class SkillsMenuComponent implements OnInit {
   skills 
   s_melee_temp = ["fighting","short blades", "long blades", "maces", "axes", "polearms", "staves", "unarmed",
 "slings"]
+  wt = weapon_types
+  selectedSkill = "unarmed"
   lessb = function (skill) {if (this.s_melee[skill]['level'] >0) {this.s_melee[skill]['level'] -=1}; this.skillsService.updateSkills(this.s_melee)}
   moreb = function (skill) {if (this.s_melee[skill]['level'] <27) {this.s_melee[skill]['level'] +=1}; this.skillsService.updateSkills(this.s_melee)}
 
@@ -55,14 +60,19 @@ export class SkillsMenuComponent implements OnInit {
     stealth:0
   }
   constructor(
-        private skillsService: SkillsService,
+    private skillsService: SkillsService,
     private parserService: CfParserService,
+    private selectedWeaponService: SelectedWeaponService,
   ) { }
 
   ngOnInit() {
+    this.selectedWeaponService.weapon.subscribe(weapon => {
+      console.log(this.wt[weapon.name]['category'])
+      this.selectedSkill = this.wt[weapon.name]['category']
+    })
     this.parserService.skills.subscribe(skills => { this.s_melee = skills; 
       this.skillsService.updateSkills(this.s_melee)
-      })
+    })
     this.skillsService.skills.subscribe(skills => {
       this.s_melee = skills
     })

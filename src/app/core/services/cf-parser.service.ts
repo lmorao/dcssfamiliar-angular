@@ -76,10 +76,10 @@ export class CfParserService {
             var maBrand = brandRe.exec(weapons[line])[0]
           } else {maBrand = ""}
           if (currentWeapon.test(weapons[line])) {
-            cWeapon = {name: maType[3], slaying: maType[1] + maType[2], brand: maBrand[0]}
+            cWeapon = {name: maType[3], slaying: maType[1] + maType[2], brand: maBrand}
           }
 
-          weaponList.push({name: maType[3], slaying: maType[1] + maType[2], brand: maBrand[0]})
+          weaponList.push({name: maType[3], slaying: maType[1] + maType[2], brand: maBrand})
         }
       }
       this.weaponListSource.next(weaponList)

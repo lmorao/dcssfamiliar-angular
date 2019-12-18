@@ -7,3 +7,4 @@ add weapon to list
 artifact
 brand damage
 bug highlighted weapon slaying not lime green
+bug with initial parser service conflicting with selectedWeapon. can see on console
