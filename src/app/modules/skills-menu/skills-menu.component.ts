@@ -9,7 +9,7 @@ import { weapon_types } from '../../weapon_types'
 @Component({
   selector: 'app-skills-menu',
   templateUrl: './skills-menu.component.html',
-  styleUrls: ['./skills-menu.component.sass']
+  styleUrls: ['./skills-menu.component.sass'],
 })
 export class SkillsMenuComponent implements OnInit {
     deserialize(input: any): this {
