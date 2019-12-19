@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { SelectedWeaponService } from './selected-weapon.service';
+import { unrands } from '../../../assets/unrands';
 
 
 @Injectable({
