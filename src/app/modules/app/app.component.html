@@ -11,22 +11,19 @@
 <div class="container">
   <div class="row">
     <div class="col-sm-4">
-      <!-- Highlight Card -->
-      <div>
-        <img src="../../../assets/images/DCSS_logo.png">
-        <h1 style="float:right"> <font size="26" color="red">familiar</font></h1>
-    </div>
+      <div class="row">
+        <div class="card-container">
+          <img src="../../../assets/images/DCSS_logo.png">
+          <h1 style="float:right"> <font size="26" color="red">familiar</font></h1>
+        </div>
+      </div>
 
-      <!-- Resources -->
-      <h2>Navigation</h2>
-
-      <div class="card-container">
-        <a class="card" rel="noopener" [routerLink]="['/']">
-          <span>Main </span>
-        </a>
-        <a class="card"  rel="noopener" [routerLink]="['/attackdamage']">
-          <span>Weapon Damage</span>
-        </a>
+      <div class="row">
+        <div class="card-container">
+          <a class="card"  rel="noopener" [routerLink]="['/attackdamage']">
+            <span>Weapon Damage</span>
+          </a>
+        </div>
       </div>
 
     </div>
