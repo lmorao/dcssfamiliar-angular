@@ -1,10 +1,11 @@
 
 
+fix selected weapon not base on name
+change selected skill to white
+
 edit weapon
-unarmed and forms
-display parsed selectedWeapon
 add weapon to list
+unarmed and forms
+
 artifact
 brand damage
-bug highlighted weapon slaying not lime green
-bug with initial parser service conflicting with selectedWeapon. can see on console

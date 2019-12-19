@@ -4,11 +4,13 @@
 <div class="panel">
   <mat-list>
     <mat-list-item *ngFor="let weapon of weapons ; let i = index" (click)="selectWeapon(weapon)">
-        <span [ngClass]="weapon==selectedWeapon ? 'selected' : '' "> 
-          <span *ngIf="weapon.name != 'unarmed'">a {{weapon.slaying}}</span> 
+        <span [ngClass]="{  'selected' : weapon.name==selectedWeapon.name}"> 
+          <span *ngIf="weapon.name != 'unarmed'" [ngClass]="{  'selected' : weapon.name==selectedWeapon.name}">
+            a {{weapon.slaying}}
+          </span> 
           {{weapon.name}}
-        </span> 
-        <span *ngIf="weapon.brand" [ngClass]="weapon==selectedWeapon ? 'selected' : '' ">
+          </span> 
+        <span *ngIf="weapon.brand" [ngClass]="{  'selected' : weapon.name==selectedWeapon.name}">
           ({{weapon.brand}})
         </span>
     </mat-list-item>
