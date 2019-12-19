@@ -66,7 +66,7 @@ export class CfParserService {
         wtRe += ")"
         var retype = new RegExp("(\\+|-)(\\d+)\\s+(?:vampiric\\s+)?" + wtRe)
         var currentWeapon= /\(weapon\)/
-        var cWeapon
+        var cWeapon = {name:"unarmed","slaying":"+0",brand:""}
 
         if (retype.test(weapons[line])) {
           var maType = retype.exec(weapons[line])
@@ -83,6 +83,7 @@ export class CfParserService {
         }
       }
       this.weaponListSource.next(weaponList)
+      console.log(cWeapon)
       this.selectedWeaponService.selectWeapon(cWeapon)
 
     }

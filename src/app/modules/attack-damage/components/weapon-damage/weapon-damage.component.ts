@@ -11,7 +11,7 @@ import { weapon_types } from '../../../../weapon_types'
 })
 export class WeaponDamageComponent implements OnInit {
   selectedWeapon;
-  skills
+  skills = {unarmed:{level:0},fighting:{level:0}}
   wt=weapon_types
   str 
   min_damage = 0;
