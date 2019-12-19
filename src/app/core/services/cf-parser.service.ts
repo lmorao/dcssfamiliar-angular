@@ -13,7 +13,7 @@ export class CfParserService {
   // its returned because it is bugging with the profile service on the profile page...
 
   private weaponListSource = new BehaviorSubject([{"name":"unarmed", "slaying":"+0"}]);
-  private profileSource = new BehaviorSubject({xl:1,str:1,int:1,dex:1});
+  private profileSource = new BehaviorSubject({xl:1,str:1,int:1,dex:1,name:'unknown',title:'Promised'});
   private skillsSource = new BehaviorSubject(
     {
       fighting: { level: 0, display: "Fighting"},
@@ -32,6 +32,7 @@ export class CfParserService {
   skills = this.skillsSource.asObservable();
 
   parseCharacterFile(txt) {
+    //profile
     var profile = {xl:1}
 
     var maXl= /XL:\s+(\d+)/.exec(txt);
@@ -44,6 +45,14 @@ export class CfParserService {
     profile['int']  = parseInt(maInt[1])
     profile['dex']  = parseInt(maDex[1])
 
+    var charReg = /(\S+)\s+the\s+(\S+\s*\S*\s*\S*\s*\S*)\s+\((\S+)\s+(\S+\s*\S*)\)\s+Turns/
+    if (charReg.test(txt)) {
+      var charname= charReg.exec(txt);
+      profile['name']  = charname[1]
+      profile['title']  = charname[2]
+      profile['species']  = charname[3]
+      profile['background']  = charname[4]
+    }
 
     // Find weapons first
     var re1 = /Hand Weapons.+(?:Missiles|Armour|Jewellery|Wands|Scrolls|Potions|Comestibles|Skills:)/
@@ -103,14 +112,14 @@ export class CfParserService {
     var re2 = /Skills:.*(spell level.? left.|You cannot memorise any spells.)/
     if (re2.test(txt)) {
       var skillsText= re2.exec(txt)[0];
-      if (/Fighting/.test(skillsText)) {skillsTemp['fighting']['level'] = parseInt(/Level (\d+)\.\d+\S*\s+Fighting/.exec(skillsText)[1])}
-      if (/Short/.test(skillsText)) {skillsTemp['short blades']['level'] = parseInt(/Level (\d+)\.\d+\S*\s+Short/.exec(skillsText)[1])}
-      if (/Long/.test(skillsText)) {skillsTemp['long blades']['level'] = parseInt(/Level (\d+)\.\d+\S*\s+Long/.exec(skillsText)[1])}
-      if (/Maces/.test(skillsText)) {skillsTemp['maces']['level'] = parseInt(/Level (\d+)\.\d+\S*\s+Maces/.exec(skillsText)[1])}
-      if (/Axes/.test(skillsText)) {skillsTemp['axes']['level'] = parseInt(/Level (\d+)\.\d+\S*\s+Axes/.exec(skillsText)[1])}
-      if (/Polearms/.test(skillsText)) {skillsTemp['polearms']['level'] = parseInt(/Level (\d+)\.\d+\S*\s+Polearms/.exec(skillsText)[1])}
-      if (/Staves/.test(skillsText)) {skillsTemp['staves']['level'] = parseInt(/Level (\d+)\.\d+\S*\s+Staves/.exec(skillsText)[1])}
-      if (/Unarmed/.test(skillsText)) {skillsTemp['unarmed']['level'] = parseInt(/Level (\d+)\.\d+\S*\s+Unarmed/.exec(skillsText)[1])}
+      if (/Fighting/.test(skillsText)) {skillsTemp['fighting']['level'] = parseInt(/Level (\d+)\.?\d{0,2}\S*\s+Fighting/.exec(skillsText)[1])}
+      if (/Short/.test(skillsText)) {skillsTemp['short blades']['level'] = parseInt(/Level (\d+)\.?\d{0,2}\S*\s+Short/.exec(skillsText)[1])}
+      if (/Long/.test(skillsText)) {skillsTemp['long blades']['level'] = parseInt(/Level (\d+)\.?\d{0,2}\S*\s+Long/.exec(skillsText)[1])}
+      if (/Maces/.test(skillsText)) {skillsTemp['maces']['level'] = parseInt(/Level (\d+)\.?\d{0,2}\S*\s+Maces/.exec(skillsText)[1])}
+      if (/Axes/.test(skillsText)) {skillsTemp['axes']['level'] = parseInt(/Level (\d+)\.?\d{0,2}\S*\s+Axes/.exec(skillsText)[1])}
+      if (/Polearms/.test(skillsText)) {skillsTemp['polearms']['level'] = parseInt(/Level (\d+)\.?\d{0,2}\S*\s+Polearms/.exec(skillsText)[1])}
+      if (/Staves/.test(skillsText)) {skillsTemp['staves']['level'] = parseInt(/Level (\d+)\.?\d{0,2}\S*\s+Staves/.exec(skillsText)[1])}
+      if (/Unarmed/.test(skillsText)) {skillsTemp['unarmed']['level'] = parseInt(/Level (\d+)\.?\d{0,2}\S*\s+Unarmed/.exec(skillsText)[1])}
       this.skillsSource.next(skillsTemp)
     }
 

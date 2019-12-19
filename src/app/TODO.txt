@@ -1,5 +1,6 @@
 
 
+not finding selected weapon
 fix selected weapon not base on name
 change selected skill to white
 
