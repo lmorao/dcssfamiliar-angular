@@ -9,7 +9,7 @@ import { CfParserService } from '../../core/services/cf-parser.service'
 })
 export class ProfileComponent implements OnInit {
   char = {"dex":5};
-  profile = {str:3};
+  profile = {xl:1,str:1,int:1,dex:1,name:'Unnamed',title:'Foretold', species:""};
   mutations: []
   
   lessxl = function () {if (this.profile.xl >1) {this.profile.xl -=1}; this.profileService.updateProfile(this.profile)}

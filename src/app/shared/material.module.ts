@@ -5,6 +5,8 @@ import { MatListModule } from '@angular/material/list';
 import { MatGridListModule } from '@angular/material/grid-list';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
+import {MatTooltipModule} from '@angular/material/tooltip';
+
 
 /*
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
@@ -29,6 +31,7 @@ import { MatMomentDateModule } from '@angular/material-moment-adapter';
     MatGridListModule,
     MatButtonModule,
     MatIconModule,
+    MatTooltipModule,
   ],
   exports: [
     MatSliderModule,
@@ -36,6 +39,7 @@ import { MatMomentDateModule } from '@angular/material-moment-adapter';
     MatGridListModule,
     MatButtonModule,
     MatIconModule,
+    MatTooltipModule,
   ]
 })
 export class MaterialModule {}

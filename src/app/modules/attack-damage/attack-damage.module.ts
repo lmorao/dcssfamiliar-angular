@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import {MaterialModule } from '../../shared/material.module';
 
-import {MatGridListModule} from '@angular/material/grid-list';
 
 
 import { AttackDamageComponent } from './attack-damage.component';
@@ -15,11 +15,10 @@ import { EnemyListComponent } from './components/enemy-list/enemy-list.component
 @NgModule({
   declarations: [
     WeaponListComponent, WeaponDamageComponent, EnemyListComponent, AttackDamageComponent,
-    MatGridListModule,
   ],
   imports: [
     CommonModule,
-    MatGridListModule,
+    MaterialModule
   ]
 })
 export class AttackDamageModule { }
