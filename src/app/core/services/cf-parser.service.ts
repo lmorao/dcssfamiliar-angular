@@ -24,6 +24,9 @@ export class CfParserService {
       polearms:{ level: 0,display: "Polearms"},
       staves:{ level: 0,display: "Staves"},
       unarmed:{ level: 0,display: "Unarmed"},
+      bows:{ level: 0,display: "Bows"},
+      crossbows:{ level: 0,display: "Crossbows"},
+      throwing:{ level: 0,display: "Throwing"},
       slings:{ level: 0,display: "Slings"},
       }
     );
@@ -108,6 +111,10 @@ export class CfParserService {
       polearms:{ level: 0,display: "Polearms"},
       staves:{ level: 0,display: "Staves"},
       unarmed:{ level: 0,display: "Unarmed"},
+
+      bows:{ level: 0,display: "Bows"},
+      crossbows:{ level: 0,display: "Crossbows"},
+      throwing:{ level: 0,display: "Throwing"},
       slings:{ level: 0,display: "Slings"},
       }
     var re2 = /Skills:.*(spell level.? left.|You cannot memorise any spells.)/
@@ -121,6 +128,10 @@ export class CfParserService {
       if (/Polearms/.test(skillsText)) {skillsTemp['polearms']['level'] = parseInt(/Level (\d+)\.?\d{0,2}\S*\s+Polearms/.exec(skillsText)[1])}
       if (/Staves/.test(skillsText)) {skillsTemp['staves']['level'] = parseInt(/Level (\d+)\.?\d{0,2}\S*\s+Staves/.exec(skillsText)[1])}
       if (/Unarmed/.test(skillsText)) {skillsTemp['unarmed']['level'] = parseInt(/Level (\d+)\.?\d{0,2}\S*\s+Unarmed/.exec(skillsText)[1])}
+      if (/Bows/.test(skillsText)) {skillsTemp['bows']['level'] = parseInt(/Level (\d+)\.?\d{0,2}\S*\s+Bows/.exec(skillsText)[1])}
+      if (/Crossbows/.test(skillsText)) {skillsTemp['crossbows']['level'] = parseInt(/Level (\d+)\.?\d{0,2}\S*\s+Crossbows/.exec(skillsText)[1])}
+      if (/Throwing/.test(skillsText)) {skillsTemp['throwing']['level'] = parseInt(/Level (\d+)\.?\d{0,2}\S*\s+Throwing/.exec(skillsText)[1])}
+      if (/Slings/.test(skillsText)) {skillsTemp['slings']['level'] = parseInt(/Level (\d+)\.?\d{0,2}\S*\s+Slings/.exec(skillsText)[1])}
       this.skillsSource.next(skillsTemp)
     }
 

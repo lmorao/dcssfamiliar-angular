@@ -1,9 +1,14 @@
-<form #heroForm="ngForm">
-  <div class="form-group">
-    <label for="name" [title]="'Copy paste your character file here. Check \'About\' for more details'">Character File <mat-icon matTooltip="Copy paste your character file  here.">help_outline</mat-icon></label>
-    <input type="text" class="form-control" id="name" [(ngModel)]="model.name" name="name" maxlength="20000"
-      #name="ngModel">
-  </div>
+<form #heroForm="ngForm" class="form-inline" >
+  <span class="form-group">
+    <label class="sr-only" for="name" [title]="'Copy paste your character file here. Check \'About\' for more details'">Character File <mat-icon matTooltip="Copy paste your character file  here.">help_outline</mat-icon></label>
+    <input type="text" 
+    placeholder="Character Dump File"
+    class="form-control" 
+    id="name" [(ngModel)]="model.name" 
+    name="name" maxlength="20000"
+      #name="ngModel"  >
+
+  </span>
   <button type="submit" class="btn btn-success" (click)=tryParser()>Submit</button>
 </form>
 

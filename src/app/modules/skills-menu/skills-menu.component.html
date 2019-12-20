@@ -6,7 +6,6 @@
         </span>
         <span style="float: right;">
           <button  color="primary" (click)=lessb(skill)>
-
             <mat-icon style="width: 20px;height: 20px; font-size: 20px;">arrow_left</mat-icon>
 </button>
 <span  class="level">
@@ -20,4 +19,25 @@
       </div>
     </li>
   </ul>
+  <ul>
+    <li *ngFor="let skill of s_ranged_temp" style="height: 30px; width:270px">
+      <div >
+        <span  [ngClass]="{  'selected' : skill==selectedSkill}" style="float: left;"> {{s_melee[skill].display}}:
+        </span>
+        <span style="float: right;">
+          <button  color="primary" (click)=lessb(skill)>
+            <mat-icon style="width: 20px;height: 20px; font-size: 20px;">arrow_left</mat-icon>
+</button>
+<span  class="level">
+          {{s_melee[skill].level}}
+</span>
+          <button   (click)=moreb(skill)>
+            <mat-icon style="width: 20px;height: 20px; font-size: 20px;">arrow_right</mat-icon>
+          </button>
+
+        </span>
+      </div>
+    </li>
+  </ul>
+
 </div>
