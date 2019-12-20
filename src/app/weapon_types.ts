@@ -71,3 +71,12 @@ export const weapon_types = {
    "javelin": {'category': "throwing", "name": 'triple_sword', 'damage': '11', 'hit':'+0', 'speed': {base: 15,min: 7},'ohms':'little', 'thms':'little','damage_type':"slicing", 'prob':2},
    "large rock": {'category': "throwing", "name": 'triple_sword', 'damage': '20', 'hit':'+0', 'speed': {base: 20,min: 7},'ohms':'little', 'thms':'little','damage_type':"slicing", 'prob':2},
 };
+
+export const colors = {
+  "bright white": "#eeeeec",
+  "dark brown": "#121212",
+  "fade white": "#babdb6",
+  "lime gree": "#65ff00",
+  "gold border": "#7d623c",
+  "blue light to replacement": "#00b8e6",
+}

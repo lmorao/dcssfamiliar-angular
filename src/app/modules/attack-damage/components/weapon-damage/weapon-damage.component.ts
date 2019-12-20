@@ -14,6 +14,7 @@ export class WeaponDamageComponent implements OnInit {
   skills = {unarmed:{level:0},fighting:{level:0}}
   wt=weapon_types
   str 
+  w_speed = 10;
   min_damage = 0;
   max_damage = 0;
   exp_damage = 0;
@@ -91,6 +92,7 @@ export class WeaponDamageComponent implements OnInit {
   }
 
   damage_per_turn = function (damage,speed) {
+    this.w_speed = speed
     return damage/(speed/10)
   }
 

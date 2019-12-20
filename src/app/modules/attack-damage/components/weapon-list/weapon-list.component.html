@@ -1,11 +1,11 @@
 
-  <div class="title-box2">
+<div class="panel">
+  <div class="title-box2 panel-title" >
     Hand Weapons
   </div>
-<div class="panel">
   <mat-list>
     <mat-list-item *ngFor="let weapon of weapons ; let i = index" (click)="selectWeapon(weapon)">
-        <span [ngClass]="{  'selected' : weapon.name==selectedWeapon.name}"> 
+        <span style="padding-left:20px"[ngClass]="{  'selected' : weapon.name==selectedWeapon.name}"> 
           <span *ngIf="weapon.name != 'unarmed'" [ngClass]="{  'selected' : weapon.name==selectedWeapon.name}">
             a {{weapon.slaying}}
           </span> 
