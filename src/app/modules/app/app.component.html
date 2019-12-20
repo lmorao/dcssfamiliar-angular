@@ -7,10 +7,10 @@
 <!-- * * * * * * * to get started with your project! * * * * * * * * -->
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 
-<div class="content" role="main">
+<div class="content" role="main" style="padding-top:30px">
 <div class="container">
   <div class="row">
-    <div class="col-sm-4">
+    <div class="col-sm-4" style="position: relative">
       <div class="row">
         <div class="card-container">
           <img src="../../../assets/images/DCSS_logo.png">
@@ -19,15 +19,24 @@
       </div>
 
       <div class="row">
-        <div class="card-container">
-          <a class="card"  rel="noopener" [routerLink]="['/attackdamage']">
-            <span>Weapon Damage</span>
-          </a>
-        </div>
-      </div>
-      <div class="row">
         <app-paste-character></app-paste-character>
       </div>
+
+
+      <div class="row" style="position: absolute;bottom:0">
+      <ul class="nav nav-tabs" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link active" [routerLink]="['/attackdamage']" data-toggle="tab" id="weaponstab">Weapons</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link disabled"  [routerLink]="['/']" data-toggle="tab" id="spellstab">Spells</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" [routerLink]="['/info']" data-toggle="tab" id="infotab">Info</a>
+          </li>
+        </ul>
+      </div>
+
 
     </div>
     <div class="col-sm-4">
@@ -39,8 +48,7 @@
   </div>
 </div>
 
-  <div>
-
+  <div style="background: #121212">
     <router-outlet></router-outlet>
   </div>
 

@@ -18,6 +18,7 @@ import { AppComponent } from './app.component';
 import { AttackDamageModule } from '../attack-damage/attack-damage.module';
 import { ProfileComponent } from '../profile/profile.component'
 import { SkillsMenuComponent } from '../skills-menu/skills-menu.component'
+import { InfoComponent } from '../info/info.component'
 import { PasteCharacterComponent } from '../paste-character/paste-character.component'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -30,6 +31,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ProfileComponent,
     SkillsMenuComponent,
     PasteCharacterComponent,
+    InfoComponent,
   ],
   imports: [
     BrowserModule,
