@@ -7,6 +7,7 @@ import { AttackDamageComponent } from '../attack-damage/attack-damage.component'
 
 const routes: Routes = [
   { path: "attackdamage", component: AttackDamageComponent },
+  { path: "", component: AttackDamageComponent },
 ];
 
 @NgModule({
