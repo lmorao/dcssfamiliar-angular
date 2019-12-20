@@ -13,7 +13,7 @@ export class CfParserService {
   // its returned because it is bugging with the profile service on the profile page...
 
   private weaponListSource = new BehaviorSubject([{"name":"unarmed", "slaying":"+0"}]);
-  private profileSource = new BehaviorSubject({xl:1,str:1,int:1,dex:1,name:'unknown',title:'Promised'});
+  private profileSource = new BehaviorSubject({xl:1,str:1,int:1,dex:1,name:'Unnamed',title:'Foretold'});
   private skillsSource = new BehaviorSubject(
     {
       fighting: { level: 0, display: "Fighting"},
@@ -33,7 +33,7 @@ export class CfParserService {
 
   parseCharacterFile(txt) {
     //profile
-    var profile = {xl:1}
+    var profile = {xl:1,str:1,int:1,dex:1,name:'Unnamed',title:'Foretold'}
 
     var maXl= /XL:\s+(\d+)/.exec(txt);
     var maStr= /Str:\s+(\d+)/.exec(txt);
@@ -53,6 +53,7 @@ export class CfParserService {
       profile['species']  = charname[3]
       profile['background']  = charname[4]
     }
+    this.profileSource.next(profile)
 
     // Find weapons first
     var re1 = /Hand Weapons.+(?:Missiles|Armour|Jewellery|Wands|Scrolls|Potions|Comestibles|Skills:)/
@@ -123,7 +124,6 @@ export class CfParserService {
       this.skillsSource.next(skillsTemp)
     }
 
-    return profile
   }
 
   constructor(
