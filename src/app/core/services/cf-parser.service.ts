@@ -3,6 +3,7 @@ import { BehaviorSubject } from 'rxjs';
 import { SelectedWeaponService } from './selected-weapon.service';
 import { unrands } from '../../../assets/unrands';
 import { Skills } from '../../shared/models/skills.model'
+import { Character } from '../../shared/models/character.model'
 
 
 @Injectable({
@@ -14,7 +15,7 @@ export class CfParserService {
   // its returned because it is bugging with the profile service on the profile page...
 
   private weaponListSource = new BehaviorSubject([{"name":"unarmed", "slaying":"+0", brand:""}]);
-  private profileSource = new BehaviorSubject({xl:1,str:1,int:1,dex:1,name:'Unnamed',title:'Foretold',species:""});
+  private profileSource = new BehaviorSubject(new Character());
   private skillsSource = new BehaviorSubject( new Skills());
 
   weaponList = this.weaponListSource.asObservable();
@@ -23,7 +24,7 @@ export class CfParserService {
 
   parseCharacterFile(txt) {
     //profile
-    var profile = {xl:1,str:1,int:1,dex:1,name:'Unnamed',title:'Foretold',species:""}
+    var profile = new Character()
 
     var maXl= /XL:\s+(\d+)/.exec(txt);
     var maStr= /Str:\s+(\d+)/.exec(txt);
@@ -42,6 +43,22 @@ export class CfParserService {
       profile['title']  = charname[2]
       profile['species']  = charname[3]
       profile['background']  = charname[4]
+      profile['mutations']  = charname[4]
+    }
+    var re0 = /.*Inventory:/
+    if (re0.test(txt)) {
+      var temp0 = re0.exec(txt)[0];
+      var words = temp0.split(/ /)
+      var slaying = 0
+      for (var line=0; line < words.length; line +=1) {
+        var slayRe = /Slay[\+-](\d+)/
+        if (slayRe.test(words[line])) {
+          slaying = parseInt(slayRe.exec(words[line])[1]) + slaying
+        }
+      }
+      var ring1 = /\+(\d+) ring of slaying/
+      if (ring1.test(temp0)) { slaying = slaying + parseInt(ring1.exec(temp0)[1])}
+      profile['slaying'] = slaying
     }
     this.profileSource.next(profile)
 
@@ -56,7 +73,7 @@ export class CfParserService {
         var found1 = weapons[line]
         var wtRe= "("
         wtRe += "dagger|quick blade|short sword|rapier"
-        wtRe += "|falchion|long sword|scimitar|demon blade|eudemon blade|double sword|great sword"
+        wtRe += "|falchion|long sword|scimitar|demon blade|eudemon blade|double sword|great sword|triple sword"
         wtRe += "|hand axe|war axe|broad axe|battleaxe|executioner's axe"
         wtRe += "|whip|club|mace|flail|morningstar|demon whip|sacred scourge|dire flail|eveningstar|great mace|giant club|giant spiked club"
         wtRe += "|spear|trident|halberd|scythe|demon trident|trishula|glaive|bardiche"
@@ -71,15 +88,21 @@ export class CfParserService {
 
         if (retype.test(weapons[line])) {
           var maType = retype.exec(weapons[line])
-          var brandRe = /(?:freezing|flaming|holy wrath|protection|piercing|speed|vamp|electrocution|freeze|flame|elec|holy)/
+          var brandRe = /(?:freezing|flaming|holy wrath|speed|vamp|electrocution|freeze|flame|elec|holy|protection|crushing|chopping|piercing|slashing|slicing)/
           if (brandRe.test(weapons[line]))
           {
             var maBrand = brandRe.exec(weapons[line])[0]
-          } else {maBrand = ""}
-          if (currentWeapon.test(weapons[line])) {
             if (maBrand == "freeze") {maBrand = "freezing"}
             if (maBrand == "flame") {maBrand = "flaming"}
             if (maBrand == "elec") {maBrand = "electrocution"}
+            if (maBrand == "crushing") {maBrand = "vorpal"}
+            if (maBrand == "chopping") {maBrand = "vorpal"}
+            if (maBrand == "piercing") {maBrand = "vorpal"}
+            if (maBrand == "slashing") {maBrand = "vorpal"}
+            if (maBrand == "slicing" ) {maBrand = "vorpal"}
+
+          } else {maBrand = ""}
+          if (currentWeapon.test(weapons[line])) {
             cWeapon = {name: maType[3], slaying: maType[1] + maType[2], brand: maBrand}
             this.selectedWeaponService.selectWeapon(cWeapon)
           }

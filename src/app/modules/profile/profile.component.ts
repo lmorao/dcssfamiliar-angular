@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProfileService } from '../../core/services/profile.service'
 import { CfParserService } from '../../core/services/cf-parser.service'
+import { Character } from '../../shared/models/character.model'
 
 @Component({
   selector: 'app-profile',
@@ -9,7 +10,7 @@ import { CfParserService } from '../../core/services/cf-parser.service'
 })
 export class ProfileComponent implements OnInit {
   char = {"dex":5};
-  profile = {xl:1,str:1,int:1,dex:1,name:'Unnamed',title:'Foretold', species:""};
+  profile = new Character();
   mutations: []
   
   lessxl = function () {if (this.profile.xl >1) {this.profile.xl -=1}; this.profileService.updateProfile(this.profile)}
@@ -20,6 +21,8 @@ export class ProfileComponent implements OnInit {
   moreint = function () {if (this.profile.str <60) {this.profile.int +=1}; this.profileService.updateProfile(this.profile)}
   lessdex = function () {if (this.profile.dex >1) {this.profile.dex -=1}; this.profileService.updateProfile(this.profile)}
   moredex = function () {if (this.profile.str <60) {this.profile.dex +=1}; this.profileService.updateProfile(this.profile)}
+  lessslaying = function () {if (this.profile.slaying >-8) {this.profile.slaying -=1}; this.profileService.updateProfile(this.profile)}
+  moreslaying = function () {if (this.profile.slaying <25) {this.profile.slaying +=1}; this.profileService.updateProfile(this.profile)}
 
   constructor(
     private profileService: ProfileService,

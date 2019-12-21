@@ -1,6 +1,6 @@
 
 
-
+changing str doesnt update brand damage
 add weapon to list
 unarmed and forms
 edit weapon

@@ -19,6 +19,7 @@ export class WeaponDamageComponent implements OnInit {
   min_damage = 0;
   max_damage = 0;
   exp_damage = 0;
+  profile = {slaying:0}
   attack_speed;
   brand_color = ""
   brand_damage = 0;
@@ -41,6 +42,7 @@ export class WeaponDamageComponent implements OnInit {
       if (weapon.brand =="holy wrath") {this.brand_color = "yellow"}
       if (weapon.brand =="pain") {this.brand_color = "purple"}
       if (weapon.brand =="electrocution") {this.brand_color = "orange"}
+      if (weapon.brand =="speed") {this.brand_color = "silver"}
 
       if (weapon.brand =="vorpal") {this.brand_color = "white"}
 
@@ -50,7 +52,7 @@ export class WeaponDamageComponent implements OnInit {
       if (weapon.brand =="vorpal") {this.brand_damage = this.attack_speed * 0.1667}
       if (weapon.brand =="pain") {this.brand_damage = (this.skills['necromancy']['level']/2)/(this.calc_w_speed(weapon)/10)}
       if (weapon.brand =="electrocution") {this.brand_damage =  0.33 * (7 + this.dice_exp(13))/(this.calc_w_speed(weapon)/10)}
-      if (weapon.brand =="speed") {this.brand_damage =  0}
+      if (weapon.brand =="speed") {this.brand_damage =  this.exp_damage/(this.calc_w_speed(weapon)*0.66/10) - this.attack_speed}
       if (weapon.brand =="protection") {this.brand_damage = 0}
       if (weapon.brand =="poison") {this.brand_damage = 0}
     } else {
@@ -60,18 +62,11 @@ export class WeaponDamageComponent implements OnInit {
 
   calc_slaying = function (preslaying, dice) {
     var slaying
-    // regex positive or negative
-    var posre = /\+/.test(preslaying)
-    var pos
-    if (posre) { pos = 1; } else { pos = -1; }
-    // regex value
-    var re = /\d+/.test(preslaying)
-    if (re) { var s1 = /\d+/.exec(preslaying); slaying =s1[0] ; } else { slaying = 0; }
-    slaying = slaying * pos
-    if (slaying > 0) {
-      slaying = dice(1 + slaying ) 
+    slaying = preslaying
+    if (preslaying > 0) {
+      slaying = dice(1 + preslaying ) 
     } else {
-      slaying = -1 * dice(1 - slaying ) 
+      slaying = -1 * dice(1 - preslaying ) 
     }
 
     return  slaying
@@ -84,7 +79,7 @@ export class WeaponDamageComponent implements OnInit {
     var weapon_spec = this.wt[weapon.name];
     var base_damage = weapon_spec['damage']
 
-    var preslaying = weapon.slaying
+    var preslaying = parseInt(weapon.slaying) + parseInt(this.profile['slaying'])
     var tempslaying = this.calc_slaying(preslaying,dice)
     var slaying = tempslaying
 
@@ -169,11 +164,13 @@ export class WeaponDamageComponent implements OnInit {
       this.change_brand(this.selectedWeapon)
     })
     this.profileService.profile.subscribe(profile => {
+      this.profile  = profile
       this.str = profile['str']
       this.min_damage = this.calculate_damage(this.selectedWeapon,this.dice_min);
       this.max_damage = this.calculate_damage(this.selectedWeapon,this.dice_max, true);
       this.exp_damage = this.calculate_damage(this.selectedWeapon,this.dice_exp);
       this.attack_speed = this.damage_per_turn(this.exp_damage, this.calc_w_speed(this.selectedWeapon))
+      this.change_brand(this.selectedWeapon)
 
 
     })

@@ -23,7 +23,7 @@ export class WeaponListComponent implements OnInit {
   new Weapon("triple sword","+0","elec"),
   ];
 
-  selectedWeapon = {"name":"TODO"};
+  selectedWeapon =  {name: 'unarmed', slaying:"+0", brand:""};
 
   selectWeapon (weapon) {
     this.selectedWeaponService.selectWeapon(weapon)

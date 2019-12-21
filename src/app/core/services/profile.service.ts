@@ -1,18 +1,12 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { Character} from '../../shared/models/character.model'
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProfileService {
-  private profileSource = new BehaviorSubject(
-    {
-      "str": 1,
-      "int": 1,
-      "dex": 1,
-      "xl": 1,
-    }
-  );
+  private profileSource = new BehaviorSubject(new Character());
 
   profile = this.profileSource.asObservable();
 
