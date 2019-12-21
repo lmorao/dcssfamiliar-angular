@@ -18,7 +18,9 @@ export class WeaponDamageComponent implements OnInit {
   min_damage = 0;
   max_damage = 0;
   exp_damage = 0;
-  attack_speed
+  attack_speed;
+  brand_color = ""
+  brand_damage = 0;
   dice_min = function (n) { return 0}
   dice_max = function (n) { return n-1}
   dice_exp = function (n) { 
@@ -31,6 +33,24 @@ export class WeaponDamageComponent implements OnInit {
   final = 1
   stabbing = 0
   ac_reduction = 0;
+  change_brand = function (weapon) {
+    if (weapon.brand != "") {
+      if (weapon.brand =="flaming") {this.brand_color = "red"}
+      if (weapon.brand =="freezing") {this.brand_color = "aqua"}
+      if (weapon.brand =="holy wrath") {this.brand_color = "yellow"}
+      if (weapon.brand =="pain") {this.brand_color = "purple"}
+      if (weapon.brand =="electrocution") {this.brand_color = "orange"}
+
+      if (weapon.brand =="flaming") {this.brand_damage = this.attack_speed * 0.25}
+      if (weapon.brand =="freezing") {this.brand_damage = this.attack_speed * 0.25}
+      if (weapon.brand =="holy wrath") {this.brand_damage = this.attack_speed * 0.75}
+      if (weapon.brand =="pain") {this.brand_damage = (this.skills['necromancy']['level']/2)/(this.calc_w_speed(weapon)/10)}
+      if (weapon.brand =="protection") {this.brand_damage = 0}
+      if (weapon.brand =="electrocution") {this.brand_damage =  0.33 * (7 + this.dice_exp(13))/(this.calc_w_speed(weapon)/10)}
+    } else {
+      this.brand_damage = 0
+    }
+  }
 
   calc_slaying = function (preslaying, dice) {
     var slaying
@@ -115,6 +135,7 @@ export class WeaponDamageComponent implements OnInit {
     return this.calc_attack_speed(base, min, weapon_skill)
   }
 
+
  
 
   constructor(
@@ -130,6 +151,7 @@ export class WeaponDamageComponent implements OnInit {
       this.max_damage = this.calculate_damage(weapon,this.dice_max, true);
       this.exp_damage = this.calculate_damage(weapon,this.dice_exp);
       this.attack_speed = this.damage_per_turn(this.exp_damage, this.calc_w_speed(weapon))
+      this.change_brand(weapon)
     })
     this.skillsService.skills.subscribe(skills => {
       this.skills = skills
@@ -137,6 +159,7 @@ export class WeaponDamageComponent implements OnInit {
       this.max_damage = this.calculate_damage(this.selectedWeapon,this.dice_max, true);
       this.exp_damage = this.calculate_damage(this.selectedWeapon,this.dice_exp);
       this.attack_speed = this.damage_per_turn(this.exp_damage, this.calc_w_speed(this.selectedWeapon))
+      this.change_brand(this.selectedWeapon)
     })
     this.profileService.profile.subscribe(profile => {
       this.str = profile['str']

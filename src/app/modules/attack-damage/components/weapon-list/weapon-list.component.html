@@ -5,14 +5,18 @@
   </div>
   <mat-list>
     <mat-list-item *ngFor="let weapon of weapons ; let i = index" (click)="selectWeapon(weapon)">
-        <span style="padding-left:20px"[ngClass]="{  'selected' : weapon.name==selectedWeapon.name}"> 
-          <span *ngIf="weapon.name != 'unarmed'" [ngClass]="{  'selected' : weapon.name==selectedWeapon.name}">
+        <span style="padding-left:20px"
+        [ngClass]="{  'selected' : weapon.name==selectedWeapon.name && weapon.slaying==selectedWeapon.slaying && weapon.brand==selectedWeapon.brand}"> 
+          <span *ngIf="weapon.name != 'unarmed'" 
+
+        [ngClass]="{  'selected' : weapon.name==selectedWeapon.name && weapon.slaying==selectedWeapon.slaying && weapon.brand==selectedWeapon.brand}"> 
             a {{weapon.slaying}}
           </span> 
           {{weapon.name}}
           </span> 
-        <span *ngIf="weapon.brand" [ngClass]="{  'selected' : weapon.name==selectedWeapon.name}">
-          ({{weapon.brand}})
+        <span *ngIf="weapon.brand" 
+        [ngClass]="{  'selected' : weapon.name==selectedWeapon.name && weapon.slaying==selectedWeapon.slaying && weapon.brand==selectedWeapon.brand}"> 
+           ({{weapon.brand}})
         </span>
     </mat-list-item>
   </mat-list>

@@ -1,10 +1,12 @@
 <div>
-  <div class=panel-title><p style="color:">Character</p></div>
-  <div class="name">
-    {{profile.name}} the {{profile.title}}
-    <br>
-    {{profile.species}}
+  <div class=panel-title>
+    <p >Character</p>
   </div>
+  <div class="name">
+    <p>{{profile.name}} the {{profile.title}}</p>
+    <p>{{profile.species}}</p>
+  </div>
+  <div class="row" style="padding-left:15px">
   <div style="float: left;" class="attr">
     <p>
       XL: 
@@ -29,4 +31,13 @@
       <span class="menu">{{profile.dex}}</span>
       <button mat-icon-button color="primary" (click)=moredex()> <mat-icon>arrow_right</mat-icon> </button>
 </div>
+</div>
+
+  <div class="row" style="padding-left:15px">
+    <p>
+    <font class="attr">Mutations:</font>
+    <br>
+    <font class="attr">Slaying:</font>
+    </p>
+  </div>
 </div>

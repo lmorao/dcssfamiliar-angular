@@ -67,7 +67,6 @@ export class SkillsMenuComponent implements OnInit {
 
   ngOnInit() {
     this.selectedWeaponService.weapon.subscribe(weapon => {
-      console.log(this.wt[weapon.name]['category'])
       this.selectedSkill = this.wt[weapon.name]['category']
     })
     this.parserService.skills.subscribe(skills => { this.s_melee = skills; 

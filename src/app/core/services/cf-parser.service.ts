@@ -12,7 +12,7 @@ export class CfParserService {
   //the weaponlist is a property to share, but the profile
   // its returned because it is bugging with the profile service on the profile page...
 
-  private weaponListSource = new BehaviorSubject([{"name":"unarmed", "slaying":"+0"}]);
+  private weaponListSource = new BehaviorSubject([{"name":"unarmed", "slaying":"+0", brand:""}]);
   private profileSource = new BehaviorSubject({xl:1,str:1,int:1,dex:1,name:'Unnamed',title:'Foretold',species:""});
   private skillsSource = new BehaviorSubject(
     {
@@ -28,6 +28,8 @@ export class CfParserService {
       crossbows:{ level: 0,display: "Crossbows"},
       throwing:{ level: 0,display: "Throwing"},
       slings:{ level: 0,display: "Slings"},
+
+      necromancy:{ level: 0,display: "Necromancy"},
       }
     );
   weaponList = this.weaponListSource.asObservable();
@@ -84,21 +86,23 @@ export class CfParserService {
 
         if (retype.test(weapons[line])) {
           var maType = retype.exec(weapons[line])
-          var brandRe = /(?:freezing|flaming|holy wrath|protection|piercing|speed|vamp)/
+          var brandRe = /(?:freezing|flaming|holy wrath|protection|piercing|speed|vamp|electrocution|freeze|flame|elec|holy)/
           if (brandRe.test(weapons[line]))
           {
             var maBrand = brandRe.exec(weapons[line])[0]
           } else {maBrand = ""}
           if (currentWeapon.test(weapons[line])) {
+            if (maBrand == "freeze") {maBrand = "freezing"}
+            if (maBrand == "flame") {maBrand = "flaming"}
+            if (maBrand == "elec") {maBrand = "electrocution"}
             cWeapon = {name: maType[3], slaying: maType[1] + maType[2], brand: maBrand}
+            this.selectedWeaponService.selectWeapon(cWeapon)
           }
 
           weaponList.push({name: maType[3], slaying: maType[1] + maType[2], brand: maBrand})
         }
       }
       this.weaponListSource.next(weaponList)
-      console.log(cWeapon)
-      this.selectedWeaponService.selectWeapon(cWeapon)
 
     }
     //skills
@@ -116,6 +120,8 @@ export class CfParserService {
       crossbows:{ level: 0,display: "Crossbows"},
       throwing:{ level: 0,display: "Throwing"},
       slings:{ level: 0,display: "Slings"},
+
+      necromancy:{ level: 0,display: "Necromancy"},
       }
     var re2 = /Skills:.*(spell level.? left.|You cannot memorise any spells.)/
     if (re2.test(txt)) {
@@ -132,6 +138,7 @@ export class CfParserService {
       if (/Crossbows/.test(skillsText)) {skillsTemp['crossbows']['level'] = parseInt(/Level (\d+)\.?\d{0,2}\S*\s+Crossbows/.exec(skillsText)[1])}
       if (/Throwing/.test(skillsText)) {skillsTemp['throwing']['level'] = parseInt(/Level (\d+)\.?\d{0,2}\S*\s+Throwing/.exec(skillsText)[1])}
       if (/Slings/.test(skillsText)) {skillsTemp['slings']['level'] = parseInt(/Level (\d+)\.?\d{0,2}\S*\s+Slings/.exec(skillsText)[1])}
+      if (/Necromancy/.test(skillsText)) {skillsTemp['necromancy']['level'] = parseInt(/Level (\d+)\.?\d{0,2}\S*\s+Necromancy/.exec(skillsText)[1])}
       this.skillsSource.next(skillsTemp)
     }
 

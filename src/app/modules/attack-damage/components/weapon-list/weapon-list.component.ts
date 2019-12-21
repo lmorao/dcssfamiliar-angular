@@ -14,7 +14,7 @@ export class WeaponListComponent implements OnInit {
 
     //new Weapon{"dagger", "elec", 1),
   weapons = [
-    {name: 'unarmed', slaying:"+0"},
+    {name: 'unarmed', slaying:"+0", brand:""},
   new Weapon("dagger","+1","elec"),
   new Weapon("hunting sling",),
   new Weapon("long sword","+3","elec"),
@@ -39,7 +39,8 @@ export class WeaponListComponent implements OnInit {
   ngOnInit() {
     this.selectedWeaponService.weapon.subscribe(weapon => {this.selectedWeapon = weapon; 
   })
-    this.parserService.weaponList.subscribe(weaponList => this.weapons = weaponList)
+    this.parserService.weaponList.subscribe(weaponList => {this.weapons = weaponList;
+    })
   }
 
 }
