@@ -1,12 +1,10 @@
 
 
-not finding selected weapon
-fix selected weapon not base on name
-change selected skill to white
 
-edit weapon
 add weapon to list
 unarmed and forms
+edit weapon
 
 artifact
 brand damage
+parse slaying

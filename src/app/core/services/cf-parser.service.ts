@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { SelectedWeaponService } from './selected-weapon.service';
 import { unrands } from '../../../assets/unrands';
+import { Skills } from '../../shared/models/skills.model'
 
 
 @Injectable({
@@ -14,24 +15,8 @@ export class CfParserService {
 
   private weaponListSource = new BehaviorSubject([{"name":"unarmed", "slaying":"+0", brand:""}]);
   private profileSource = new BehaviorSubject({xl:1,str:1,int:1,dex:1,name:'Unnamed',title:'Foretold',species:""});
-  private skillsSource = new BehaviorSubject(
-    {
-      fighting: { level: 0, display: "Fighting"},
-      "short blades": { level: 0, display: "Short Blades"},
-      "long blades":{ level: 0,display: "Long Blades"},
-      maces:{ level: 0,display: "Maces & Flails"},
-      axes:{ level: 0,display: "Axes"},
-      polearms:{ level: 0,display: "Polearms"},
-      staves:{ level: 0,display: "Staves"},
-      unarmed:{ level: 0,display: "Unarmed"},
-      bows:{ level: 0,display: "Bows"},
-      crossbows:{ level: 0,display: "Crossbows"},
-      throwing:{ level: 0,display: "Throwing"},
-      slings:{ level: 0,display: "Slings"},
+  private skillsSource = new BehaviorSubject( new Skills());
 
-      necromancy:{ level: 0,display: "Necromancy"},
-      }
-    );
   weaponList = this.weaponListSource.asObservable();
   profile = this.profileSource.asObservable();
   skills = this.skillsSource.asObservable();
@@ -106,23 +91,7 @@ export class CfParserService {
 
     }
     //skills
-    var skillsTemp = {
-      fighting: { level: 0, display: "Fighting"},
-      "short blades": { level: 0, display: "Short Blades"},
-      "long blades":{ level: 0,display: "Long Blades"},
-      maces:{ level: 0,display: "Maces & Flails"},
-      axes:{ level: 0,display: "Axes"},
-      polearms:{ level: 0,display: "Polearms"},
-      staves:{ level: 0,display: "Staves"},
-      unarmed:{ level: 0,display: "Unarmed"},
-
-      bows:{ level: 0,display: "Bows"},
-      crossbows:{ level: 0,display: "Crossbows"},
-      throwing:{ level: 0,display: "Throwing"},
-      slings:{ level: 0,display: "Slings"},
-
-      necromancy:{ level: 0,display: "Necromancy"},
-      }
+    var skillsTemp = new Skills();
     var re2 = /Skills:.*(spell level.? left.|You cannot memorise any spells.)/
     if (re2.test(txt)) {
       var skillsText= re2.exec(txt)[0];

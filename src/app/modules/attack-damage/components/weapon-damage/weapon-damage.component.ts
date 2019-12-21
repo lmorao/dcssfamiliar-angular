@@ -3,6 +3,7 @@ import { SelectedWeaponService } from '../../../../core/services/selected-weapon
 import { SkillsService } from '../../../../core/services/skills.service'
 import { ProfileService } from '../../../../core/services/profile.service'
 import { weapon_types } from '../../../../weapon_types'
+import { Skills } from '../../../../shared/models/skills.model'
 
 @Component({
   selector: 'app-weapon-damage',
@@ -11,7 +12,7 @@ import { weapon_types } from '../../../../weapon_types'
 })
 export class WeaponDamageComponent implements OnInit {
   selectedWeapon;
-  skills = {unarmed:{level:0},fighting:{level:0}}
+  skills = new Skills()
   wt=weapon_types
   str 
   w_speed = 10;
@@ -41,12 +42,17 @@ export class WeaponDamageComponent implements OnInit {
       if (weapon.brand =="pain") {this.brand_color = "purple"}
       if (weapon.brand =="electrocution") {this.brand_color = "orange"}
 
+      if (weapon.brand =="vorpal") {this.brand_color = "white"}
+
       if (weapon.brand =="flaming") {this.brand_damage = this.attack_speed * 0.25}
       if (weapon.brand =="freezing") {this.brand_damage = this.attack_speed * 0.25}
       if (weapon.brand =="holy wrath") {this.brand_damage = this.attack_speed * 0.75}
+      if (weapon.brand =="vorpal") {this.brand_damage = this.attack_speed * 0.1667}
       if (weapon.brand =="pain") {this.brand_damage = (this.skills['necromancy']['level']/2)/(this.calc_w_speed(weapon)/10)}
-      if (weapon.brand =="protection") {this.brand_damage = 0}
       if (weapon.brand =="electrocution") {this.brand_damage =  0.33 * (7 + this.dice_exp(13))/(this.calc_w_speed(weapon)/10)}
+      if (weapon.brand =="speed") {this.brand_damage =  0}
+      if (weapon.brand =="protection") {this.brand_damage = 0}
+      if (weapon.brand =="poison") {this.brand_damage = 0}
     } else {
       this.brand_damage = 0
     }
@@ -81,6 +87,7 @@ export class WeaponDamageComponent implements OnInit {
     var preslaying = weapon.slaying
     var tempslaying = this.calc_slaying(preslaying,dice)
     var slaying = tempslaying
+
     var weapon_skill = this.skills[weapon_spec['category']]['level']
     var form = 3
     if (weapon.name == "unarmed") {
