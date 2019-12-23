@@ -13,6 +13,9 @@ export class SkillsService {
   updateSkills(s) {
     this.skillsSource.next(s);
   }
+  get() {
+    return this.skills
+  }
 
   constructor() { }
 }

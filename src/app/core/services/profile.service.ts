@@ -13,5 +13,8 @@ export class ProfileService {
   updateProfile(profile) {
     this.profileSource.next(profile);
   }
+  get() {
+    return this.profile;
+  }
   constructor() { }
 }

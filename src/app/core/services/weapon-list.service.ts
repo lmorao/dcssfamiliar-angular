@@ -11,6 +11,9 @@ export class WeaponListService {
   updateWeaponList = function (wl) {
     this.weaponListSource.next(wl)
   }
+  get () {
+    return this.weaponList
+  }
 
   constructor() { }
 }

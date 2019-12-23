@@ -22,6 +22,7 @@ import { InfoComponent } from '../info/info.component'
 import { PasteCharacterComponent } from '../paste-character/paste-character.component'
 import { LandUrlComponent } from '../land-url/land-url.component'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ShareUrlButtonComponent } from '../share-url-button/share-url-button.component'
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     PasteCharacterComponent,
     InfoComponent,
     LandUrlComponent,
+    ShareUrlButtonComponent
   ],
   imports: [
     BrowserModule,

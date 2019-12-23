@@ -63,7 +63,7 @@ export class ShareUrlService {
     if (n ==51) {return "X"}
     if (n ==52) {return "Y"}
     if (n ==53) {return "Z"}
-    if (n >53) {console.log("TODO number > 27")}
+    if (n >53) {console.log('dont support higher than 53');return "Z"}
   }
   routeid = ""
   createUrl = function (profile, skills,  weapons, selectedWeapon) {

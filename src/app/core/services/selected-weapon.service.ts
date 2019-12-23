@@ -11,6 +11,9 @@ export class SelectedWeaponService {
   selectWeapon(weapon) {
     this.weaponSource.next(weapon);
   }
+  get() {
+    return this.weapon
+  }
 
   constructor() { }
 }
