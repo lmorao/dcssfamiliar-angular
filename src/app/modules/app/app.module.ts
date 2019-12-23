@@ -20,6 +20,7 @@ import { ProfileComponent } from '../profile/profile.component'
 import { SkillsMenuComponent } from '../skills-menu/skills-menu.component'
 import { InfoComponent } from '../info/info.component'
 import { PasteCharacterComponent } from '../paste-character/paste-character.component'
+import { LandUrlComponent } from '../land-url/land-url.component'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
@@ -32,6 +33,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     SkillsMenuComponent,
     PasteCharacterComponent,
     InfoComponent,
+    LandUrlComponent,
   ],
   imports: [
     BrowserModule,
