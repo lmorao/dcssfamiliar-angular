@@ -34,7 +34,7 @@ export class CfParserService {
     profile['int']  = parseInt(maInt[1])
     profile['dex']  = parseInt(maDex[1])
 
-    var charReg = /(\S+)\s+the\s+(\S+\s*\S*\s*\S*\s*\S*)\s+\((\S+)\s+(\S+\s*\S*)\)\s+Turns/
+    var charReg = /(\S+)\s+the\s+(\S+\s*\S*\s*\S*\s*\S*)\s+\((\S+)\s*(\S*\s*\S*)\)\s+Turns/
     if (charReg.test(txt)) {
       var charname= charReg.exec(txt);
       profile['name']  = charname[1]
@@ -65,10 +65,11 @@ export class CfParserService {
     // Find weapons first
     var re1 = /Hand Weapons.+(?:Missiles|Armour|Jewellery|Wands|Scrolls|Potions|Comestibles|Skills:)/
     var maHandWeapons= re1.exec(txt);
+    var weaponList  = new Array({"name":"unarmed", "slaying":"+0", brand:""});
+    var cWeapon = {name:"unarmed","slaying":"+0",brand:""}
     if (re1.test(txt)) {
       var inventory  = maHandWeapons[0]
       var weapons = inventory.split(/[a-zA-Z] - (?:a|the)/)
-      var weaponList  = new Array({"name":"unarmed", "slaying":"+0", brand:""});
       for (var line=0; line < weapons.length; line +=1) {
         var found1 = weapons[line]
         var wtRe= "("
@@ -84,7 +85,6 @@ export class CfParserService {
         wtRe += ")"
         var retype = new RegExp("(\\+|-)(\\d+)\\s+(?:vampiric\\s+)?" + wtRe)
         var currentWeapon= /\(weapon\)/
-        var cWeapon = {name:"unarmed","slaying":"+0",brand:""}
 
         if (retype.test(weapons[line])) {
           var maType = retype.exec(weapons[line])
@@ -109,9 +109,9 @@ export class CfParserService {
           weaponList.push({name: maType[3], slaying: maType[1] + maType[2], brand: maBrand})
         }
       }
-      return [weaponList, cWeapon]
 
     }
+    return [weaponList, cWeapon]
   }
   parseSkills = function (txt) {
     //skills

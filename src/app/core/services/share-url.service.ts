@@ -66,7 +66,7 @@ export class ShareUrlService {
     if (n >53) {console.log("TODO number > 27")}
   }
   routeid = ""
-  createUrl = function (profile, skills,  weapons) {
+  createUrl = function (profile, skills,  weapons, selectedWeapon) {
     var url = ""
     var conv = this.convertNumberToLeter
     url += conv(profile.xl)
@@ -74,6 +74,7 @@ export class ShareUrlService {
     url += conv(profile.int);
     url += conv(profile.dex);
     url += conv(profile.slaying);
+
     url += "/" + profile.name
     url += "/" + profile.species + "/"
 
@@ -113,9 +114,176 @@ export class ShareUrlService {
     url += conv(skills.evocations.level);
     url += conv(skills.stealth.level);
 
-    console.log(url)
+    url += "/"
+    for (var i=0 ; i<weapons.length; i+=1) {
+      url += this.weaponHash(weapons[i])
+
+    }
+    url += "/"
+    url += this.weaponHash(selectedWeapon)
+
     return url
   }
+
+  weaponHash (weapon) {
+    var res = ""
+    var name =  ""
+    if (weapon.name == "unarmed") { name = "Z" }
+    if (weapon.name == "dagger") { name = "0" }
+    if (weapon.name == "quick blade") { name = "a" }
+    if (weapon.name == "short sword") { name = "b" }
+    if (weapon.name == "rapier") { name = "c" }
+    if (weapon.name == "falchion") { name = "d" }
+    if (weapon.name == "long sword") { name = "e" }
+    if (weapon.name == "scimitar") { name = "f" }
+    if (weapon.name == "demon blade") { name = "g" }
+    if (weapon.name == "eudemon blade") { name = "h" }
+    if (weapon.name == "double sword") { name = "i" }
+    if (weapon.name == "great sword") { name = "j" }
+    if (weapon.name == "triple sword") { name = "k" }
+    if (weapon.name == "hand axe") { name = "l" }
+    if (weapon.name == "war axe") { name = "m" }
+    if (weapon.name == "broad axe") { name = "n" }
+    if (weapon.name == "battleaxe") { name = "o" }
+    if (weapon.name == "executioner's axe") { name = "p" }
+    if (weapon.name == "whip") { name = "q" }
+    if (weapon.name == "club") { name = "r" }
+    if (weapon.name == "mace") { name = "s" }
+    if (weapon.name == "flail") { name = "t" }
+    if (weapon.name == "morningstar") { name = "u" }
+    if (weapon.name == "demon whip") { name = "v" }
+    if (weapon.name == "sacred scourge") { name = "w" }
+    if (weapon.name == "dire flail") { name = "x" }
+    if (weapon.name == "eveningstar") { name = "y" }
+    if (weapon.name == "great mace") { name = "z" }
+    if (weapon.name == "giant club") { name = "A" }
+    if (weapon.name == "giant spiked club") { name = "B" }
+    if (weapon.name == "spear") { name = "C" }
+    if (weapon.name == "trident") { name = "D" }
+    if (weapon.name == "halberd") { name = "E" }
+    if (weapon.name == "scythe") { name = "F" }
+    if (weapon.name == "demon trident") { name = "G" }
+    if (weapon.name == "trishula") { name = "H" }
+    if (weapon.name == "glaive") { name = "I" }
+    if (weapon.name == "bardiche") { name = "J" }
+    if (weapon.name == "quarterstaff") { name = "K" }
+    if (weapon.name == "lajatang") { name = "L" }
+    if (weapon.name == "hunting sling") { name = "M" }
+    if (weapon.name == "fustibalus") { name = "N" }
+    if (weapon.name == "shortbow") { name = "O" }
+    if (weapon.name == "longbow") { name = "P" }
+    if (weapon.name == "hand crossbow") { name = "Q" }
+    if (weapon.name == "arbalest") { name = "R" }
+    if (weapon.name == "triple crossbow") { name = "S" }
+    if (weapon.name == "stone") { name = "T" }
+    if (weapon.name == "boomerang") { name = "U" }
+    if (weapon.name == "javelin") { name = "V" }
+    if (weapon.name == "large rock") { name = "W" }
+
+    res += name 
+    if (weapon.slaying[0] == "+") {res+= "0"} else {res += "1"}
+    res += this.convertNumberToLeter(weapon.slaying[1])
+
+    var brand
+    if (weapon.brand == "") { brand = "0" }
+    if (weapon.brand == "flaming") { brand = "a" }
+    if (weapon.brand == "freezing") { brand = "b" }
+    if (weapon.brand == "electrocution") { brand = "c" }
+    if (weapon.brand == "vorpal") { brand = "d" }
+    if (weapon.brand == "holy wrath") { brand = "e" }
+    if (weapon.brand == "pain") { brand = "f" }
+    if (weapon.brand == "speed") { brand = "g" }
+    if (weapon.brand == "protection") { brand = "h" }
+    if (weapon.brand == "vamp") { brand = "i" }
+    
+    res += brand
+    return res
+  }
+
+  reverseWeaponHash = function (name, signal, slaying, brand) {
+    var res = {name: "dagger", slaying: "+0", brand: ""}
+    if (name == "Z") { res.name = "unarmed"}
+    if (name == "0") { res.name = "dagger"}
+    if (name == "a") { res.name = "quick blade"}
+    if (name == "b") { res.name = "short sword"}
+    if (name == "c") { res.name = "rapier"}
+    if (name == "d") { res.name = "falchion"}
+    if (name == "e") { res.name = "long sword"}
+    if (name == "f") { res.name = "scimitar"}
+    if (name == "g") { res.name = "demon blade"}
+    if (name == "h") { res.name = "eudemon blade"}
+    if (name == "i") { res.name = "double sword"}
+    if (name == "j") { res.name = "great sword"}
+    if (name == "k") { res.name = "triple sword"}
+    if (name == "l") { res.name = "hand axe"}
+    if (name == "m") { res.name = "war axe"}
+    if (name == "n") { res.name = "broad axe"}
+    if (name == "o") { res.name = "battleaxe"}
+    if (name == "p") { res.name = "executioner's axe"}
+    if (name == "q") { res.name = "whip"}
+    if (name == "r") { res.name = "club"}
+    if (name == "s") { res.name = "mace"}
+    if (name == "t") { res.name = "flail"}
+    if (name == "u") { res.name = "morningstar"}
+    if (name == "v") { res.name = "demon whip"}
+    if (name == "w") { res.name = "sacred scourge"}
+    if (name == "x") { res.name = "dire flail"}
+    if (name == "y") { res.name = "eveningstar"}
+    if (name == "z") { res.name = "great mace"}
+    if (name == "A") { res.name = "giant club"}
+    if (name == "B") { res.name = "giant spiked club"}
+    if (name == "C") { res.name = "spear"}
+    if (name == "D") { res.name = "trident"}
+    if (name == "E") { res.name = "halberd"}
+    if (name == "F") { res.name = "scythe"}
+    if (name == "G") { res.name = "demon trident"}
+    if (name == "H") { res.name = "trishula"}
+    if (name == "I") { res.name = "glaive"}
+    if (name == "J") { res.name = "bardiche"}
+    if (name == "K") { res.name = "quarterstaff"}
+    if (name == "L") { res.name = "lajatang"}
+    if (name == "M") { res.name = "hunting sling"}
+    if (name == "N") { res.name = "fustibalus"}
+    if (name == "O") { res.name = "shortbow"}
+    if (name == "P") { res.name = "longbow"}
+    if (name == "Q") { res.name = "hand crossbow"}
+    if (name == "R") { res.name = "arbalest"}
+    if (name == "S") { res.name = "triple crossbow"}
+    if (name == "T") { res.name = "stone"}
+    if (name == "U") { res.name = "boomerang"}
+    if (name == "V") { res.name = "javelin"}
+    if (name == "W") { res.name = "large rock"}
+
+    if (signal == "0") {res.slaying ="+"} else {res.slaying ="-"}
+    res.slaying += this.convertLetterToNumber(slaying)
+
+    var brand
+    if (brand == "0") { res.brand = ""}
+    if (brand == "a" ) { res.brand = "flaming"}
+    if (brand == "b" ) { res.brand = "freezing"}
+    if (brand == "c" ) { res.brand = "electrocution"}
+    if (brand == "d" ) { res.brand = "vorpal"}
+    if (brand == "e" ) { res.brand = "holy wrath"}
+    if (brand == "f" ) { res.brand = "pain"}
+    if (brand == "g" ) { res.brand = "speed"}
+    if (brand == "h" ) { res.brand = "protection"}
+    if (brand == "i" ) { res.brand = "vamp"}
+ 
+    return res
+
+  }
+  recreateWeaponList = function (wltxt) {
+    var res = []
+    for (var i=0;i<wltxt.length;i+=4) {
+      res.push(this.reverseWeaponHash(wltxt[i],wltxt[i+1],wltxt[i+2],wltxt[i+3]))
+    }
+    return res
+    
+  }
+  recreateSelectedWeapon = function (swtxt) {
+    return this.reverseWeaponHash(swtxt[0],swtxt[1],swtxt[2],swtxt[3],)
+  }
+
   convertLetterToNumber = function (n) {
     if (n <0) {return 0}
     if (n ==0) {return 0}
@@ -172,14 +340,58 @@ export class ShareUrlService {
     if (n =="Y") {return 52}
     if (n =="Z") {return 53}
   }
-  recreateProfile = function (txt) {
+  recreateProfile = function (attr,name, species) {
     var res = new Character()
     var conv = this.convertLetterToNumber
-    res.xl =      conv(txt[0])
-    res.str =     conv(txt[1])
-    res.int =     conv(txt[2])
-    res.dex =     conv(txt[3])
-    res.slaying = conv(txt[4])
+    res.xl =      conv(attr[0])
+    res.str =     conv(attr[1])
+    res.int =     conv(attr[2])
+    res.dex =     conv(attr[3])
+    res.slaying = conv(attr[4])
+    res.name = name
+    res.species = species
+    return res
+  }
+  recreateSkills = function (skills) {
+    var res = new Skills()
+    var conv = this.convertLetterToNumber
+
+    res.fighting.level = conv(skills[0]);
+    res["short blades"].level = conv(skills[1]);
+    res["long blades"].level = conv(skills[2]);
+    res.maces.level = conv(skills[3]);
+    res.axes.level = conv(skills[4]);
+    res.polearms.level = conv(skills[5]);
+    res.staves.level = conv(skills[6]);
+    res.unarmed.level = conv(skills[7]);
+    res.bows.level = conv(skills[8]);
+    res.crossbows.level = conv(skills[9]);
+    res.throwing.level = conv(skills[10]);
+    res.slings.level = conv(skills[11]);
+
+
+    res.armour.level = conv(skills[12]);
+    res.dodging.level = conv(skills[13]);
+    res.shields.level = conv(skills[14]);
+
+    res.spellcasting.level = conv(skills[15]);
+    res.conjurations.level = conv(skills[16]);
+    res.hexes.level = conv(skills[17]);
+    res.charms.level = conv(skills[18]);
+    res.summonings.level = conv(skills[19]);
+    res.necromancy.level = conv(skills[20]);
+    res.translocations.level = conv(skills[21]);
+    res.transmutations.level = conv(skills[22]);
+    res["fire magic"].level = conv(skills[23]);
+    res["ice magic"].level = conv(skills[24]);
+    res["air magic"].level = conv(skills[25]);
+    res["earth magic"].level = conv(skills[26]);
+    res["poison magic"].level = conv(skills[27]);
+
+    res.invocations.level = conv(skills[28]);
+    res.evocations.level = conv(skills[29]);
+    res.stealth.level = conv(skills[30]);
+
     return res
   }
 
