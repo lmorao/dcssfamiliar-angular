@@ -116,6 +116,72 @@ export class ShareUrlService {
     console.log(url)
     return url
   }
+  convertLetterToNumber = function (n) {
+    if (n <0) {return 0}
+    if (n ==0) {return 0}
+    if (n =="a") {return 1}
+    if (n =="b") {return 2}
+    if (n =="c") {return 3}
+    if (n =="d") {return 4}
+    if (n =="e") {return 5}
+    if (n =="f") {return 6}
+    if (n =="g") {return 7}
+    if (n =="h") {return 8}
+    if (n =="i") {return 9}
+    if (n =="j") {return 11}
+    if (n =="k") {return 12}
+    if (n =="l") {return 13}
+    if (n =="m") {return 14}
+    if (n =="n") {return 15}
+    if (n =="o") {return 16}
+    if (n =="p") {return 17}
+    if (n =="q") {return 18}
+    if (n =="r") {return 19}
+    if (n =="s") {return 20}
+    if (n =="t") {return 21}
+    if (n =="u") {return 22}
+    if (n =="v") {return 23}
+    if (n =="w") {return 24}
+    if (n =="x") {return 25}
+    if (n =="y") {return 26}
+    if (n =="z") {return 27}
+    if (n =="A") {return 28}
+    if (n =="B") {return 29}
+    if (n =="C") {return 30}
+    if (n =="D") {return 31}
+    if (n =="E") {return 32}
+    if (n =="F") {return 33}
+    if (n =="G") {return 34}
+    if (n =="H") {return 35}
+    if (n =="I") {return 36}
+    if (n =="J") {return 37}
+    if (n =="K") {return 38}
+    if (n =="L") {return 39}
+    if (n =="M") {return 40}
+    if (n =="N") {return 41}
+    if (n =="O") {return 42}
+    if (n =="P") {return 43}
+    if (n =="Q") {return 44}
+    if (n =="R") {return 45}
+    if (n =="S") {return 46}
+    if (n =="T") {return 47}
+    if (n =="U") {return 48}
+    if (n =="V") {return 49}
+    if (n =="W") {return 50}
+    if (n =="X") {return 51}
+    if (n =="Y") {return 52}
+    if (n =="Z") {return 53}
+  }
+  recreateProfile = function (txt) {
+    var res = new Character()
+    var conv = this.convertLetterToNumber
+    res.xl =      conv(txt[0])
+    res.str =     conv(txt[1])
+    res.int =     conv(txt[2])
+    res.dex =     conv(txt[3])
+    res.slaying = conv(txt[4])
+    return res
+  }
 
   constructor() { }
 }
