@@ -31,8 +31,8 @@ export class PasteCharacterComponent implements OnInit {
 
     var url = this.shareUrlService.createUrl(profile, skills, weaponsArray[0], weaponsArray[1])
     //console.log(url)
-    //window.location.href = "http://www.dcssfamiliar.com/#/parse/" + url
-    window.location.href = "http://localhost:4200/#/parse/" + url
+    window.location.href = "http://www.dcssfamiliar.com/#/parse/" + url
+    //window.location.href = "http://localhost:4200/#/parse/" + url
 
     this.model.name = ""
   }
