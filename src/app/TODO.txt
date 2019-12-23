@@ -1,4 +1,6 @@
 
+races that have two words
+share-url title
 
 changing str doesnt update brand damage
 add weapon to list

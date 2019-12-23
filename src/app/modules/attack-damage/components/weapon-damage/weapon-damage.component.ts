@@ -4,7 +4,6 @@ import { SkillsService } from '../../../../core/services/skills.service'
 import { ProfileService } from '../../../../core/services/profile.service'
 import { weapon_types } from '../../../../weapon_types'
 import { Skills } from '../../../../shared/models/skills.model'
-import { ShareUrlService } from 'src/app/core/services/share-url.service';
 
 @Component({
   selector: 'app-weapon-damage',
@@ -138,18 +137,10 @@ export class WeaponDamageComponent implements OnInit {
     return this.calc_attack_speed(base, min, weapon_skill)
   }
 
-
-  tempFunction = function () {
-    var url = this.shareUrlService.createUrl(this.profile, this.skills, this.weapon)
-    console.log(url)
-  }
- 
-
   constructor(
     private selectedWeaponService: SelectedWeaponService,
     private skillsService: SkillsService,
     private profileService: ProfileService,
-    private shareUrlService: ShareUrlService,
   ) { }
 
   ngOnInit() {
