@@ -40,13 +40,9 @@ export class ShareUrlService {
   }
   routeid = ""
   createUrl = function (profile,skills,  weapons) {
-    console.log(profile)
-    console.log(skills)
     var url = ""
-    console.log(url)
     var conv = this.convertNumberToLeter
     url += conv(profile.xl)
-    console.log(url)
     url += conv(profile.str);
     url += conv(profile.int);
     url += conv(profile.dex);
@@ -54,7 +50,6 @@ export class ShareUrlService {
     url += conv(profile.title);
     url += conv(profile.species);
     url += conv(profile.slaying);
-    console.log(url)
 
     url += conv(skills.fighting );
     url += conv(skills["short blades"]);

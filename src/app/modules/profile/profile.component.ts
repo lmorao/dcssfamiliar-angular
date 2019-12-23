@@ -30,11 +30,7 @@ export class ProfileComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.parserService.profile.subscribe(profile => {
-      this.profile = profile; 
-      this.profileService.updateProfile(profile)
-    })
-
+    this.profileService.profile.subscribe(profile => {this.profile = profile});
   }
 
 }

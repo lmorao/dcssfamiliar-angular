@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { SelectedWeaponService } from './selected-weapon.service';
 import { unrands } from '../../../assets/unrands';
+import { SelectedWeaponService } from './selected-weapon.service';
 import { Skills } from '../../shared/models/skills.model'
 import { Character } from '../../shared/models/character.model'
 
@@ -16,13 +16,11 @@ export class CfParserService {
 
   private weaponListSource = new BehaviorSubject([{"name":"unarmed", "slaying":"+0", brand:""}]);
   private profileSource = new BehaviorSubject(new Character());
-  private skillsSource = new BehaviorSubject( new Skills());
 
   weaponList = this.weaponListSource.asObservable();
   profile = this.profileSource.asObservable();
-  skills = this.skillsSource.asObservable();
 
-  parseCharacterFile(txt) {
+  parseProfile(txt) {
     //profile
     var profile = new Character()
 
@@ -60,8 +58,10 @@ export class CfParserService {
       if (ring1.test(temp0)) { slaying = slaying + parseInt(ring1.exec(temp0)[1])}
       profile['slaying'] = slaying
     }
-    this.profileSource.next(profile)
+    return profile
 
+  }
+  parseWeapons = function (txt) {
     // Find weapons first
     var re1 = /Hand Weapons.+(?:Missiles|Armour|Jewellery|Wands|Scrolls|Potions|Comestibles|Skills:)/
     var maHandWeapons= re1.exec(txt);
@@ -104,15 +104,16 @@ export class CfParserService {
           } else {maBrand = ""}
           if (currentWeapon.test(weapons[line])) {
             cWeapon = {name: maType[3], slaying: maType[1] + maType[2], brand: maBrand}
-            this.selectedWeaponService.selectWeapon(cWeapon)
           }
 
           weaponList.push({name: maType[3], slaying: maType[1] + maType[2], brand: maBrand})
         }
       }
-      this.weaponListSource.next(weaponList)
+      return [weaponList, cWeapon]
 
     }
+  }
+  parseSkills = function (txt) {
     //skills
     var skillsTemp = new Skills();
     var re2 = /Skills:.*(spell level.? left.|You cannot memorise any spells.)/
@@ -131,9 +132,8 @@ export class CfParserService {
       if (/Throwing/.test(skillsText)) {skillsTemp['throwing']['level'] = parseInt(/Level (\d+)\.?\d{0,2}\S*\s+Throwing/.exec(skillsText)[1])}
       if (/Slings/.test(skillsText)) {skillsTemp['slings']['level'] = parseInt(/Level (\d+)\.?\d{0,2}\S*\s+Slings/.exec(skillsText)[1])}
       if (/Necromancy/.test(skillsText)) {skillsTemp['necromancy']['level'] = parseInt(/Level (\d+)\.?\d{0,2}\S*\s+Necromancy/.exec(skillsText)[1])}
-      this.skillsSource.next(skillsTemp)
     }
-
+    return skillsTemp
   }
 
   constructor(

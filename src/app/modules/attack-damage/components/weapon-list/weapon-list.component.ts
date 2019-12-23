@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Weapon } from '../../../../shared/models/weapon.model'
 import { SelectedWeaponService } from '../../../../core/services/selected-weapon.service'
-import { CfParserService } from '../../../../core/services/cf-parser.service'
+import { WeaponListService } from '../../../../core/services/weapon-list.service'
 
 @Component({
   selector: 'weapon-list',
@@ -32,15 +32,13 @@ export class WeaponListComponent implements OnInit {
 
   constructor(
     private selectedWeaponService: SelectedWeaponService,
-    private parserService: CfParserService,
+    private weaponListService: WeaponListService,
   ) { 
   }
 
   ngOnInit() {
-    this.selectedWeaponService.weapon.subscribe(weapon => {this.selectedWeapon = weapon; 
-  })
-    this.parserService.weaponList.subscribe(weaponList => {this.weapons = weaponList;
-    })
+    this.selectedWeaponService.weapon.subscribe(weapon => {this.selectedWeapon = weapon; })
+    this.weaponListService.weaponList.subscribe(weaponList => {this.weapons = weaponList; })
   }
 
 }

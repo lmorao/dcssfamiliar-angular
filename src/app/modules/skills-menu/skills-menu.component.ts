@@ -17,7 +17,7 @@ export class SkillsMenuComponent implements OnInit {
     }
   // TODO: dont separate skills, but use attribute instead. easy to pass between components
   s_melee
-  skills 
+  skills  = new Skills()
   s_melee_temp = ["fighting","short blades", "long blades", "maces", "axes", "polearms", "staves", "unarmed",]
   s_ranged_temp = [ "slings", 'crossbows','bows','throwing']
   wt = weapon_types
@@ -68,9 +68,6 @@ export class SkillsMenuComponent implements OnInit {
   ngOnInit() {
     this.selectedWeaponService.weapon.subscribe(weapon => {
       this.selectedSkill = this.wt[weapon.name]['category']
-    })
-    this.parserService.skills.subscribe(skills => { this.s_melee = skills; 
-      this.skillsService.updateSkills(this.s_melee)
     })
     this.skillsService.skills.subscribe(skills => {
       this.s_melee = skills
