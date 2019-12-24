@@ -3,9 +3,13 @@
             <p>Damage</p>
           </div>
 <div>
-<p [title]="'Damage per turn'" style="cursor: help"><font color="#fde94f">DPT:</font> {{attack_speed | number:'1.1-1'}}
-    <span *ngIf="brand_damage > 0"><font [style.color]="brand_color" >+{{brand_damage | number:'1.1-1'}}</font></span>
+<p  style="cursor: help"><font [title]="'Damage per swing'" color="#fde94f">DPS:</font> <font [title]="'Normal damage per swing'"> {{attack_speed | number:'1.1-1'}}</font>
+    <span [title]="'Brand damage per swing'" *ngIf="brand_damage > 0"><font [style.color]="brand_color" > +{{brand_damage | number:'1.1-1'}}</font></span>
 </p>
-<p [title]="'Average damage of an attack. Max damage of an attack. This doesn\'t account weapon speed.'" style="cursor: help"><font color="#8f5902">AVG:</font> {{exp_damage | number:'1.1-1'}}, <font color="#8f5902">MAX:</font> {{max_damage | number:'1.1-1'}}</p>
+<p [title]="'Average damage of a swing.'" style="cursor: help"><font color="#8f5902">AVG:</font> {{exp_damage | number:'1.1-1'}} 
+</p>
+<p [title]="' Max damage of a swing.'">
+  <font color="#8f5902">MAX:</font> {{max_damage | number:'1.1-1'}}
+</p>
 <p [title]="'Speed measured in Auts. 10 Auts is 1 turn'" style="cursor: help"><font color="#8f5902">SPD:</font> {{w_speed | number:'1.1-1'}}</p>
 </div>

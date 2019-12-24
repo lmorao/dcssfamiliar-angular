@@ -1,6 +1,9 @@
 
-          <p>&#60;comming soon&#62; </p>
 
+<div class="panel">
+    <span>
+          <div class=panel-title>
+            <p>Sample Enemy List</p>
           <span class="attr">
     Target Armour:
           </span>
@@ -11,3 +14,19 @@
     <button mat-icon-button color="primary" (click)=moreac()>
         <mat-icon>arrow_right</mat-icon>
     </button>
+          </div>
+
+</span>
+
+  <div class="title-box2 panel-title" >
+      <!-- Enemy List -->
+  </div>
+  <mat-list>
+    <mat-list-item *ngFor="let enemy of enemyList ; let i = index" (click)="targetEnemy(enemy)">
+        <span style="padding-left:0px" [ngClass]="{  'selected' : enemy.name==selectedEnemy.name }">
+                <img src="../../../../../assets/images/monsters/{{enemy.name}}.png"> &nbsp; {{enemy.display}}
+        </span>
+    </mat-list-item>
+  </mat-list>
+</div>
+
