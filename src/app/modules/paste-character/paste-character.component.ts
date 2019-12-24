@@ -9,6 +9,9 @@ import { WeaponListService } from '../../core/services/weapon-list.service'
 import { ProfileService } from '../../core/services/profile.service'
 import { ShareUrlService } from 'src/app/core/services/share-url.service';
 
+import {environment} from '../../../environments/environment';
+
+
 
 @Component({
   selector: 'app-paste-character',
@@ -24,8 +27,7 @@ export class PasteCharacterComponent implements OnInit {
     var weaponsArray = this.parserService.parseWeapons(this.model.name)
     var profile = this.parserService.parseProfile(this.model.name)
     var url = this.shareUrlService.createUrl(profile, skills, weaponsArray[0], weaponsArray[1])
-    window.location.href = "http://www.dcssfamiliar.com/#/parse/" + url
-    //window.location.href = "http://localhost:4200/#/parse/" + url
+    window.location.href = environment.serverUrl+ "/#/parse/" + url
 
     this.model.name = ""
   }

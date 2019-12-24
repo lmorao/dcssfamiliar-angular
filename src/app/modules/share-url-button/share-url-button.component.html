@@ -1,0 +1,12 @@
+
+<div >
+  <button  class="btn btn-primary btn-sm nopadding"  (click)="create_url()"><mat-icon>share</mat-icon></button> 
+
+  <span *ngIf="share_clicked != true">
+    {{share_url}}
+</span>
+  <span *ngIf="share_clicked == true">
+<input readonly="readonly" [ngModel]="share_url" #urlinput>
+  <button [title]="'Copy to clipboard'"class="btn btn-primary btn-sm nopadding" style (click)="copyToClipboard(urlinput)"><mat-icon>file_copy</mat-icon></button> 
+</span>
+</div>

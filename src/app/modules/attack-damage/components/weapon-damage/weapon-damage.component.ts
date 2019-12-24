@@ -2,8 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { SelectedWeaponService } from '../../../../core/services/selected-weapon.service'
 import { SkillsService } from '../../../../core/services/skills.service'
 import { ProfileService } from '../../../../core/services/profile.service'
+import { EnemyListService } from '../../../../core/services/enemy-list.service'
 import { weapon_types } from '../../../../weapon_types'
 import { Skills } from '../../../../shared/models/skills.model'
+import { Enemy } from '../../../../shared/models/enemy.model';
 
 @Component({
   selector: 'app-weapon-damage',
@@ -14,6 +16,7 @@ export class WeaponDamageComponent implements OnInit {
   selectedWeapon;
   skills = new Skills()
   wt=weapon_types
+  target = new Enemy()
   str 
   w_speed = 10;
   min_damage = 0;
@@ -35,6 +38,12 @@ export class WeaponDamageComponent implements OnInit {
   final = 1
   stabbing = 0
   ac_reduction = 0;
+  calc_ac_reduction = function (target, dice) {
+    //very simple since its monster defense, max_damage =0, which simplifies alot
+    //var stab_bypass = 0
+    //var ac = max(armour_class()- stab_bypass, 0)
+    return dice(1+target.ac)
+  };
   change_brand = function (weapon) {
     if (weapon.brand != "") {
       if (weapon.brand =="flaming") {this.brand_color = "red"}
@@ -104,10 +113,11 @@ export class WeaponDamageComponent implements OnInit {
     } else {
       strm=1
     }
+    var ac_reduction = this.calc_ac_reduction(this.target,dice)
 
     //total = (( dice(base_damage * strm + 1) - 1) * wsm * fm + this.misc + slaying) * this.final + this.stabbing - this.ac_reduction
     //TODO stabbing is not right
-    total = ( dice(base_damage * strm + 1)  * wsm * fm + this.misc + slaying) * this.final + this.stabbing - this.ac_reduction
+    total = ( dice(base_damage * strm + 1)  * wsm * fm + this.misc + slaying) * this.final + this.stabbing - ac_reduction
     if (0 > total) {total = 0}
 
     return total
@@ -141,6 +151,7 @@ export class WeaponDamageComponent implements OnInit {
     private selectedWeaponService: SelectedWeaponService,
     private skillsService: SkillsService,
     private profileService: ProfileService,
+    private enemyListService: EnemyListService,
   ) { }
 
   ngOnInit() {
@@ -151,7 +162,7 @@ export class WeaponDamageComponent implements OnInit {
       this.exp_damage = this.calculate_damage(weapon,this.dice_exp);
       this.attack_speed = this.damage_per_turn(this.exp_damage, this.calc_w_speed(weapon))
       this.change_brand(weapon)
-    })
+    });
     this.skillsService.skills.subscribe(skills => {
       this.skills = skills
       this.min_damage = this.calculate_damage(this.selectedWeapon,this.dice_min);
@@ -159,7 +170,7 @@ export class WeaponDamageComponent implements OnInit {
       this.exp_damage = this.calculate_damage(this.selectedWeapon,this.dice_exp);
       this.attack_speed = this.damage_per_turn(this.exp_damage, this.calc_w_speed(this.selectedWeapon))
       this.change_brand(this.selectedWeapon)
-    })
+    });
     this.profileService.profile.subscribe(profile => {
       this.profile  = profile
       this.str = profile['str']
@@ -168,9 +179,16 @@ export class WeaponDamageComponent implements OnInit {
       this.exp_damage = this.calculate_damage(this.selectedWeapon,this.dice_exp);
       this.attack_speed = this.damage_per_turn(this.exp_damage, this.calc_w_speed(this.selectedWeapon))
       this.change_brand(this.selectedWeapon)
+    });
+    this.enemyListService.target.subscribe(target => {
+      this.target = target;
+      this.min_damage = this.calculate_damage(this.selectedWeapon,this.dice_min);
+      this.max_damage = this.calculate_damage(this.selectedWeapon,this.dice_max, true);
+      this.exp_damage = this.calculate_damage(this.selectedWeapon,this.dice_exp);
+      this.attack_speed = this.damage_per_turn(this.exp_damage, this.calc_w_speed(this.selectedWeapon))
+      this.change_brand(this.selectedWeapon)
 
-
-    })
+    });
   }
 
 }

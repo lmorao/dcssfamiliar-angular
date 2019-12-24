@@ -7,5 +7,5 @@ export function Character() {
       this.slaying=0;
       this.name='Unnamed';
       this.title='Foretold';
-      this.species="";
+      this.species="Slime";
 }

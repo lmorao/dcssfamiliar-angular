@@ -7,7 +7,6 @@ import { Character} from '../../shared/models/character.model'
 })
 export class ProfileService {
   private profileSource = new BehaviorSubject(new Character());
-
   profile = this.profileSource.asObservable();
 
   updateProfile(profile) {
