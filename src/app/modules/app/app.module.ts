@@ -23,6 +23,8 @@ import { PasteCharacterComponent } from '../paste-character/paste-character.comp
 import { LandUrlComponent } from '../land-url/land-url.component'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ShareUrlButtonComponent } from '../share-url-button/share-url-button.component'
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+
 
 @NgModule({
   declarations: [
@@ -45,6 +47,7 @@ import { ShareUrlButtonComponent } from '../share-url-button/share-url-button.co
     HttpClientModule,
     FormsModule,
     AttackDamageModule,
+    NgbModule,
 
 
   ],

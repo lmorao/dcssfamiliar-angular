@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {MaterialModule } from '../../shared/material.module';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 
 
@@ -20,7 +21,8 @@ import { AddWeaponComponent } from './components/add-weapon/add-weapon.component
   ],
   imports: [
     CommonModule,
-    MaterialModule
+    MaterialModule,
+    NgbModule,
   ]
 })
 export class AttackDamageModule { }

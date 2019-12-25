@@ -22,7 +22,9 @@
       <!-- Enemy List -->
   </div>
   <mat-list>
-    <mat-list-item *ngFor="let enemy of enemyList ; let i = index" (click)="targetEnemy(enemy)">
+    <mat-list-item *ngFor="let enemy of enemyList ; let i = index" (click)="targetEnemy(enemy)" 
+ngbTooltip="{{enemy.name}}"
+    >
         <span style="padding-left:0px" [ngClass]="{  'selected' : enemy.name==selectedEnemy.name }">
                 <img src="../../../../../assets/images/monsters/{{enemy.name}}.png"> &nbsp; {{enemy.display}}
         </span>
