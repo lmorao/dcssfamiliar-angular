@@ -1,5 +1,4 @@
 
-
 <div class="panel">
     <span>
           <div class=panel-title>
@@ -24,20 +23,19 @@
   <mat-list>
     <mat-list-item *ngFor="let enemy of enemyList ; let i = index" (click)="targetEnemy(enemy)" 
 [ngbTooltip]="tipContent"
+placement="top"
     >
         <ng-template #tipContent>
-          <div style="text-align: left;">
-          <p>
+          <div class="enemy-tooltip">
           Name: {{enemy.display}} <br>
           HP:   {{enemy.hp}} <br>
-          AC:   {{enemy.ac}} ({{toPlus(enemy.ac)}})<br>
-          EV:   {{enemy.ev}} ({{toPlus(enemy.ev)}})<br>
-          MR:   {{enemy.mr}} ({{toPlusMr(enemy.mr)}})<br>
-          </p>
+          AC:   <div class="enemy-values1">{{enemy.ac }}</div> ({{toPlus(enemy.ac)}})<br>
+          EV:   <div class="enemy-values1">{{enemy.ev}}</div> ({{toPlus(enemy.ev)}})<br>
+          MR:   <div class="enemy-values1">{{enemy.mr}}</div> ({{toPlusMr(enemy.mr)}})<br>
 
           <span>
-          Resistances: {{enemy.resistances}}<br>
-          Vulnerabilties: {{enemy.resistances}}<br>
+          Resist: {{enemy.resistances}}<br>
+          Vulner: {{enemy.vulnerabilities}}<br>
           </span>
 </div>
         </ng-template>
