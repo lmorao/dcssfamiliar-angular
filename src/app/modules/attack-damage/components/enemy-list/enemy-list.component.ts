@@ -15,7 +15,35 @@ export class EnemyListComponent implements OnInit {
   lessac = function () {if (this.selectedEnemy.ac >1) {this.selectedEnemy.ac -=1};  this.enemyListService.updateTarget(this.selectedEnemy);};
   moreac = function () {if (this.selectedEnemy.ac <30) {this.selectedEnemy.ac +=1}; this.enemyListService.updateTarget(this.selectedEnemy);};
 
-  enemyList = [monsters.orc, monsters.gnoll, monsters.crimson_imp, monsters.centaur, monsters.orc_warrior]
+  enemyList = [monsters['orc'], monsters['gnoll'], monsters['crimson imp'], monsters['centaur'], monsters['orc warrior']]
+  getResColor = function (res) {
+    switch (res) {
+      case 'rP':
+        return 'green';
+      case 'rF':
+      case 'rF+':
+      case 'rF++':
+      case 'rF+++':
+      case 'Fire':
+        return 'red';
+      case 'rC':
+      case 'rC+':
+      case 'rC++':
+      case 'rC+++':
+      case 'Cold':
+        return 'aqua';
+      case 'rElec':
+      case 'rElec+':
+      case 'rElec++':
+      case 'rElec+++':
+        return 'orange';
+      case 'Holy':
+      case 'rHoly':
+        return 'yellow';
+      case 'rDrain':
+        return 'purple';
+    }
+  }
   toPlus = function (n: number) {
     var res = ""
     if (n==0) {res = ""}

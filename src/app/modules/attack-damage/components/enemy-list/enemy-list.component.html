@@ -28,19 +28,19 @@ placement="top"
         <ng-template #tipContent>
           <div class="enemy-tooltip">
           Name: {{enemy.display}} <br>
-          HP:   {{enemy.hp}} <br>
+          HP:   <div class="enemy-values1">{{enemy.hp/10 | number:'1.0-0'}}</div> &#177; {{enemy.hp/10*0.33 | number:'1.0-0'}}<br>
           AC:   <div class="enemy-values1">{{enemy.ac }}</div> ({{toPlus(enemy.ac)}})<br>
           EV:   <div class="enemy-values1">{{enemy.ev}}</div> ({{toPlus(enemy.ev)}})<br>
           MR:   <div class="enemy-values1">{{enemy.mr}}</div> ({{toPlusMr(enemy.mr)}})<br>
 
           <span>
-          Resist: {{enemy.resistances}}<br>
-          Vulner: {{enemy.vulnerabilities}}<br>
+          Resist: <span *ngFor="let res of enemy.res"><span [ngStyle]="{'color': getResColor(res)}">{{res}}</span>, </span><br>
+          Vulner: <span *ngFor="let vul of enemy.vul"><span [ngStyle]="{'color': getResColor(vul)}">{{vul}}</span>, </span><br>
           </span>
 </div>
         </ng-template>
         <span   style="padding-left:0px" [ngClass]="{  'selected' : enemy.name==selectedEnemy.name }">
-                <img src="../../../../../assets/images/monsters/{{enemy.name}}.png"> &nbsp; {{enemy.display}}
+                <img src="https://raw.githubusercontent.com/crawl/crawl/master/crawl-ref/source/rltiles/{{enemy.image}}" > &nbsp; {{enemy.display}}
         </span>
     </mat-list-item>
   </mat-list>
