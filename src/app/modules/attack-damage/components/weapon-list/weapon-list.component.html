@@ -1,9 +1,10 @@
 
-<div class="panel">
+<div class="panel" >
+  <div >
   <div class="title-box2 panel-title" >
     Hand Weapons
   </div>
-  <mat-list>
+  <mat-list style="overflow:auto; height:360px">
     <mat-list-item *ngFor="let weapon of weapons ; let i = index" (click)="selectWeapon(weapon)">
         <span style="padding-left:20px"
         [ngClass]="{  'selected' : weapon.name==selectedWeapon.name && weapon.slaying==selectedWeapon.slaying && weapon.brand==selectedWeapon.brand}"> 
@@ -20,4 +21,5 @@
         </span>
     </mat-list-item>
   </mat-list>
+</div>
 </div>

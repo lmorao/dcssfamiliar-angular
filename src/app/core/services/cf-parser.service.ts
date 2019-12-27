@@ -4,6 +4,7 @@ import { unrands } from '../../../assets/unrands';
 import { SelectedWeaponService } from './selected-weapon.service';
 import { Skills } from '../../shared/models/skills.model'
 import { Character } from '../../shared/models/character.model'
+import { monsters } from '../../monsters'
 
 
 @Injectable({
@@ -59,6 +60,57 @@ export class CfParserService {
       profile['slaying'] = slaying
     }
     return profile
+
+  }
+  auxChecks = function (mon) {
+    var c1 = / \d+ (.*)/
+    var c2 = / (?:an|a|\d+) (.*)/
+    var c4 = / (.*)/
+    var res
+    if (c1.test(mon)) {
+      res = monsters[c1.exec(mon)[1].slice(0, -1)]
+    }
+    else if (c2.test(mon)) {
+      res = monsters[c2.exec(mon)[1]]
+    }
+    else if (c4.test(mon)) {
+      res = monsters[c4.exec(mon)[1]]
+    }
+    return res
+      }
+
+  parseEnemies = function (txt) {
+    var caseRe = /There were no monsters in sight/
+    if (caseRe.test(txt)) {
+      console.log('no monsters found')
+      return [monsters['orc'], monsters['gnoll'], monsters['crimson imp'], monsters['centaur'], monsters['yak'],monsters['grinder']]
+    }
+    var res = []
+    var caseRe = /You can see(.*?)\.\s*Vanquished Creatures/
+    if (caseRe.test(txt)) {
+      var m1 = caseRe.exec(txt)[1]
+      var mons = m1.split(",")
+      var c1 = / \d+ (.*)/
+      var c2 = / (?:an|a|\d+) (.*)/
+      var c4 = / (.*)/
+
+
+
+      for (var i=0; i <mons.length ; i +=1) {
+
+        if (!/ and /.test(mons[i])) {
+          res.push(this.auxChecks(mons[i]))
+        } else {
+          var mon1 = mons[i].split(" and")[0]
+          var mon2 = mons[i].split(" and")[1]
+          res.push(this.auxChecks(mon1))
+          res.push(this.auxChecks(mon2))
+        }
+      }
+    } else {
+      console.log("Error, should not come here")
+    }
+    return res
 
   }
   parseWeapons = function (txt) {

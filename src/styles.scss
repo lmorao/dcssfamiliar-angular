@@ -1,11 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
-
+html {
+    height: 100%;
+}
 body {
     background-color: #000000;
     //color: #e8e8e6;
     color: #babdb6;
     //font-family: "Consolas", Monaco, monospace
     font-family: "Courier New", Courier, monospace;
+    height: 100%;
 }
 .panel-title {
     padding-top: 15px;

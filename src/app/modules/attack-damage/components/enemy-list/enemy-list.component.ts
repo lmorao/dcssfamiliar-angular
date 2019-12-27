@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Enemy } from '../../../../shared/models/enemy.model'
 import { EnemyListService} from '../../../../core/services/enemy-list.service'
 import { monsters } from '../../../../monsters'
+import { ProfileService} from '../../../../core/services/profile.service'
+import { Character } from '../../../../shared/models/character.model';
 
 @Component({
   selector: 'app-enemy-list',
@@ -11,15 +13,16 @@ import { monsters } from '../../../../monsters'
 export class EnemyListComponent implements OnInit {
 
   selectedEnemy = new Enemy()
+  profile = new Character()
 
   lessac = function () {if (this.selectedEnemy.ac >1) {this.selectedEnemy.ac -=1};  this.enemyListService.updateTarget(this.selectedEnemy);};
   moreac = function () {if (this.selectedEnemy.ac <30) {this.selectedEnemy.ac +=1}; this.enemyListService.updateTarget(this.selectedEnemy);};
 
-  enemyList = [monsters['orc'], monsters['gnoll'], monsters['crimson imp'], monsters['centaur'], monsters['orc warrior']]
+  enemyList = [monsters['orc'], monsters['gnoll'], monsters['crimson imp'], monsters['centaur'], monsters['yak'],monsters['grinder']]
   getResColor = function (res) {
     switch (res) {
       case 'rP':
-        return 'green';
+        return 'lightgreen';
       case 'rF':
       case 'rF+':
       case 'rF++':
@@ -42,7 +45,40 @@ export class EnemyListComponent implements OnInit {
         return 'yellow';
       case 'rDrain':
         return 'purple';
+      case 'rN+':
+      case 'rN++':
+      case 'rN+++':
+        return 'gray';
+      case 'rTorm':
+        return 'slateblue';
     }
+  }
+  dangerous = function (hd) {
+    return '#babdb6'
+    switch (true) {
+      case (hd > this.profile.xl):
+        console.log('red');
+        return 'red';
+      case hd == this.profile.xl:
+        return 'yellow';
+      case hd < this.profile.xl:
+        return 'grey';
+    }
+  }
+  calcXp = function (hd,speed,hp ) {
+    var maxhp = hp*1.33
+    var x_val = (16 + maxhp) * hd * hd / 10;
+    x_val *= speed
+    x_val /= 10
+    if (x_val > 100)
+    {
+      x_val = 100 + ((x_val - 100) * 3) / 4;
+    }
+    if (x_val > 750)
+    { 
+      x_val = 750 + (x_val - 750) / 3
+    }
+    return x_val
   }
   toPlus = function (n: number) {
     var res = ""
@@ -75,10 +111,13 @@ export class EnemyListComponent implements OnInit {
 
   
   constructor(
-    private enemyListService: EnemyListService
+    private enemyListService: EnemyListService,
+    private profileService: ProfileService,
   ) { }
 
   ngOnInit() {
+    this.profileService.profile.subscribe(profile => this.profileService = profile)
+    this.enemyListService.enemyList.subscribe(enemyList => this.enemyList = enemyList)
   }
 
 }

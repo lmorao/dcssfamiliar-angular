@@ -20,7 +20,7 @@
   <div class="title-box2 panel-title" >
       <!-- Enemy List -->
   </div>
-  <mat-list>
+  <mat-list style="overflow:auto; height:310px">
     <mat-list-item *ngFor="let enemy of enemyList ; let i = index" (click)="targetEnemy(enemy)" 
 [ngbTooltip]="tipContent"
 placement="top"
@@ -29,18 +29,23 @@ placement="top"
           <div class="enemy-tooltip">
           Name: {{enemy.display}} <br>
           HP:   <div class="enemy-values1">{{enemy.hp/10 | number:'1.0-0'}}</div> &#177; {{enemy.hp/10*0.33 | number:'1.0-0'}}<br>
+          HD:   <div class="enemy-values1" > <!--<span [ngStyle]="{'color': dangerous(enemy.hd)}">--> {{enemy.hd}} </div><br> 
+          <!-- XP:  <div class="enemy-values1">~{{calcXp(enemy.hd,enemy.speed,enemy.hp)| number:'1.0-0' }}</div> <br>-->
           AC:   <div class="enemy-values1">{{enemy.ac }}</div> ({{toPlus(enemy.ac)}})<br>
           EV:   <div class="enemy-values1">{{enemy.ev}}</div> ({{toPlus(enemy.ev)}})<br>
           MR:   <div class="enemy-values1">{{enemy.mr}}</div> ({{toPlusMr(enemy.mr)}})<br>
 
-          <span>
           Resist: <span *ngFor="let res of enemy.res"><span [ngStyle]="{'color': getResColor(res)}">{{res}}</span>, </span><br>
           Vulner: <span *ngFor="let vul of enemy.vul"><span [ngStyle]="{'color': getResColor(vul)}">{{vul}}</span>, </span><br>
-          </span>
 </div>
         </ng-template>
-        <span   style="padding-left:0px" [ngClass]="{  'selected' : enemy.name==selectedEnemy.name }">
-                <img src="https://raw.githubusercontent.com/crawl/crawl/master/crawl-ref/source/rltiles/{{enemy.image}}" > &nbsp; {{enemy.display}}
+        <span   style="padding-left:10px"  >
+                <img src="https://raw.githubusercontent.com/crawl/crawl/master/crawl-ref/source/rltiles/{{enemy.image}}" 
+                [ngClass]="{  'selected' : enemy.name==selectedEnemy.name }"
+                > &nbsp; 
+                <span [ngStyle]="{'color': dangerous(enemy.hd)}">
+{{enemy.display}}
+                </span>
         </span>
     </mat-list-item>
   </mat-list>

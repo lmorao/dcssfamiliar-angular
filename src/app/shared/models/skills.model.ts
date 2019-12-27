@@ -1,8 +1,8 @@
-export function Skills() {
-      this.fighting = { level: 0, display: "Fighting"};
+export function Skills(fighting=2,maces=3) {
+      this.fighting = { level: fighting, display: "Fighting"};
       this["short blades"]= { level: 0, display: "Short Blades"};
       this["long blades"]={ level: 0,display: "Long Blades"};
-      this.maces={ level: 0,display: "Maces & Flails"};
+      this.maces={ level: maces,display: "Maces & Flails"};
       this.axes={ level: 0,display: "Axes"};
       this.polearms={ level: 0,display: "Polearms"};
       this.staves={ level: 0,display: "Staves"};

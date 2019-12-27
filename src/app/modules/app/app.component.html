@@ -9,7 +9,7 @@
 
 <div class="content" role="main" style="padding-top:30px">
 <div class="container" style="">
-  <div class="row" style="">
+  <div class="row fill45" style="">
     <div class="col-4" style="position: relative;">
       <div class="row">
         <div class="card-container">
@@ -37,12 +37,12 @@
     </div>
 
   </div>
-      <div class="row" style="padding-left:15px">
+      <div class="row fill10" style="">
       <ul class="nav nav-tabs" role="tablist">
-          <li class="nav-item">
-            <a class="nav-link active" [routerLink]="['/attackdamage']" data-toggle="tab" id="weaponstab">Weapons</a>
+          <li class="nav-item active">
+            <a class="nav-link" [routerLink]="['/attackdamage']" data-toggle="tab" id="weaponstab">Weapons</a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item ">
             <a class="nav-link disabled"  [routerLink]="['/']" data-toggle="tab" id="spellstab">Spells</a>
           </li>
           <li class="nav-item">
@@ -54,7 +54,7 @@
 
 </div>
 
-  <div style="background: #121212">
+  <div class="container" style="background: #121212">
     <router-outlet></router-outlet>
   </div>
 
