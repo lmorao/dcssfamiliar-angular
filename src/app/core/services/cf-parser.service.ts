@@ -6,6 +6,7 @@ import { Skills } from '../../shared/models/skills.model'
 import { Character } from '../../shared/models/character.model'
 import { monsters } from '../../monsters'
 
+import {environment} from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -62,7 +63,9 @@ export class CfParserService {
     return profile
 
   }
-  auxChecks = function (mon) {
+  auxChecks = function (mons) {
+    var mon
+    mon =  mons.replace(/ \(\S+\)/,"")
     var c1 = / \d+ (.*)/
     var c2 = / (?:an|a|\d+) (.*)/
     var c4 = / (.*)/
@@ -71,6 +74,7 @@ export class CfParserService {
       res = monsters[c1.exec(mon)[1].slice(0, -1)]
     }
     else if (c2.test(mon)) {
+      console.log(c2.exec(mon)[1])
       res = monsters[c2.exec(mon)[1]]
     }
     else if (c4.test(mon)) {
@@ -86,25 +90,27 @@ export class CfParserService {
       return [monsters['orc'], monsters['gnoll'], monsters['crimson imp'], monsters['centaur'], monsters['yak'],monsters['grinder']]
     }
     var res = []
-    var caseRe = /You can see(.*?)\.\s*Vanquished Creatures/
+    var caseRe = /You (?:can|could) see(.*?)\.\s*Vanquished Creatures/
     if (caseRe.test(txt)) {
       var m1 = caseRe.exec(txt)[1]
       var mons = m1.split(",")
-      var c1 = / \d+ (.*)/
-      var c2 = / (?:an|a|\d+) (.*)/
-      var c4 = / (.*)/
-
-
 
       for (var i=0; i <mons.length ; i +=1) {
+        environment.debug(mons[i])
 
         if (!/ and /.test(mons[i])) {
-          res.push(this.auxChecks(mons[i]))
+          var mon0 = this.auxChecks(mons[i])
+          if (mon0 == undefined) {mon0 = monsters.butterfly}
+          res.push(mon0)
         } else {
-          var mon1 = mons[i].split(" and")[0]
-          var mon2 = mons[i].split(" and")[1]
-          res.push(this.auxChecks(mon1))
-          res.push(this.auxChecks(mon2))
+          var pre1 = mons[i].split(" and")[0]
+          var pre2 = mons[i].split(" and")[1]
+          var mon1 = this.auxChecks(pre1)
+          var mon2 = this.auxChecks(pre2)
+          if (mon1 == undefined) {mon1 = monsters.butterfly}
+          if (mon2 == undefined) {mon2 = monsters.butterfly}
+          res.push(mon1)
+          res.push(mon2)
         }
       }
     } else {

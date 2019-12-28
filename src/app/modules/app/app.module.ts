@@ -40,7 +40,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     ShareUrlButtonComponent
   ],
   imports: [
-    BrowserModule,
+    BrowserModule.withServerTransition({ appId: 'serverApp' }),
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,

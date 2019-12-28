@@ -36,6 +36,7 @@ export class PasteCharacterComponent implements OnInit {
     this.profileService.updateProfile(profile)
     this.enemyListService.updateEnemyList(enemyList)
 
+
     this.model.name = ""
   }
   constructor(

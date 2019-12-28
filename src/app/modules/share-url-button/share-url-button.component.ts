@@ -35,7 +35,9 @@ export class ShareUrlButtonComponent implements OnInit {
 
     console.log(this.skills, )
     var url  = environment.serverUrl + "/#/parse/"
-    url += this.shareUrlService.createUrl(this.profile, this.skills, this.wl, this.sw)
+    var temp1 = this.shareUrlService.createUrl(this.profile, this.skills, this.wl, this.sw)
+    environment.debug(temp1)
+    url += temp1
 
     this.share_url = url
     this.share_clicked = true

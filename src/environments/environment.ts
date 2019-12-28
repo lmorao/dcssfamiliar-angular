@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  serverUrl: "http://localhost:4200"
+  serverUrl: "http://localhost:4200",
+  debug: function (txt) {console.log(txt)},
 };
 
 /*
