@@ -182,25 +182,33 @@ export class CfParserService {
     }
     return [weaponList, cWeapon]
   }
+  _getSkill = function (display, txt) {
+    //var temp =  /Level (\d+)\.?\d{0,2}\S*\s+Maces/.exec(txt)
+    var temp =  new RegExp("Level (\\d+)\\.?\\d{0,2}\\(?(\\d+)?\\.?\\d*\\)?\\s+" + display, "g").exec(txt)
+    var pos
+    console.log(temp)
+    if (temp[2] != undefined) { pos = 2} else {pos = 1}
+    return parseInt(temp[pos])
+  }
   parseSkills = function (txt) {
     //skills
     var skillsTemp = new Skills(0, 0);
     var re2 = /Skills:.*(spell level.? left.|You cannot memorise any spells.|You couldn't memorise any spells.)/
     if (re2.test(txt)) {
       var skillsText= re2.exec(txt)[0];
-      if (/Fighting/.test(skillsText)) {skillsTemp['fighting']['level'] = parseInt(/Level (\d+)\.?\d{0,2}\S*\s+Fighting/.exec(skillsText)[1])}
-      if (/Short/.test(skillsText)) {skillsTemp['short blades']['level'] = parseInt(/Level (\d+)\.?\d{0,2}\S*\s+Short/.exec(skillsText)[1])}
-      if (/Long/.test(skillsText)) {skillsTemp['long blades']['level'] = parseInt(/Level (\d+)\.?\d{0,2}\S*\s+Long/.exec(skillsText)[1])}
-      if (/Maces/.test(skillsText)) {skillsTemp['maces']['level'] = parseInt(/Level (\d+)\.?\d{0,2}\S*\s+Maces/.exec(skillsText)[1])}
-      if (/Axes/.test(skillsText)) {skillsTemp['axes']['level'] = parseInt(/Level (\d+)\.?\d{0,2}\S*\s+Axes/.exec(skillsText)[1])}
-      if (/Polearms/.test(skillsText)) {skillsTemp['polearms']['level'] = parseInt(/Level (\d+)\.?\d{0,2}\S*\s+Polearms/.exec(skillsText)[1])}
-      if (/Staves/.test(skillsText)) {skillsTemp['staves']['level'] = parseInt(/Level (\d+)\.?\d{0,2}\S*\s+Staves/.exec(skillsText)[1])}
-      if (/Unarmed/.test(skillsText)) {skillsTemp['unarmed']['level'] = parseInt(/Level (\d+)\.?\d{0,2}\S*\s+Unarmed/.exec(skillsText)[1])}
-      if (/Bows/.test(skillsText)) {skillsTemp['bows']['level'] = parseInt(/Level (\d+)\.?\d{0,2}\S*\s+Bows/.exec(skillsText)[1])}
-      if (/Crossbows/.test(skillsText)) {skillsTemp['crossbows']['level'] = parseInt(/Level (\d+)\.?\d{0,2}\S*\s+Crossbows/.exec(skillsText)[1])}
-      if (/Throwing/.test(skillsText)) {skillsTemp['throwing']['level'] = parseInt(/Level (\d+)\.?\d{0,2}\S*\s+Throwing/.exec(skillsText)[1])}
-      if (/Slings/.test(skillsText)) {skillsTemp['slings']['level'] = parseInt(/Level (\d+)\.?\d{0,2}\S*\s+Slings/.exec(skillsText)[1])}
-      if (/Necromancy/.test(skillsText)) {skillsTemp['necromancy']['level'] = parseInt(/Level (\d+)\.?\d{0,2}\S*\s+Necromancy/.exec(skillsText)[1])}
+      if (/Fighting/.test(skillsText)) {skillsTemp['fighting']['level'] = this._getSkill("Fighting",skillsText)}
+      if (/Short/.test(skillsText)) {skillsTemp['short blades']['level'] = this._getSkill("Short",skillsText)}
+      if (/Long/.test(skillsText)) {skillsTemp['long blades']['level'] = this._getSkill("Long",skillsText)}
+      if (/Maces/.test(skillsText)) {skillsTemp['maces']['level'] = this._getSkill("Maces",skillsText)}
+      if (/Axes/.test(skillsText)) {skillsTemp['axes']['level'] = this._getSkill("Axes",skillsText)}
+      if (/Polearms/.test(skillsText)) {skillsTemp['polearms']['level'] = this._getSkill("Polearms",skillsText)}
+      if (/Staves/.test(skillsText)) {skillsTemp['staves']['level'] = this._getSkill("Staves",skillsText)}
+      if (/Unarmed/.test(skillsText)) {skillsTemp['unarmed']['level'] = this._getSkill("Unarmed",skillsText)}
+      if (/Bows/.test(skillsText)) {skillsTemp['bows']['level'] = this._getSkill("Bows",skillsText)}
+      if (/Crossbows/.test(skillsText)) {skillsTemp['crossbows']['level'] = this._getSkill("Crossbows",skillsText)}
+      if (/Throwing/.test(skillsText)) {skillsTemp['throwing']['level'] = this._getSkill("Throwing",skillsText)}
+      if (/Slings/.test(skillsText)) {skillsTemp['slings']['level'] = this._getSkill("Slings",skillsText)}
+      if (/Necromancy/.test(skillsText)) {skillsTemp['necromancy']['level'] = this._getSkill("Necromancy",skillsText)}
     }
     return skillsTemp
   }
