@@ -11,7 +11,7 @@ const routes: Routes = [
   { path: "attackdamage", component: AttackDamageComponent },
   { path: "", component: AttackDamageComponent },
   { path: "info", component: InfoComponent },
-  { path: "parse/:profile/:name/:species/:skills/:wl/:sw", component: LandUrlComponent },
+  { path: "parse/:profile/:name/:species/:skills/:wl/:sw", component: AttackDamageComponent },
 ];
 
 @NgModule({

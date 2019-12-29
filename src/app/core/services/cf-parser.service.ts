@@ -149,10 +149,11 @@ export class CfParserService {
 
         if (retype.test(weapons[line])) {
           var maType = retype.exec(weapons[line])
-          var brandRe = /(?:freezing|flaming|distortion|pain|draining|holy wrath|speed|vamp|electrocution|freeze|flame|elec|holy|protection|crushing|chopping|piercing|slashing|slicing)/
+          var brandRe = /(?:freezing|flaming|distortion|pain|draining|holy wrath|speed|vamp|electrocution|freeze|flame|elec|holy|protection|crushing|chopping|piercing|slashing|slicing|crush|chop|pierce|slash|slice)/
           if (brandRe.test(weapons[line]))
           {
             var maBrand = brandRe.exec(weapons[line])[0]
+            console.log(maBrand)
             if (maBrand == "freeze") {maBrand = "freezing"}
             if (maBrand == "flame") {maBrand = "flaming"}
             if (maBrand == "elec") {maBrand = "electrocution"}
@@ -161,6 +162,13 @@ export class CfParserService {
             if (maBrand == "piercing") {maBrand = "vorpal"}
             if (maBrand == "slashing") {maBrand = "vorpal"}
             if (maBrand == "slicing" ) {maBrand = "vorpal"}
+            if (maBrand == "crush") {maBrand = "vorpal"}
+            if (maBrand == "chop") {maBrand = "vorpal"}
+            if (maBrand == "pierce") {maBrand = "vorpal"}
+            if (maBrand == "slash") {maBrand = "vorpal"}
+            if (maBrand == "slice" ) {maBrand = "vorpal"}
+            console.log(maBrand)
+
 
           } else {maBrand = ""}
           if (currentWeapon.test(weapons[line])) {

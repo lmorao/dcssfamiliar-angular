@@ -41,7 +41,6 @@ export class LandUrlComponent implements OnInit {
        this.selectedWeaponService.selectWeapon( this.shareUrlService.recreateSelectedWeapon(sw_hash))
 
 
-       this.router.navigate(['/']);
 
       
   };

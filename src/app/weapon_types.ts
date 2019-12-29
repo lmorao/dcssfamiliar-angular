@@ -102,6 +102,8 @@ export function brand_color (brand) {
       return "silver";
     case "vorpal":
       return "white";
+    case "protection":
+      return "brown";
     case "":
       return "";
 
