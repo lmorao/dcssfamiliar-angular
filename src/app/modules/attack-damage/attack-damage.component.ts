@@ -29,6 +29,7 @@ export class AttackDamageComponent implements OnInit{
 
     ) {}
   ngOnInit() {
+    if (this.route.snapshot.params.hasOwnProperty("profile")) {
        var profile_hash  =this.route.snapshot.params.profile
        var name_hash  =this.route.snapshot.params.name
        var species_hash  =this.route.snapshot.params.species
@@ -42,6 +43,7 @@ export class AttackDamageComponent implements OnInit{
        this.skillsService.updateSkills( this.shareUrlService.recreateSkills(skills_hash))
        this.weaponListService.updateWeaponList( this.shareUrlService.recreateWeaponList(wl_hash))
        this.selectedWeaponService.selectWeapon( this.shareUrlService.recreateSelectedWeapon(sw_hash))
+}
 
 
 
