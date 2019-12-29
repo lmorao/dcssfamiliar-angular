@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Weapon } from '../../../../shared/models/weapon.model'
 import { SelectedWeaponService } from '../../../../core/services/selected-weapon.service'
 import { WeaponListService } from '../../../../core/services/weapon-list.service'
+import {  brand_color } from '../../../../weapon_types'
 
 @Component({
   selector: 'weapon-list',
@@ -15,15 +16,13 @@ export class WeaponListComponent implements OnInit {
     //new Weapon{"dagger", "elec", 1),
   weapons = [
     {name: 'unarmed', slaying:"+0", brand:""},
-  new Weapon("dagger","+1","elec"),
-  new Weapon("hunting sling",),
-  new Weapon("long sword","+3","elec"),
-  new Weapon("long sword","+0","elec"),
-  new Weapon("falchion","+0","elec"),
-  new Weapon("triple sword","+0","elec"),
   ];
 
   selectedWeapon =  {name: 'unarmed', slaying:"+0", brand:""};
+  brand_color = function (brand) {
+    return brand_color(brand)
+
+  }
 
   selectWeapon (weapon) {
     this.selectedWeaponService.selectWeapon(weapon)

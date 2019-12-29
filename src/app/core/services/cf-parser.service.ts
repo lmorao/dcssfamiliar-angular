@@ -71,20 +71,22 @@ export class CfParserService {
     var c4 = / (.*)/
     var res
     if (c1.test(mon)) {
+      environment.debug("\"" + c1.exec(mon)[1] + "\"")
       res = monsters[c1.exec(mon)[1].slice(0, -1)]
     }
     else if (c2.test(mon)) {
-      console.log(c2.exec(mon)[1])
+      environment.debug("\"" + c2.exec(mon)[1] + "\"")
       res = monsters[c2.exec(mon)[1]]
     }
     else if (c4.test(mon)) {
-      res = monsters[c4.exec(mon)[1]]
+      environment.debug("\"" + c4.exec(mon)[1] + "\"")
+      res = monsters[c4.exec(mon)[1].toLowerCase()]
     }
     return res
       }
 
   parseEnemies = function (txt) {
-    var caseRe = /There were no monsters in sight/
+    var caseRe = /There (?:were|are) no monsters in sight/
     if (caseRe.test(txt)) {
       console.log('no monsters found')
       return [monsters['orc'], monsters['gnoll'], monsters['crimson imp'], monsters['centaur'], monsters['yak'],monsters['grinder']]
@@ -121,7 +123,7 @@ export class CfParserService {
   }
   parseWeapons = function (txt) {
     // Find weapons first
-    var re1 = /Hand Weapons.+(?:Missiles|Armour|Jewellery|Wands|Scrolls|Potions|Comestibles|Skills:)/
+    var re1 = /Hand Weapons.+?(?:Missiles|Armour|Jewellery|Wands|Scrolls|Potions|Comestibles|Skills:)/
     var maHandWeapons= re1.exec(txt);
     var weaponList  = new Array({"name":"unarmed", "slaying":"+0", brand:""});
     var cWeapon = {name:"unarmed","slaying":"+0",brand:""}
@@ -130,6 +132,7 @@ export class CfParserService {
       var weapons = inventory.split(/[a-zA-Z] - (?:a|the)/)
       for (var line=0; line < weapons.length; line +=1) {
         var found1 = weapons[line]
+        console.log(weapons[line])
         var wtRe= "("
         wtRe += "dagger|quick blade|short sword|rapier"
         wtRe += "|falchion|long sword|scimitar|demon blade|eudemon blade|double sword|great sword|triple sword"
@@ -146,7 +149,7 @@ export class CfParserService {
 
         if (retype.test(weapons[line])) {
           var maType = retype.exec(weapons[line])
-          var brandRe = /(?:freezing|flaming|holy wrath|speed|vamp|electrocution|freeze|flame|elec|holy|protection|crushing|chopping|piercing|slashing|slicing)/
+          var brandRe = /(?:freezing|flaming|distortion|pain|draining|holy wrath|speed|vamp|electrocution|freeze|flame|elec|holy|protection|crushing|chopping|piercing|slashing|slicing)/
           if (brandRe.test(weapons[line]))
           {
             var maBrand = brandRe.exec(weapons[line])[0]
@@ -173,8 +176,8 @@ export class CfParserService {
   }
   parseSkills = function (txt) {
     //skills
-    var skillsTemp = new Skills();
-    var re2 = /Skills:.*(spell level.? left.|You cannot memorise any spells.)/
+    var skillsTemp = new Skills(0, 0);
+    var re2 = /Skills:.*(spell level.? left.|You cannot memorise any spells.|You couldn't memorise any spells.)/
     if (re2.test(txt)) {
       var skillsText= re2.exec(txt)[0];
       if (/Fighting/.test(skillsText)) {skillsTemp['fighting']['level'] = parseInt(/Level (\d+)\.?\d{0,2}\S*\s+Fighting/.exec(skillsText)[1])}

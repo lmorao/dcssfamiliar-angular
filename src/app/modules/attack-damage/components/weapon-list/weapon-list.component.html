@@ -16,7 +16,7 @@
           {{weapon.name}}
           </span> 
         <span *ngIf="weapon.brand" 
-        [ngClass]="{  'selected' : weapon.name==selectedWeapon.name && weapon.slaying==selectedWeapon.slaying && weapon.brand==selectedWeapon.brand}"> 
+        [ngStyle]="{'color': brand_color(weapon.brand) }">
         &nbsp;({{weapon.brand}})
         </span>
     </mat-list-item>

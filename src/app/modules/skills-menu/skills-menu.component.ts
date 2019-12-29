@@ -19,7 +19,8 @@ export class SkillsMenuComponent implements OnInit {
   s_melee
   skills  = new Skills()
   s_melee_temp = ["fighting","short blades", "long blades", "maces", "axes", "polearms", "staves", "unarmed",]
-  s_ranged_temp = [ "slings", 'crossbows','bows','throwing']
+  s_ranged_temp = [ "slings", 'crossbows','bows']
+  s_spells_temp = [ "necromancy"]
   wt = weapon_types
   selectedSkill = "unarmed"
   lessb = function (skill) {if (this.s_melee[skill]['level'] >0) {this.s_melee[skill]['level'] -=1}; this.skillsService.updateSkills(this.s_melee)}

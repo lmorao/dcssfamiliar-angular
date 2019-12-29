@@ -3,7 +3,7 @@ import { SelectedWeaponService } from '../../../../core/services/selected-weapon
 import { SkillsService } from '../../../../core/services/skills.service'
 import { ProfileService } from '../../../../core/services/profile.service'
 import { EnemyListService } from '../../../../core/services/enemy-list.service'
-import { weapon_types } from '../../../../weapon_types'
+import { weapon_types, brand_color } from '../../../../weapon_types'
 import { Skills } from '../../../../shared/models/skills.model'
 import { Enemy } from '../../../../shared/models/enemy.model';
 
@@ -45,23 +45,25 @@ export class WeaponDamageComponent implements OnInit {
     return dice(1+target.ac)
   };
   change_brand = function (weapon) {
+    this.brand_color = brand_color (weapon.brand)
     if (weapon.brand != "") {
-      if (weapon.brand =="flaming") {this.brand_color = "red"}
-      if (weapon.brand =="freezing") {this.brand_color = "aqua"}
-      if (weapon.brand =="holy wrath") {this.brand_color = "yellow"}
-      if (weapon.brand =="pain") {this.brand_color = "purple"}
-      if (weapon.brand =="electrocution") {this.brand_color = "orange"}
-      if (weapon.brand =="speed") {this.brand_color = "silver"}
-
-      if (weapon.brand =="vorpal") {this.brand_color = "white"}
-
       if (weapon.brand =="flaming") {this.brand_damage = this.attack_speed * 0.25}
       if (weapon.brand =="freezing") {this.brand_damage = this.attack_speed * 0.25}
       if (weapon.brand =="holy wrath") {this.brand_damage = this.attack_speed * 0.75}
       if (weapon.brand =="vorpal") {this.brand_damage = this.attack_speed * 0.1667}
-      if (weapon.brand =="pain") {this.brand_damage = (this.skills['necromancy']['level']/2)/(this.calc_w_speed(weapon)/10)}
-      if (weapon.brand =="electrocution") {this.brand_damage =  0.33 * (7 + this.dice_exp(13))/(this.calc_w_speed(weapon)/10)}
-      if (weapon.brand =="speed") {this.brand_damage =  this.exp_damage/(this.calc_w_speed(weapon)*0.66/10) - this.attack_speed}
+      if (weapon.brand =="draining") {this.brand_damage = this.attack_speed * 0.25}
+      if (weapon.brand =="pain") {
+        this.brand_damage = 
+        this.damage_per_turn(this.skills['necromancy']['level']/2, this.calc_w_speed(weapon))}
+      if (weapon.brand =="electrocution") {
+        this.brand_damage =  
+        this.damage_per_turn(0.33 * (7 + this.dice_exp(13)),this.calc_w_speed(weapon) )}
+      if (weapon.brand =="distortion") {
+        this.brand_damage = 
+        this.damage_per_turn(0.33*(1+7)/2+0.22*14.5, this.calc_w_speed(weapon))
+      }
+      if (weapon.brand =="speed") {
+        this.brand_damage =  this.exp_damage/(this.calc_w_speed(weapon)*0.66/10) - this.attack_speed}
       if (weapon.brand =="protection") {this.brand_damage = 0}
       if (weapon.brand =="poison") {this.brand_damage = 0}
     } else {

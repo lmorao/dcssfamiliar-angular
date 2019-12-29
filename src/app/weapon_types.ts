@@ -55,6 +55,7 @@ export const weapon_types = {
 
    "quarterstaff": {'category': "staves", "name": 'spear', 'damage': '10', 'hit':'+3', 'speed': {base: 13,min:6},'ohms':'little', 'thms':'little','damage_type':"slicing", 'prob':10},
    "lajatang": {'category': "staves", "name": 'spear', 'damage': '16', 'hit':'-3', 'speed': {base: 14,min:7},'ohms':'little', 'thms':'little','damage_type':"slicing", 'prob':10},
+   "staff": {'category': "staves", "name": 'spear', 'damage': '5', 'hit':'+5', 'speed': {base: 12,min:6},'ohms':'little', 'thms':'little','damage_type':"slicing", 'prob':10},
 
    "hunting sling": {'category': "slings", "name": 'triple_sword', 'damage': '5', 'hit':'+2', 'speed': {base: 12,min: 6},'ohms':'little', 'thms':'little','damage_type':"slicing", 'prob':2},
    "fustibalus": {'category': "slings", "name": 'triple_sword', 'damage': '8', 'hit':'-1', 'speed': {base: 14,min: 7},'ohms':'little', 'thms':'little','damage_type':"slicing", 'prob':2},
@@ -72,6 +73,8 @@ export const weapon_types = {
    "large rock": {'category': "throwing", "name": 'triple_sword', 'damage': '20', 'hit':'+0', 'speed': {base: 20,min: 7},'ohms':'little', 'thms':'little','damage_type':"slicing", 'prob':2},
 };
 
+
+
 export const colors = {
   "bright white": "#eeeeec",
   "dark brown": "#121212",
@@ -79,4 +82,29 @@ export const colors = {
   "lime gree": "#65ff00",
   "gold border": "#7d623c",
   "blue light to replacement": "#00b8e6",
+}
+
+export function brand_color (brand) {
+  switch (brand) {
+    case "flaming":
+      return "red";
+    case "freezing":
+      return "aqua";
+    case "holy wrath":
+      return "yellow";
+    case "electrocution":
+      return "orange";
+    case "pain":
+      return "slateblue";
+    case "distortion":
+      return "violet";
+    case "speed":
+      return "silver";
+    case "vorpal":
+      return "white";
+    case "":
+      return "";
+
+  }
+
 }
