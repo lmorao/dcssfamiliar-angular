@@ -23,6 +23,7 @@ import { PasteCharacterComponent } from '../paste-character/paste-character.comp
 import { LandUrlComponent } from '../land-url/land-url.component'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ShareUrlButtonComponent } from '../share-url-button/share-url-button.component'
+import { ChangelistComponent } from '../changelist/changelist.component'
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 
@@ -37,7 +38,8 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     PasteCharacterComponent,
     InfoComponent,
     LandUrlComponent,
-    ShareUrlButtonComponent
+    ShareUrlButtonComponent,
+    ChangelistComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
