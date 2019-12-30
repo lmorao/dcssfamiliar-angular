@@ -6,6 +6,11 @@
 <p  style="cursor: help"><font [title]="'Damage per turn (not counting hit chance). It accounts for weapon speed and armor reduction from the target enemy.'" color="#fde94f">Damage per turn:</font> <font [title]="'Normal damage per swing'"> {{attack_speed | number:'1.1-1'}}</font>
     <span [title]="'Brand damage per turn. This is applied after armor reduction, but it is not reduced by armor. It may be reduced by resistances, but the calculation has not been implemented.'" *ngIf="brand_damage > 0"><font [style.color]="brand_color" > +{{brand_damage | number:'1.1-1'}}</font></span>
 </p>
+<p [title]="'Reduction from the target\'s armor and resistances.'" style="cursor: help"><font color="#8f5902">Reduction per turn:</font> -{{ac_reduction_per_turn | number:'1.1-1'}} 
+
+    <span [title]="''" *ngIf="resist_reduction > 0"><font [style.color]="brand_color" > -{{resist_reduction | number:'1.1-1'}}</font></span>
+</p>
+
 <p [title]="'Average damage of a swing.'" style="cursor: help"><font color="#8f5902">Average hit damage:</font> {{exp_damage | number:'1.1-1'}} 
 </p>
 <p [title]="' Max damage of a swing.'">

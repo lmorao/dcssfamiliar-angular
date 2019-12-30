@@ -18,6 +18,8 @@ export class WeaponDamageComponent implements OnInit {
   wt=weapon_types
   target = new Enemy()
   str 
+  ac_reduction = 0;
+  ac_reduction_per_turn = 0;
   w_speed = 10;
   min_damage = 0;
   max_damage = 0;
@@ -37,13 +39,68 @@ export class WeaponDamageComponent implements OnInit {
   misc = 0 
   final = 1
   stabbing = 0
-  ac_reduction = 0;
   calc_ac_reduction = function (target, dice) {
     //very simple since its monster defense, max_damage =0, which simplifies alot
     //var stab_bypass = 0
     //var ac = max(armour_class()- stab_bypass, 0)
     return dice(1+target.ac)
   };
+
+  calc_brand_resist_mutlipier = function (brand, target_res) {
+    var look_for = "nothing"
+    var level = 0
+    var multiplier = 1
+    if (brand == "flaming") {look_for = "rF\\+"}
+    if (brand == "freezing") {look_for = "rC\\+"}
+    if (brand == "draining") {look_for = "rDrain"}
+    if (brand == "pain") {look_for = "rN\\+"}
+    if (brand == "electrocution") {look_for = "rElec"}
+    for (var i=0;i<target_res.length;i++) {
+      var re = new RegExp(look_for)
+      if (re.test(target_res[i])) {
+
+        level = 1
+        var re2 = new RegExp(look_for + "\\+")
+        if (re2.test(target_res[i])) { level =2}
+        var re3 = new RegExp(look_for + "\\+\\+")
+        if (re3.test(target_res[i])) { level =3}
+      }
+    }
+    if (level ==1) {multiplier = 0.5}
+    if (level ==2) {multiplier = 0.2}
+    if (level ==3) {multiplier = 0}
+    if (brand == "electrocution") {if (level == 1) {multiplier =0.33}}
+    if (brand == "electrocution") {if (level == 2) {multiplier =0.17}}
+    return multiplier
+  }
+  calc_brand_vul_mutlipier = function (brand, target_vul,skill) {
+
+    var look_for = "nothing"
+    var level = 0
+    var multiplier = 1
+    if (brand == "flaming") {look_for = "Fire"}
+    if (brand == "freezing") {look_for = "Cold"}
+    if (brand == "holy wrath") {look_for = "Holy"}
+    for (var i=0;i<target_vul.length;i++) {
+      var re = new RegExp(look_for)
+      if (re.test(target_vul[i])) {
+        level = 1
+      }
+    }
+    if (level ==1) {multiplier = 2}
+    // holy does nothing if you don't have vul
+    if (brand == "holy wrath" && multiplier == 1) {multiplier = 0}
+    if (brand == "holy wrath" && multiplier == 2) {multiplier = 1}
+    // ranged does only 1.5
+    if (['slings', 'bows', 'crossbows'].indexOf(skill) >= 0) {
+      if (multiplier  ==2) { multiplier = 1.5}
+    }
+
+    return multiplier
+
+  }
+
+  resist_reduction
   change_brand = function (weapon) {
     this.brand_color = brand_color (weapon.brand)
     if (weapon.brand != "") {
@@ -69,6 +126,10 @@ export class WeaponDamageComponent implements OnInit {
     } else {
       this.brand_damage = 0
     }
+
+    this.resist_reduction = this.brand_damage * (1-this.calc_brand_resist_mutlipier(weapon.brand, this.target.res))
+    this.brand_damage *= this.calc_brand_resist_mutlipier(weapon.brand, this.target.res)
+    this.brand_damage *= this.calc_brand_vul_mutlipier(weapon.brand, this.target.vul,  this.wt[weapon.name].category);
   }
 
   calc_slaying = function (preslaying, dice) {
@@ -116,6 +177,7 @@ export class WeaponDamageComponent implements OnInit {
       strm=1
     }
     var ac_reduction = this.calc_ac_reduction(this.target,dice)
+    this.ac_reduction_per_turn = this.damage_per_turn(ac_reduction, this.calc_w_speed(weapon))
 
     //total = (( dice(base_damage * strm + 1) - 1) * wsm * fm + this.misc + slaying) * this.final + this.stabbing - this.ac_reduction
     //TODO stabbing is not right
