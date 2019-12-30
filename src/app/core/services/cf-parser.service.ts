@@ -182,6 +182,24 @@ export class CfParserService {
     }
     return [weaponList, cWeapon]
   }
+  _checkCrossTraining = function (skillLevel, skill, skills) {
+    if (skillLevel == 0) {
+      if (skill == "axes") 
+      { "polearms" + "maces"}
+      if (skill == "staves") 
+      { "polearms" + "maces"}
+      if (skill == "maces") 
+      { "axes" + "staves"}
+      if (skill == "polearms") 
+      { "axes" + "staves"}
+      if (skill == "long blades") 
+      { "short blades"}
+      if (skill == "throwing") 
+      { "slings"}
+      if (skill == "slings") 
+      { "throwing"}
+    }
+  }
   _getSkill = function (display, txt) {
     //var temp =  /Level (\d+)\.?\d{0,2}\S*\s+Maces/.exec(txt)
     var temp =  new RegExp("Level (\\d+)\\.?\\d{0,2}\\(?(\\d+)?\\.?\\d*\\)?\\s+" + display, "g").exec(txt)
