@@ -1,7 +1,15 @@
-<form #heroForm="ngForm" class="form-inline" >
+<form #heroForm="ngForm" class="form-inline" 
 
-  <span class="form-group">
-    <label class="sr-only" for="name" [title]="'Copy paste your character file here. Check \'About\' for more details'">Character File <mat-icon matTooltip="Copy paste your character file  here.">help_outline</mat-icon></label>
+    ngbTooltip="Copy the full text from a morgue file (keyboard shorcut is Ctrl-A, then Ctrl-C) and paste it here. Note that this input box takes the actual text, not the url web-link. Check the info tab if you need further clarification."
+    placement="left"
+>
+
+  <span class="form-group"
+  >
+    <label class="sr-only" for="name" 
+    [title]="'Copy paste your character file here. Check \'About\' for more details'">
+    Character File <mat-icon matTooltip="Copy paste your character file  here.">
+      help_outline</mat-icon></label>
     <input type="text" 
     placeholder="Paste text from morgue or character file"
     class="form-control" 
