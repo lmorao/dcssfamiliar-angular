@@ -103,6 +103,7 @@ export class WeaponDamageComponent implements OnInit {
   resist_reduction
   change_brand = function (weapon) {
     this.brand_color = brand_color (weapon.brand)
+      var speed = this.calc_w_speed(weapon)
     if (weapon.brand != "") {
       if (weapon.brand =="flaming") {this.brand_damage = this.attack_speed * 0.25}
       if (weapon.brand =="freezing") {this.brand_damage = this.attack_speed * 0.25}
@@ -120,12 +121,15 @@ export class WeaponDamageComponent implements OnInit {
         this.damage_per_turn(0.33*(1+7)/2+0.22*14.5, this.calc_w_speed(weapon))
       }
       if (weapon.brand =="speed") {
-        this.brand_damage =  this.exp_damage/(this.calc_w_speed(weapon)*0.66/10) - this.attack_speed}
+        this.brand_damage =  this.exp_damage/(speed*0.66/10) - this.attack_speed
+        speed = speed * 0.66
+      }
       if (weapon.brand =="protection") {this.brand_damage = 0}
       if (weapon.brand =="poison") {this.brand_damage = 0}
     } else {
       this.brand_damage = 0
     }
+    this.w_speed = speed
 
     this.resist_reduction = this.brand_damage * (1-this.calc_brand_resist_mutlipier(weapon.brand, this.target.res))
     this.brand_damage *= this.calc_brand_resist_mutlipier(weapon.brand, this.target.res)
@@ -188,7 +192,6 @@ export class WeaponDamageComponent implements OnInit {
   }
 
   damage_per_turn = function (damage,speed) {
-    this.w_speed = speed
     return damage/(speed/10)
   }
 

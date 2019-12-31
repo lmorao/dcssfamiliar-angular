@@ -8,7 +8,7 @@ import { monsters } from '../../monsters'
 })
 export class EnemyListService {
   private enemyListSource = new BehaviorSubject(
-    [monsters['orc'], monsters['gnoll'], monsters['crimson imp'], monsters['centaur'], monsters['yak'],monsters['grinder']]
+    [monsters['orc'], monsters['grinder'], monsters['ice beast'], monsters['juggernaut'], monsters['balrug']]
     );
   private targetSource = new BehaviorSubject(new Enemy);
 

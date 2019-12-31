@@ -1,16 +1,16 @@
 
 races that have two words
 share-url title
+oklob imunities missing
+Drain is using the wrong resist
+ice dragon and ghost moth no listing hp
+speed brand is not showing correct auts and damage seems high
 
-pain brand
 chaos brand
-drain brand
 
-changing str doesnt update brand damage
 add weapon to list
 unarmed and forms
 edit weapon
 
 artifact
 brand damage
-parse slaying
