@@ -1,0 +1,23 @@
+
+<div class="panel">
+  <span>
+    <div class=panel-title>
+      <p>Spell List</p>
+    </div>
+  </span>
+
+  <mat-list style="overflow:auto; height:310px">
+    <mat-list-item *ngFor="let spell of spellList ; let i = index" (click)="targetSpell(spell)" 
+    >
+        <span   style="padding-left:10px"  >
+                <img src="https://raw.githubusercontent.com/crawl/crawl/master/crawl-ref/source/rltiles/{{spell.image}}" 
+                > &nbsp; 
+                <span [ngStyle]="{}">
+{{spell.display}}
+                </span>
+        </span>
+    </mat-list-item>
+  </mat-list>
+</div>
+
+

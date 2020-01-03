@@ -10,14 +10,28 @@ body {
     font-family: "Courier New", Courier, monospace;
     height: 100%;
 }
-.panel-title {
+div.panel-title {
     padding-top: 15px;
     padding-left: 15px;
     color: #00b8e6;
 }
+span {
+    color: #babdb6;
+    //font-family: "Prestige Elite", Monaco, monospace;
+    font-family: "Courier New", Monaco, monospace;
+}
+
+
 div.attr {
     color: #8f5902;
 }
+div.panel {
+   background-color: #040204;
+   border-style: solid;
+   border-color: #7d623c;
+   border-width: 2px;
+}
+
 font.attr {
     color: #8f5902;
 }
