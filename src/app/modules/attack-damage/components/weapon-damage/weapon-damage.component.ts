@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { SelectedWeaponService } from '../../../../core/services/selected-weapon.service'
-import { SkillsService } from '../../../../core/services/skills.service'
-import { ProfileService } from '../../../../core/services/profile.service'
 import { EnemyListService } from '../../../../core/services/enemy-list.service'
 import { weapon_types, brand_color } from '../../../../weapon_types'
+import { SkillsService } from '../../../../core/services/skills.service'
+import { ProfileService } from '../../../../core/services/profile.service'
 import { Skills } from '../../../../shared/models/skills.model'
 import { Enemy } from '../../../../shared/models/enemy.model';
 
