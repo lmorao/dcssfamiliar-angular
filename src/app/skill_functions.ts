@@ -38,8 +38,6 @@ export function skill_xp (level) {
 export function adjusted_shield_penalty(item, scale, shields_skill, racial_factor = 0 ) 
 {
 
-    console.log(item)
-    console.log(shields_skill)
     var base_shield_penalty = item['encumbrance']
     //var player_shield_racial_factor = max(1, 5 + racial_factor )
     var player_shield_racial_factor = 5 + racial_factor

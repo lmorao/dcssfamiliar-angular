@@ -81,13 +81,13 @@ export class SkillsMenuComponent implements OnInit {
     'spellcasting', 'conjurations', 'charms', 'hexes',"summonings",
     "necromancy","translocations","transmutations", "fire magic",
     'ice magic', "air magic", "earth magic","poison magic"]
-  this.s_spells_temp = [ "necromancy"]
+  this.s_spells_temp = []
 
           }
           if (/attackdamage/.test(val['url']) ) {
 
   this.s_melee_temp = ["fighting","short blades", "long blades", "maces", "axes", "polearms", "staves", "unarmed",]
-  this.s_ranged_temp = [ "slings", 'crossbows','bows']
+  this.s_ranged_temp = [ "slings", 'crossbows','bows','throwing']
   this.s_spells_temp = [ "necromancy"]
           }
         });

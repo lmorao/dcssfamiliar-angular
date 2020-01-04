@@ -6,7 +6,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./spell-list.component.scss']
 })
 export class SpellListComponent implements OnInit {
-  spellList = [{display:"spell1"}]
+  spellList = [
+    {display:"Foxfire", image: "fire/foxfire.png", type:"charms"},
+    {display:"Foxfire", image: "fire/foxfire.png",type:"translocations"},
+  ]
   targetSpell = function () {}
 
   constructor() { }

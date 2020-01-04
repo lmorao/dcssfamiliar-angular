@@ -1,4 +1,3 @@
-
 <div class="panel">
   <span>
     <div class=panel-title>
@@ -6,18 +5,17 @@
     </div>
   </span>
 
-  <mat-list style="overflow:auto; height:310px">
-    <mat-list-item *ngFor="let spell of spellList ; let i = index" (click)="targetSpell(spell)" 
-    >
-        <span   style="padding-left:10px"  >
-                <img src="https://raw.githubusercontent.com/crawl/crawl/master/crawl-ref/source/rltiles/{{spell.image}}" 
-                > &nbsp; 
-                <span [ngStyle]="{}">
-{{spell.display}}
-                </span>
-        </span>
-    </mat-list-item>
-  </mat-list>
+      <mat-list style="overflow:auto; height:310px">
+        <mat-list-item *ngFor="let spell of spellList ; let i = index" (click)="targetSpell(spell)">
+            <span style="padding-left:10px" >
+              <img src="https://raw.githubusercontent.com/crawl/crawl/master/crawl-ref/source/rltiles/gui/spells/{{spell.image}}">
+            </span>
+            <span [ngStyle]="{}" class="left">
+              {{spell.display}}
+            </span>
+            <span class="left"> {{spell.type}} </span>
+            <span> {{spell.display}} </span>
+        </mat-list-item>
+      </mat-list>
 </div>
-
 
