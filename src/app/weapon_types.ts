@@ -112,3 +112,49 @@ export function brand_color (brand) {
   }
 
 }
+export const armour_types = {
+
+"no armour" : {"name": "no armour",  armour: 0, encumbrance:   0, price:    0},
+"animal skin" : {"name": "animal skin",  armour: 2, encumbrance:   0, price:    3},
+"robe" : {"name" :"robe",  armour: 2, encumbrance: 0},
+"leather armour" : {name: "leather armour",  armour: 3, encumbrance: -40,  price: 20},
+"ring mail" : {name: "ring mail",  armour: 5, encumbrance: -70 },
+"scale mail" : {name: "scale mail", armour: 6, encumbrance: -100},
+"chain mail" : {name: "chain mail", armour: 8, encumbrance: -150},
+"plate armour" : {name: "plate armour",  armour: 10, encumbrance: -180},
+"crystal plate armour" :{ name: "crystal plate armour",armour: 14, encumbrance:-230},
+
+"troll leather armour" :{ name: "troll leather armour",armour: 4, encumbrance:-40} ,
+
+"cloak" : {name: "cloak",  armour: 1, encumbrance: 0},
+"scarf" : {name: "scarf",  armour: 0, encumbrance: 0},
+"gloves" : {name: "gloves",armour: 1, encumbrance: 0},
+
+"helmet" : {name: "helmet",armour: 1, encumbrance: 0},
+"hat" : {name: "hat",armour: 0, encumbrance: 0} ,
+
+"boots" : {name: "boots",armour: 1, encumbrance: 0},
+"centaur barding" : {name: "centaur barding",  armour: 4, encumbrance: -60},
+"naga barding" : {name: "naga barding",  armour: 4, encumbrance: -60} ,
+
+"no shield" : {name: "no shield",armour: 0, encumbrance: 0},
+"buckler" : {name: "buckler",armour: 3, encumbrance: -8},
+"shield" : {name: "shield",armour: 8, encumbrance: -30} ,
+"large shield" : {name: "large shield",amour: 13, encumbrance: -50},
+
+// Following all ARM_ entries for the benefit of util/gather_items
+"steam": {armour: 5, encumbrance:   0},
+"acid": { armour: 6, encumbrance:  -50},
+"quicksilver": { armour:          9, encumbrance:  -70},
+"swamp": { armour: 7, encumbrance:  -70},
+"fire": { armour: 8, encumbrance: -110},
+"ice": { armour: 9, encumbrance: -110},
+"pearl": { armour: 10, encumbrance: -110},
+"storm": { armour: 10, encumbrance: -150},
+"shadow": { armour: 10, encumbrance: -150},
+"gold": { armour: 12, encumbrance: -230},
+
+}
+export const armour_types_list  = ["no armour", "animal skin","robe","leather armour", "ring mail", "scale mail", "chain mail",
+"plate armour", "crystal plate armour", "troll leather armour"]
+export const shield_types_list  = ["no shield", "buckler", "shield", "large shield"]

@@ -13,12 +13,12 @@ export function skill_xp (level) {
  *                  encumbrance.
  */
 
- export function encumberance_penalty (item, scale, armour_skill, str, mutations = [])
+ export function encumbrance_penalty (item, scale, armour_skill, str, mutations = [])
 {
     var sturdy_frame = 0 
-    if (mutations.hasOwnProperty('sturdy_frame') {sturdy_frame = mutations['sturdy_frame'] *2}
-    var e = item.encumbrance - sturdy_frame
-    if (e <0) {e = 0}
+    if (mutations.hasOwnProperty('sturdy_frame')) { sturdy_frame = mutations['sturdy_frame'] *2}
+    var e = item.encumbrance/10 - sturdy_frame
+    if (e >0) {e = 0}
 
     // New formula for effect of str on aevp: (2/5) * evp^2 / (str+3)
     /*
@@ -38,10 +38,14 @@ export function skill_xp (level) {
 export function adjusted_shield_penalty(item, scale, shields_skill, racial_factor = 0 ) 
 {
 
-    var base_shield_penalty = item['penalty']
+    console.log(item)
+    console.log(shields_skill)
+    var base_shield_penalty = item['encumbrance']
     //var player_shield_racial_factor = max(1, 5 + racial_factor )
     var player_shield_racial_factor = 5 + racial_factor
-    return ((base_shield_penalty * scale) - shields_skill * scale / player_shield_racial_factor * 10) / 10;
+    var temp = ((-base_shield_penalty * scale) - shields_skill * scale / player_shield_racial_factor * 10) / 10;
+    if (temp <0) {temp = 0}
+    return temp
 }
 
 /*

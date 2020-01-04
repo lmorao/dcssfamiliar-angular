@@ -4,6 +4,9 @@ import { SkillsService } from '../../core/services/skills.service'
 import { CfParserService } from '../../core/services/cf-parser.service'
 import { SelectedWeaponService } from '../../core/services/selected-weapon.service'
 import { weapon_types } from '../../weapon_types'
+import { Router,NavigationEnd } from '@angular/router';
+import { filter } from 'rxjs/operators';
+
 
 
 @Component({
@@ -64,7 +67,33 @@ export class SkillsMenuComponent implements OnInit {
     private skillsService: SkillsService,
     private parserService: CfParserService,
     private selectedWeaponService: SelectedWeaponService,
-  ) { }
+    private router : Router,
+  ) { 
+
+        router.events
+        .pipe(
+        filter(event => event instanceof NavigationEnd)
+        )
+        .subscribe(val => {
+          if (/spelldamage/.test(val['url']) ) {
+  this.s_melee_temp = ["armour","shields"]
+  this.s_ranged_temp = [ 
+    'spellcasting', 'conjurations', 'charms', 'hexes',"summonings",
+    "necromancy","translocations","transmutations", "fire magic",
+    'ice magic', "air magic", "earth magic","poison magic"]
+  this.s_spells_temp = [ "necromancy"]
+
+          }
+          if (/attackdamage/.test(val['url']) ) {
+
+  this.s_melee_temp = ["fighting","short blades", "long blades", "maces", "axes", "polearms", "staves", "unarmed",]
+  this.s_ranged_temp = [ "slings", 'crossbows','bows']
+  this.s_spells_temp = [ "necromancy"]
+          }
+        });
+
+
+  }
 
   ngOnInit() {
     this.selectedWeaponService.weapon.subscribe(weapon => {
