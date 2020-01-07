@@ -13,6 +13,10 @@
             <span class="left"> Power  </span>
             <span class="left"> Avg damage </span>
             <span class="left"> Max damage </span>
+            <span class="left"> Fail </span>
+            <span class="left"> level </span>
+            <span class="left" hidden=true> Range </span>
+            <span class="left" hidden=true> Noise </span>
         </mat-list-item>
         <mat-list-item *ngFor="let spell of spellList ; let i = index" (click)="targetSpell(spell)">
             <div class='image' >
@@ -22,6 +26,10 @@
             <span class="left"> {{power(spell)| number:'1.0-0'}}/{{spell.max_power}}  </span>
             <span class= "left"> {{spell.formula(40, diceAvg) | number:'1.0-0'}} </span>
             <span class="left"> {{spell.formula(40, diceMax) | number:'1.0-0'}} </span>
+            <span class="left"> {{fail(spell)| number:'1.0-0'}}&#8202;% </span>
+            <span class="left"> {{spell.level}} </span>
+            <span class="left" hidden=true> {{spell.formula(40, diceMax) | number:'1.0-0'}} </span>
+            <span class="left" hidden=true> {{spell.formula(40, diceMax) | number:'1.0-0'}} </span>
         </mat-list-item>
       </mat-list>
 </div>
