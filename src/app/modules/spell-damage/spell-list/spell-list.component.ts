@@ -42,16 +42,20 @@ export class SpellListComponent implements OnInit {
     }
     return res
   }
-  fail = function (spell) {
+  raw_fail = function (spell) {
     var pow = this.power(spell, false)
+    pow = 7
     var chance = 60
     chance -= pow
     chance -= this.profile.int * 2
     chance += this.armour_penalty
+    var spell_level = [0,3,15,35,70,100,150,200,260,340]
+    chance += spell_level[spell.level]
 
     var chance2 
 
     chance2 = (((chance + 426) * chance + 82670) * chance + 7245398) / 262144;
+    if (chance2 <0) {chance2 =0 }
 
 //chance2 += get_form()->spellcasting_penalty;
 
@@ -70,7 +74,50 @@ export class SpellListComponent implements OnInit {
     if (chance2 <0) {chance2 =0 }
     if (chance2 >100) {chance2 =100 }
 
+    console.log("chance2 " + chance2)
     return chance2
+  }
+
+  _get_true_fail_rate = function (raw_fail) {
+    var outcomes = 101*101*100;
+    var target = raw_fail * 3
+
+    console.log("tetra " + this._tetrahedral_number(raw_fail))
+    console.log("tetra over outcomes "+this._tetrahedral_number(raw_fail)/outcomes)
+    if (target <= 100) {
+      return this._tetrahedral_number(raw_fail)/outcomes
+    }
+    if (target <= 200) {
+      return (this._tetrahedral_number(target)
+              - 2 * this._tetrahedral_number(target - 101)
+              - this._tetrahedral_number(target - 100)) / outcomes;
+    }
+
+    return (outcomes - this._tetrahedral_number(300 - target)) / outcomes;
+
+  }
+  failure_rate_to_int = function (fail)
+{
+    if (fail <= 0)
+        return 0;
+    else if (fail >= 100)
+        return (fail + 100)/2;
+    else
+      var tetra = this._get_true_fail_rate(fail)
+        var res = (100 * tetra);
+    console.log("percentage? " +100*tetra)
+    console.log(" ")
+        if (res <1) {res = 1}
+        return res
+}
+fail = function (spell) {
+  return this.failure_rate_to_int(this.raw_fail(spell))
+
+}
+
+  _tetrahedral_number = function (n)
+  {
+      return n * (n+1) * (n+2) / 6;
   }
   spellList = [
     {display:"Foxfire", image: "fire/foxfire.png", type1:"conjurations" , type2:"fire magic", max_power: 40,
@@ -78,6 +125,7 @@ export class SpellListComponent implements OnInit {
       "formula" : function (power, dice, max_power = 40) { if (power > max_power) {power = max_power}; return dice(3+power/3)},
       level: 1,
   },
+  /*
     {
       display:"Freeze", 
       image: "ice/freeze.png",
@@ -89,6 +137,7 @@ export class SpellListComponent implements OnInit {
       range: 1,
       level: 1,
     }, 
+    */
   ]
   targetSpell = function () {}
 
