@@ -1,4 +1,4 @@
-export function Skills(fighting=2,maces=3, spellcasting = 2) {
+export function Skills(fighting=2,maces=3, spellcasting = 2,conj=6, fire =3) {
       this.fighting = { level: fighting, display: "Fighting"};
       this["short blades"]= { level: 0, display: "Short Blades"};
       this["long blades"]={ level: 0,display: "Long Blades"};
@@ -18,14 +18,14 @@ export function Skills(fighting=2,maces=3, spellcasting = 2) {
       this.shields={ level: 0,display: "Shields"};
 
       this.spellcasting={ level: spellcasting,display: "Spellcasting"};
-      this.conjurations={ level: 0,display: "Conjurations"};
+      this.conjurations={ level: conj,display: "Conjurations"};
       this.hexes={ level: 0,display: "Hexes"};
       this.charms={ level: 0,display: "Charms"};
       this.summonings={ level: 0,display: "Summonings"};
       this.necromancy={ level: 0,display: "Necromancy"};
       this.translocations={ level: 0,display: "Translocations"};
       this.transmutations={ level: 0,display: "Transmutations"};
-      this["fire magic"] = { level: 0,display: "Fire Magic"};
+      this["fire magic"] = { level: fire,display: "Fire Magic"};
       this["ice magic"] = { level: 0,display: "Ice Magic"};
       this["air magic"] = { level: 0,display: "Air Magic"};
       this["earth magic"] = { level: 0,display: "Earth Magic"};

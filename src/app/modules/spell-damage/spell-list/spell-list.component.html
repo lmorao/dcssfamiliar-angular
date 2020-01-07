@@ -23,7 +23,7 @@
               <img src="https://raw.githubusercontent.com/crawl/crawl/master/crawl-ref/source/rltiles/gui/spells/{{spell.image}}">
             </div>
             <span class="left"> {{spell.display}} </span>
-            <span class="left"> {{power(spell)| number:'1.0-0'}}/{{spell.max_power}}  </span>
+            <span class="left"> {{power(spell, true,false,true)| number:'1.0-0'}}/{{spell.max_power}}  </span>
             <span class= "left"> {{spell.formula(40, diceAvg) | number:'1.0-0'}} </span>
             <span class="left"> {{spell.formula(40, diceMax) | number:'1.0-0'}} </span>
             <span class="left"> {{fail(spell)| number:'1.0-0'}}&#8202;% </span>
