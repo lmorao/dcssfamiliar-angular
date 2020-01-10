@@ -32,16 +32,41 @@
           </ng-template>
 
             <div class='image' >
-              <img src="https://raw.githubusercontent.com/crawl/crawl/master/crawl-ref/source/rltiles/gui/spells/{{spell.image}}">
+              <img src="https://raw.githubusercontent.com/crawl/crawl/master/crawl-ref/source/rltiles/{{spell.img}}">
             </div>
             <span class="left"> {{spell.display}} </span>
-            <span class="left"> {{power(spell, true,false,true)| number:'1.0-0'}}/{{spell.max_power}}  </span>
-            <span class= "left" [ngbTooltip]="damageFormula"> 
-              {{ (spell.ndice + max_spell_dam_dice(spell, power(spell,true,false,true)) )/2| number:'1.0-0'}} 
+            <span class="left"> {{power(spell, true,false,true)| number:'1.0-0'}}/{{spell.power}}  </span>
+
+
+            <span class= "left" > 
+              <span *ngIf="spell.ndice==spell.mdice==spell.ddice==1; then thenBlock1 else elseBlock1"> </span>
+              <ng-template #elseBlock1 >
+                <span [ngbTooltip]="damageFormula">
+                {{ (spell.ndice + max_spell_dam_dice(spell, power(spell,true,false,true)) )/2| number:'1.0-0'}} 
+                </span>
+              </ng-template>
+              <ng-template #thenBlock1>
+                <span [ngbTooltip]="nothing">
+                -
+                </span>
+              </ng-template>
             </span>
-            <span class="left" [ngbTooltip]="maxDamageFormula"> 
+            <span class= "left" > 
+              <span *ngIf="spell.ndice==spell.mdice==spell.ddice==1; then thenBlock2 else elseBlock2"> </span>
+
+              <ng-template #elseBlock2 >
+            <span [ngbTooltip]="maxDamageFormula"> 
               {{max_spell_dam_dice(spell, power(spell,true,false,true)) | number:'1.0-0'}} 
             </span>
+              </ng-template>
+              <ng-template #thenBlock2 >
+                <span [ngbTooltip]="nothing">
+                -
+                </span>
+              </ng-template>
+            </span>
+
+
             <span class="left"> {{fail(spell)| number:'1.0-0'}}&#8202;% </span>
             <span class="left"> {{spell.level}} </span>
             <span class="left"> {{spell.type1|slice:0:3}}|{{spell.type2|slice:0:3}} </span>
@@ -63,4 +88,10 @@
   <div class=panel style="width:300px">
   Formula: n*d(a/n+ <font color="yellow">pow</font>*m/d/n)
   </div>
+</ng-template>
+<ng-template #nothing>
+  <div class=panel style="width:300px">
+    No damage or Non standard damage formula and the familiar could not calculate it correctly
+  </div>
+
 </ng-template>

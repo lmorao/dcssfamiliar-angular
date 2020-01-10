@@ -70,7 +70,7 @@ export class SpellListComponent implements OnInit {
     }
 
     if (limited == true) {
-      if (res > spell.max_power) {res = spell.max_power}
+      if (res > spell.power) {res = spell.power}
     }
     return res
   }
@@ -143,10 +143,10 @@ export class SpellListComponent implements OnInit {
       return n * (n+1) * (n+2) / 6;
   }
   spellList = [
-    spell_db.sting,
-    spell_db.foxfire,
-    spell_db.hailstorm,
-    spell_db.starburst,
+    spell_db.SPELL_STING,
+    spell_db.SPELL_FOXFIRE,
+    spell_db.SPELL_HAILSTORM,
+    spell_db.SPELL_STARBURST,
   ]
   max_spell_dam_dice = function (spell,power) {
     // dont use ndice, because we would have to divide and multiply again
