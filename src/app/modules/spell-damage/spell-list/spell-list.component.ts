@@ -3,6 +3,7 @@ import { SkillsService } from '../../../core/services/skills.service'
 import { ProfileService } from '../../../core/services/profile.service'
 import { Skills } from '../../../shared/models/skills.model'
 import { Character } from '../../../shared/models/character.model'
+import { spell_db } from 'src/app/spell_db'
 
 @Component({
   selector: 'app-spell-list',
@@ -142,25 +143,21 @@ export class SpellListComponent implements OnInit {
       return n * (n+1) * (n+2) / 6;
   }
   spellList = [
-    {display:"Foxfire", image: "fire/foxfire.png", type1:"conjurations" , type2:"fire magic", max_power: 40,
-
-      "formula" : function (power, dice, max_power = 40) { if (power > max_power) {power = max_power}; return dice(3+power/3)},
-      level: 1,
-  },
-  /*
-    {
-      display:"Freeze", 
-      image: "ice/freeze.png",
-      type1:"ice magic", 
-      type2: "" , 
-      max_power: 25, 
-      "formula" : function (power, dice, max_power = 25) { if (power > max_power) {power = max_power}; return dice(3+power/3)},
-      damage_type: "cold",
-      range: 1,
-      level: 1,
-    }, 
-    */
+    spell_db.sting,
+    spell_db.foxfire,
+    spell_db.hailstorm,
+    spell_db.starburst,
   ]
+  max_spell_dam_dice = function (spell,power) {
+    // dont use ndice, because we would have to divide and multiply again
+    return spell.pdice + power * spell.mdice/spell.ddice
+  }
+  display_damage = function (spell) {
+    var res =  ""
+    res +=  spell.ndice + "d(" + spell.pdice/spell.ddice + " + " + '<font color:"red">' + this.power(spell,true,false,true) + '</font>' + "*" + spell.mdice/spell.ddice
+    return res
+  }
+
   targetSpell = function () {}
 
   constructor(

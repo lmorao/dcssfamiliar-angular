@@ -1,7 +1,7 @@
 <div class="panel">
   <span>
     <div class=panel-title>
-      <p>Spell List</p>
+      <p>Spell List <font color="red"> - Under construction, cant load from morgue yet, no armour</font></p>
     </div>
   </span>
 
@@ -11,26 +11,56 @@
             </div>
             <span class="left"> Name  </span>
             <span class="left"> Power  </span>
-            <span class="left"> Avg damage </span>
-            <span class="left"> Max damage </span>
+            <span class="left" [ngbTooltip]="AvgDmg" placement="bottom"> Avg Dmg</span>
+            <span class="left" [ngbTooltip]="MaxDmg" placement="bottom"> Max Dmg </span>
             <span class="left"> Fail </span>
-            <span class="left"> level </span>
+            <span class="left"> Level </span>
+            <span class="left"> Disci </span>
             <span class="left" hidden=true> Range </span>
             <span class="left" hidden=true> Noise </span>
         </mat-list-item>
-        <mat-list-item *ngFor="let spell of spellList ; let i = index" (click)="targetSpell(spell)">
+        <mat-list-item *ngFor="let spell of spellList ; let i = index" (click)="targetSpell()">
+          <ng-template #damageFormula>
+            <div class=panel>
+            Formula: ({{spell.ndice}} +  <font color="yellow">{{max_spell_dam_dice(spell, power(spell,true,false,true))|number:'1.0-2'}}</font>)/2
+            </div>
+          </ng-template>
+          <ng-template #maxDamageFormula>
+            <div class=panel>
+            Formula: {{spell.ndice}}d({{spell.pdice/spell.ndice|number:'1.0-2'}} + <font color="yellow">{{power(spell,true,false,true)}} </font>*{{spell.mdice/(spell.ddice*spell.ndice)|number:'1.0-2'}})
+            </div>
+          </ng-template>
+
             <div class='image' >
               <img src="https://raw.githubusercontent.com/crawl/crawl/master/crawl-ref/source/rltiles/gui/spells/{{spell.image}}">
             </div>
             <span class="left"> {{spell.display}} </span>
             <span class="left"> {{power(spell, true,false,true)| number:'1.0-0'}}/{{spell.max_power}}  </span>
-            <span class= "left"> {{spell.formula(40, diceAvg) | number:'1.0-0'}} </span>
-            <span class="left"> {{spell.formula(40, diceMax) | number:'1.0-0'}} </span>
+            <span class= "left" [ngbTooltip]="damageFormula"> 
+              {{ (spell.ndice + max_spell_dam_dice(spell, power(spell,true,false,true)) )/2| number:'1.0-0'}} 
+            </span>
+            <span class="left" [ngbTooltip]="maxDamageFormula"> 
+              {{max_spell_dam_dice(spell, power(spell,true,false,true)) | number:'1.0-0'}} 
+            </span>
             <span class="left"> {{fail(spell)| number:'1.0-0'}}&#8202;% </span>
             <span class="left"> {{spell.level}} </span>
-            <span class="left" hidden=true> {{spell.formula(40, diceMax) | number:'1.0-0'}} </span>
-            <span class="left" hidden=true> {{spell.formula(40, diceMax) | number:'1.0-0'}} </span>
+            <span class="left"> {{spell.type1|slice:0:3}}|{{spell.type2|slice:0:3}} </span>
+            <span class="left" hidden=true>  </span>
+            <span class="left" hidden=true>  </span>
         </mat-list-item>
       </mat-list>
 </div>
 
+
+<!-- Tooltips-->
+<ng-template #AvgDmg>
+  <div class=panel style="width:300px">
+  Formula: (number_of_dice + <font color="yellow">Max_dice_roll_with_current_power</font>)/2
+  </div>
+</ng-template>
+
+<ng-template #MaxDmg>
+  <div class=panel style="width:300px">
+  Formula: n*d(a/n+ <font color="yellow">pow</font>*m/d/n)
+  </div>
+</ng-template>

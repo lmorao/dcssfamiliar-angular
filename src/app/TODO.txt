@@ -17,3 +17,5 @@ brand damage
 
 fonts
 // https://www.pagecloud.com/blog/how-to-add-custom-fonts-to-any-website
+
+Spelllist on mobile crunched up

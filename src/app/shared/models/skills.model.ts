@@ -1,4 +1,4 @@
-export function Skills(fighting=2,maces=3, spellcasting = 2,conj=6, fire =3) {
+export function Skills(fighting=2,maces=3, spellcasting = 2,conj=1, fire =3) {
       this.fighting = { level: fighting, display: "Fighting"};
       this["short blades"]= { level: 0, display: "Short Blades"};
       this["long blades"]={ level: 0,display: "Long Blades"};

@@ -4,7 +4,6 @@ import { ServerModule } from '@angular/platform-server';
 import { AppModule } from './modules/app/app.module';
 import { AppComponent } from './modules/app/app.component';
 import { ModuleMapLoaderModule } from '@nguniversal/module-map-ngfactory-loader';
-import { SelectArmourComponent } from './modules/select-armour/select-armour.component';
 
 @NgModule({
   imports: [
@@ -13,6 +12,6 @@ import { SelectArmourComponent } from './modules/select-armour/select-armour.com
     ModuleMapLoaderModule,
   ],
   bootstrap: [AppComponent],
-  declarations: [SelectArmourComponent],
+  declarations: [],
 })
 export class AppServerModule {}
