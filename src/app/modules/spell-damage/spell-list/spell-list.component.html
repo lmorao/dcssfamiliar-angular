@@ -5,7 +5,7 @@
     </div>
   </span>
 
-      <mat-list style="overflow:auto; height:310px; padding-top:0px">
+      <mat-list style="overflow:auto; padding-top:0px">
         <mat-list-item >
             <div class="image" >
             </div>
@@ -19,6 +19,8 @@
             <span class="left" hidden=true> Range </span>
             <span class="left" hidden=true> Noise </span>
         </mat-list-item>
+      </mat-list>
+      <mat-list style="overflow:auto; height:310px; padding-top:0px">
         <mat-list-item *ngFor="let spell of spellList ; let i = index" (click)="targetSpell()">
           <ng-template #damageFormula>
             <div class=panel>
@@ -27,7 +29,7 @@
           </ng-template>
           <ng-template #maxDamageFormula>
             <div class=panel>
-            Formula: {{spell.ndice}}d({{spell.pdice/spell.ndice|number:'1.0-2'}} + <font color="yellow">{{power(spell,true,false,true)}} </font>*{{spell.mdice/(spell.ddice*spell.ndice)|number:'1.0-2'}})
+            Formula: {{spell.ndice}}d({{calcdice(spell,spell.pdice)|number:'1.0-2'}} + <font color="yellow">{{power(spell,true,false,true)}} </font>*{{calcdice(spell,spell.mdice/spell.ddice)|number:'1.0-2'}})
             </div>
           </ng-template>
 
@@ -39,7 +41,7 @@
 
 
             <span class= "left" > 
-              <span *ngIf="spell.ndice==spell.mdice==spell.ddice==1; then thenBlock1 else elseBlock1"> </span>
+              <span *ngIf="spell.ndice==1 && spell.ddice==1 && spell.mdice==1; then thenBlock1 else elseBlock1"> </span>
               <ng-template #elseBlock1 >
                 <span [ngbTooltip]="damageFormula">
                 {{ (spell.ndice + max_spell_dam_dice(spell, power(spell,true,false,true)) )/2| number:'1.0-0'}} 
@@ -52,7 +54,7 @@
               </ng-template>
             </span>
             <span class= "left" > 
-              <span *ngIf="spell.ndice==spell.mdice==spell.ddice==1; then thenBlock2 else elseBlock2"> </span>
+              <span *ngIf="spell.ndice==1 && spell.ddice==1 && spell.mdice==1; then thenBlock2 else elseBlock2"> </span>
 
               <ng-template #elseBlock2 >
             <span [ngbTooltip]="maxDamageFormula"> 

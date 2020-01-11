@@ -145,16 +145,26 @@ export class SpellListComponent implements OnInit {
   spellList = [
     spell_db.SPELL_STING,
     spell_db.SPELL_FOXFIRE,
+    spell_db.SPELL_STONE_ARROW,
     spell_db.SPELL_HAILSTORM,
     spell_db.SPELL_STARBURST,
+    spell_db.SPELL_IRON_SHOT,
   ]
   max_spell_dam_dice = function (spell,power) {
-    // dont use ndice, because we would have to divide and multiply again
-    return spell.pdice + power * spell.mdice/spell.ddice
+      var res = spell.pdice + power * spell.mdice/spell.ddice
+    if (!spell.calcdice) {
+      res *=spell.ndice
+    } 
+
+    return  res
+  }
+  calcdice = function (spell,p) {
+    if (spell.calcdice) {return p/spell.ndice}
+    else {return p}
   }
   display_damage = function (spell) {
     var res =  ""
-    res +=  spell.ndice + "d(" + spell.pdice/spell.ddice + " + " + '<font color:"red">' + this.power(spell,true,false,true) + '</font>' + "*" + spell.mdice/spell.ddice
+      res +=  spell.ndice + "d(" + this.calcdice(spell,spell.pdice) + " + " + '<font color:"red">' + this.power(spell,true,false,true) + '</font>' + "*" + this.calcdice(spell,spell.mdice/spell.ddice)
     return res
   }
 
