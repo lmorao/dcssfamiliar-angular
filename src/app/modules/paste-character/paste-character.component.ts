@@ -9,6 +9,8 @@ import { WeaponListService } from '../../core/services/weapon-list.service'
 import { ProfileService } from '../../core/services/profile.service'
 import { ShareUrlService } from 'src/app/core/services/share-url.service';
 import { EnemyListService } from '../../core/services/enemy-list.service'
+import { SpellListService } from '../../core/services/spell-list.service'
+import { spell_db } from 'src/app/spell_db';
 
 import {environment} from '../../../environments/environment';
 
@@ -28,6 +30,24 @@ export class PasteCharacterComponent implements OnInit {
     var weaponsArray = this.parserService.parseWeapons(this.model.name)
     var profile = this.parserService.parseProfile(this.model.name)
     var enemyList = this.parserService.parseEnemies(this.model.name)
+    var spellList3 = this.parserService.parseSpells(this.model.name)[0]
+    var spellList4 = this.parserService.parseSpells(this.model.name)[1]
+    var spellList1 = new Array()
+    var spellList2 = new Array()
+    for (var i=0;i < spellList3.length; i++) {
+      var result = Object.keys(spell_db) .filter(key => {
+        if (spellList3[i].length>19) {
+          return spell_db[key].display.includes(spellList3[i])
+        } else {
+          return spell_db[key].display ==spellList3[i]
+        }
+      })
+      spellList1.push(result[0])
+    }
+    console.log("Starburst".includes)
+
+    console.log("parser spells1: ")
+    console.log(spellList1)
     //var url = this.shareUrlService.createUrl(profile, skills, weaponsArray[0], weaponsArray[1])
     //window.location.href = environment.serverUrl+ "/#/parse/" + url
     this.skillsService.updateSkills(skills)
@@ -35,6 +55,8 @@ export class PasteCharacterComponent implements OnInit {
     this.selectedWeaponService.selectWeapon(weaponsArray[1])
     this.profileService.updateProfile(profile)
     this.enemyListService.updateEnemyList(enemyList)
+    this.spellListService.updateSpellList1(spellList1)
+    //this.spellListService.updateSpellList2(spellList2)
 
 
     this.model.name = ""
@@ -46,6 +68,7 @@ export class PasteCharacterComponent implements OnInit {
     private weaponListService: WeaponListService,
     private profileService: ProfileService,
     private enemyListService: EnemyListService,
+    private spellListService: SpellListService,
 
     private shareUrlService: ShareUrlService,
   ) { }

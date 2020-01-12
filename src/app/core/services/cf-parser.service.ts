@@ -226,9 +226,53 @@ export class CfParserService {
       if (/Crossbows/.test(skillsText)) {skillsTemp['crossbows']['level'] = this._getSkill("Crossbows",skillsText)}
       if (/Throwing/.test(skillsText)) {skillsTemp['throwing']['level'] = this._getSkill("Throwing",skillsText)}
       if (/Slings/.test(skillsText)) {skillsTemp['slings']['level'] = this._getSkill("Slings",skillsText)}
+      if (/Spellcasting/.test(skillsText)) {skillsTemp['spellcasting']['level'] = this._getSkill("Spellcasting",skillsText)}
+
+      if (/Conjurations/.test(skillsText)) {skillsTemp['conjurations']['level'] = this._getSkill("Conjurations",skillsText)}
+      if (/Hexes/.test(skillsText)) {skillsTemp['hexes']['level'] = this._getSkill("Hexes",skillsText)}
+      if (/Charms/.test(skillsText)) {skillsTemp['charms']['level'] = this._getSkill("Charms",skillsText)}
+      if (/Summonings/.test(skillsText)) {skillsTemp['summonings']['level'] = this._getSkill("Summonings",skillsText)}
       if (/Necromancy/.test(skillsText)) {skillsTemp['necromancy']['level'] = this._getSkill("Necromancy",skillsText)}
+      if (/Translocations/.test(skillsText)) {skillsTemp['translocations']['level'] = this._getSkill("Translocations",skillsText)}
+      if (/Transmutations/.test(skillsText)) {skillsTemp['transmutations']['level'] = this._getSkill("Transmutations",skillsText)}
+      if (/Fire Magic/.test(skillsText)) {skillsTemp['fire magic']['level'] = this._getSkill("Fire Magic",skillsText)}
+      if (/Ice Magic/.test(skillsText)) {skillsTemp['ice magic']['level'] = this._getSkill("Ice Magic",skillsText)}
+      if (/Air Magic/.test(skillsText)) {skillsTemp['air magic']['level'] = this._getSkill("Air Magic",skillsText)}
+      if (/Earth Magic/.test(skillsText)) {skillsTemp['earth magic']['level'] = this._getSkill("Earth Magic",skillsText)}
+      if (/Poison Magic/.test(skillsText)) {skillsTemp['poison magic']['level'] = this._getSkill("Poison Magic",skillsText)}
+
+
     }
     return skillsTemp
+  }
+  parseSpells = function (txt) {
+
+    var spellsTemp1 = new Array()
+    var spellsTemp2 = new Array()
+    var re2 = /You know the following spells:(.*)Dungeon Overview and Level Annotations/
+    var re3 = /\S - (\S.*\S)\s+(?:Conj|Chrm|Hex|Tloc|Tmut|Pois|Air|Fire|Ice|Summ|Eart)/
+    var re4 = /(\S.*\S)\s+(?:Conj|Chrm|Hex|Tloc|Tmut|Pois|Air|Fire|Ice|Summ|Eart)/
+    if (re2.test(txt)){
+      var spellsT = re2.exec(txt)[0]
+      var a = spellsT.match(/(\S - )?((?:\S+ +)?\S+ +)?\S+ +\S+\s+\S+\s+\d+.\s+\d+\s+\S+/g)
+      //console.log(a)
+
+      for (var i=0; i <= a.length ; i++) {
+        if (re3.test(a[i])) {
+          spellsTemp1.push(re3.exec(a[i])[1])
+          //console.log(re3.exec(a[i])[1])
+        }
+        else if (re4.test(a[i])) 
+        {
+          spellsTemp2.push(re4.exec(a[i])[1])
+          //console.log(re4.exec(a[i])[1])
+        }
+
+      }
+
+    }
+    return new Array(spellsTemp1,spellsTemp2)
+
   }
 
   constructor(

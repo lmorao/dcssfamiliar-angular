@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SkillsService } from '../../../core/services/skills.service'
 import { ProfileService } from '../../../core/services/profile.service'
+import { SpellListService } from '../../../core/services/spell-list.service'
 import { Skills } from '../../../shared/models/skills.model'
 import { Character } from '../../../shared/models/character.model'
 import { spell_db } from 'src/app/spell_db'
@@ -143,12 +144,12 @@ export class SpellListComponent implements OnInit {
       return n * (n+1) * (n+2) / 6;
   }
   spellList = [
-    spell_db.SPELL_STING,
-    spell_db.SPELL_FOXFIRE,
-    spell_db.SPELL_STONE_ARROW,
-    spell_db.SPELL_HAILSTORM,
-    spell_db.SPELL_STARBURST,
-    spell_db.SPELL_IRON_SHOT,
+    spell_db['spell_sting'],
+    spell_db['spell_foxfire'],
+    spell_db['spell_stone_arrow'],
+    spell_db['spell_hailstorm'],
+    spell_db['spell_starburst'],
+    spell_db['spell_iron_shot'],
   ]
   max_spell_dam_dice = function (spell,power) {
       var res = spell.pdice + power * spell.mdice/spell.ddice
@@ -173,6 +174,7 @@ export class SpellListComponent implements OnInit {
   constructor(
     private skillsService: SkillsService,
     private profileService: ProfileService,
+    private spellListService: SpellListService,
 
   ) { }
 
@@ -183,6 +185,26 @@ export class SpellListComponent implements OnInit {
     })
     this.profileService.profile.subscribe(profile => {
       this.profile  = profile
+    })
+    this.spellListService.spellList1.subscribe(spellList1 => {
+      this.spellList  = [
+        spell_db['SPELL_STING'],
+        spell_db['SPELL_FOXFIRE'],
+        spell_db['SPELL_STONE_ARROW'],
+        spell_db['SPELL_HAILSTORM'],
+        spell_db['SPELL_STARBURST'],
+        spell_db['SPELL_IRON_SHOT'],
+      ]
+
+
+
+      if (spellList1.length>0) {
+        this.spellList  = [
+        ]
+        for (var i=0; i<spellList1.length;i++){
+          this.spellList.push(spell_db[spellList1[i]])  
+        }
+      }
     })
   }
 
