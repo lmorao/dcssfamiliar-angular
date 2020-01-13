@@ -6,7 +6,9 @@
   </div>
   <mat-list style="overflow:auto; height:360px">
     <mat-list-item *ngFor="let weapon of weapons ; let i = index" (click)="selectWeapon(weapon)">
-        <span style="padding-left:20px"
+        <img *ngIf='weapon.name != "unarmed"'  src="https://raw.githubusercontent.com/crawl/crawl/master/crawl-ref/source/rltiles/item/weapon/{{weapon.img}}">
+        <img *ngIf='weapon.name == "unarmed"' filter="opacity(50%)" src="https://raw.githubusercontent.com/crawl/crawl/master/crawl-ref/source/rltiles/gui/skills/unarmed_combat.png">
+        <span style="padding-left:8px"
         [ngClass]="{  'selected' : weapon.name==selectedWeapon.name && weapon.slaying==selectedWeapon.slaying && weapon.brand==selectedWeapon.brand}"> 
           <span *ngIf="weapon.name != 'unarmed'" 
 
@@ -17,7 +19,7 @@
           </span> 
         <span *ngIf="weapon.brand" 
         [ngStyle]="{'color': brand_color(weapon.brand) }">
-        &nbsp;({{weapon.brand}})
+        &nbsp;({{weapon.brand|slice:0:7}})
         </span>
     </mat-list-item>
   </mat-list>

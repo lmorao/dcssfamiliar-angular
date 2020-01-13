@@ -7,6 +7,7 @@ import { Character } from '../../shared/models/character.model'
 import { monsters } from '../../monsters'
 
 import {environment} from '../../../environments/environment';
+import { weapon_types } from 'src/app/weapon_types';
 
 @Injectable({
   providedIn: 'root'
@@ -125,7 +126,7 @@ export class CfParserService {
     // Find weapons first
     var re1 = /Hand Weapons.+?(?:Missiles|Armour|Jewellery|Wands|Scrolls|Potions|Comestibles|Skills:)/
     var maHandWeapons= re1.exec(txt);
-    var weaponList  = new Array({"name":"unarmed", "slaying":"+0", brand:""});
+    var weaponList  = [{"name":"unarmed", "slaying":"+0", brand:"", title:"", img:""}];
     var cWeapon = {name:"unarmed","slaying":"+0",brand:""}
     if (re1.test(txt)) {
       var inventory  = maHandWeapons[0]
@@ -171,11 +172,43 @@ export class CfParserService {
 
 
           } else {maBrand = ""}
-          if (currentWeapon.test(weapons[line])) {
-            cWeapon = {name: maType[3], slaying: maType[1] + maType[2], brand: maBrand}
-          }
 
-          weaponList.push({name: maType[3], slaying: maType[1] + maType[2], brand: maBrand})
+          if (currentWeapon.test(weapons[line])) {
+            cWeapon = {name: maType[3], slaying: maType[1] + maType[2], brand: maBrand, }
+          }
+          var randRe= /\".*\"/
+
+          var img
+          console.log(maType[3])
+          if (maBrand == "") { 
+            if (/(?:triple sword|dagger|demon blade|club|demon_trident|double_sword|giant_club|giant_spiked_club|quarterstaff|whip)/.test(maType[3])) {
+              img = weapon_types[maType[3]]['img'] + ".png" 
+            } else {
+              img = weapon_types[maType[3]]['img'] + "1.png" 
+            }
+          }
+          if (maBrand != "") {
+            if (/(?:trishula|sacred scourge|blessed blade)/.test(maType[3])) {
+             img = weapon_types[maType[3]]['img'] + ".png" 
+            } else {
+
+             img = weapon_types[maType[3]]['img'] + "2.png" 
+            }
+          }
+          if (randRe.test(weapons[line])) { img = weapon_types[maType[3]]['img'] + "3.png" }
+
+
+          console.log(img)
+          weaponList.push({name: maType[3], slaying: maType[1] + maType[2], brand: maBrand, img: img, title: "" })
+        } else {
+          for (var i =0; i<unrands.length; i++) {
+            var reU = RegExp(unrands[i].hint)
+            console.log(unrands[i])
+            if (reU.test(weapons[line])) {
+              weaponList.push({name: unrands[i]['category'], slaying: unrands[i]['slaying'], brand:unrands[i]['brand'], title: unrands[i]['title'], img: weapon_types[unrands[i]['category']]['img'] + "3.png"})
+
+            }
+          }
         }
       }
 
