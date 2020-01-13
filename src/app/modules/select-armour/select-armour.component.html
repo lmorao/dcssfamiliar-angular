@@ -5,14 +5,14 @@
     <div><span class=attr>Armour Penalty: </span>{{encumbrance | number:'1.0-0'}}</div>
     <div><span class=attr>Shield Penalty: </span>{{shieldPen | number:'1.0-0'}}</div>
 <div ngbDropdown class="">
-  <button class="btn btn-outline-primary" id="armourDropdown" ngbDropdownToggle disabled>{{selectedArmour.name}}</button>
+  <button class="btn btn-outline-primary" id="armourDropdown" ngbDropdownToggle >{{selectedArmour.name}}</button>
   <div ngbDropdownMenu aria-labelledby="armourDropdown">
     <button *ngFor="let item of armourList" ngbDropdownItem (click)="selectArmour(item)">{{item}}</button>
   </div>
 </div>
 
 <div ngbDropdown class="">
-  <button class="btn btn-outline-primary" id="armourDropdown" ngbDropdownToggle disabled>{{selectedShield.name}}</button>
+  <button class="btn btn-outline-primary" id="armourDropdown" ngbDropdownToggle >{{selectedShield.name}}</button>
   <div ngbDropdownMenu aria-labelledby="armourDropdown">
     <button *ngFor="let item of shieldList" ngbDropdownItem (click)="selectShield(item)">{{item}}</button>
   </div>

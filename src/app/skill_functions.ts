@@ -17,7 +17,7 @@ export function skill_xp (level) {
 {
     var sturdy_frame = 0 
     if (mutations.hasOwnProperty('sturdy_frame')) { sturdy_frame = mutations['sturdy_frame'] *2}
-    var e = item.encumbrance/10 - sturdy_frame
+    var e = item.encumbrance/10 + sturdy_frame
     if (e >0) {e = 0}
 
     // New formula for effect of str on aevp: (2/5) * evp^2 / (str+3)
@@ -44,6 +44,15 @@ export function adjusted_shield_penalty(item, scale, shields_skill, racial_facto
     var temp = ((-base_shield_penalty * scale) - shields_skill * scale / player_shield_racial_factor * 10) / 10;
     if (temp <0) {temp = 0}
     return temp
+}
+export function armour_shield_spell_penalty() 
+{
+    var scale = 100
+    var pen = 19* this.encumbrance_penalty(100) + this.adjusted_shield_penalty(100) * 19 
+    pen /=scale
+    return pen
+
+
 }
 
 /*

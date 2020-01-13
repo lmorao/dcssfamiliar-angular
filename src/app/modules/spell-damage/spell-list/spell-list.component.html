@@ -1,7 +1,7 @@
 <div class="panel">
   <span>
     <div class=panel-title>
-      <p>Spell List <font color="red"> - Under construction, cant load from morgue yet, no armour</font></p>
+      <p>Spell List <font color="red"> - Under construction</font> <font color='grey'> some spell dmg missing, no wiz rings</font></p>
     </div>
   </span>
 
@@ -15,7 +15,7 @@
             <span class="left" [ngbTooltip]="MaxDmg" placement="bottom"> Max Dmg </span>
             <span class="left"> Fail </span>
             <span class="left"> Level </span>
-            <span class="left"> Disci </span>
+            <span class="left"> School </span>
             <span class="left" hidden=true> Range </span>
             <span class="left" hidden=true> Noise </span>
         </mat-list-item>
@@ -71,7 +71,7 @@
 
             <span class="left"> {{fail(spell)| number:'1.0-0'}}&#8202;% </span>
             <span class="left"> {{spell.level}} </span>
-            <span class="left"> {{spell.type1|slice:0:3}}|{{spell.type2|slice:0:3}} </span>
+            <span class="left" [ngStyle]='{"font-size": spell.type3 != "" ? "12px": ""}'> {{displaytype(spell.type1)}}<span *ngIf='spell.type2 !=""'>|{{displaytype(spell.type2)}}</span> <span *ngIf='spell.type3 !=""'>|{{displaytype(spell.type3)}}</span></span>
             <span class="left" hidden=true>  </span>
             <span class="left" hidden=true>  </span>
         </mat-list-item>

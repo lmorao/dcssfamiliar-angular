@@ -5,6 +5,8 @@ import { SpellListService } from '../../../core/services/spell-list.service'
 import { Skills } from '../../../shared/models/skills.model'
 import { Character } from '../../../shared/models/character.model'
 import { spell_db } from 'src/app/spell_db'
+import { SelectedArmourService } from '../../../core/services/selected-armour.service';
+import { encumbrance_penalty, adjusted_shield_penalty } from 'src/app/skill_functions';
 
 @Component({
   selector: 'app-spell-list',
@@ -15,11 +17,28 @@ export class SpellListComponent implements OnInit {
   skills = new Skills()
   profile = new Character()
   armour_penalty = 0
+  shield_penalty = 0
   diceAvg = function (number) {
     return (number -1) /2
   }
   diceMax = function (number) {
     return number 
+  }
+  displaytype = function (t) {
+    // slice:0:3
+    if (t =="") { return "" }
+    if (t =="conjurations") { return "Conj" }
+    if (t =="charms") { return "Chrm" }
+    if (t =="hexes") { return "Hex" }
+    if (t =="translocations") { return "Tloc" }
+    if (t =="transmutations") { return "Tmut" }
+    if (t =="summonings") { return "Summ" }
+    if (t =="necromancy") { return "Necr" }
+    if (t =="fire magic") { return "Fire" }
+    if (t =="ice magic") { return "Ice" }
+    if (t =="air magic") { return "Air" }
+    if (t =="earth magic") { return "Erth" }
+    if (t =="poison magic") { return "Pois" }
   }
   power = function (spell, apply_int = true, fail_rate = false,limited = true, scale=1, enhancers = 0, brilliance = false, wildMagic=0, subDueMagic = 0) {
     //brilliance is either 0 or 3
@@ -38,6 +57,10 @@ export class SpellListComponent implements OnInit {
     if (spell.type2 != "") {
       schools += this.skills[spell.type2]['level']
       div = 2
+    }
+    if (spell.type3 != "") {
+      schools += this.skills[spell.type3]['level']
+      div = 3
     }
 
     raw_power =  Math.floor(schools*200/div)
@@ -80,7 +103,7 @@ export class SpellListComponent implements OnInit {
     var chance = 60
     chance -= this.power(spell, false, true,false, 6)
     chance -= this.profile.int * 2
-    chance += this.armour_penalty
+    chance += this.armour_penalty + this.shield_penalty
     var spell_level = [0,3,15,35,70,100,150,200,260,340]
     chance += spell_level[spell.level]
 
@@ -175,6 +198,7 @@ export class SpellListComponent implements OnInit {
     private skillsService: SkillsService,
     private profileService: ProfileService,
     private spellListService: SpellListService,
+    private selectedArmourService: SelectedArmourService,
 
   ) { }
 
@@ -205,6 +229,13 @@ export class SpellListComponent implements OnInit {
           this.spellList.push(spell_db[spellList1[i]])  
         }
       }
+    })
+
+    this.selectedArmourService.armour.subscribe(armour => {
+      this.armour_penalty = encumbrance_penalty(armour, 100, this.skills['armour']['level'], this.profile.str)*19/100
+    })
+    this.selectedArmourService.shield.subscribe(shield => {
+      this.shield_penalty = adjusted_shield_penalty(shield, 100, this.skills['shields']['level'])*19/100
     })
   }
 

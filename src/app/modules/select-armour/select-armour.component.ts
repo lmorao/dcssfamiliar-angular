@@ -5,6 +5,7 @@ import { SkillsService } from '../../core/services/skills.service';
 import { ProfileService } from '../../core/services/profile.service';
 import { Skills } from '../../shared/models/skills.model';
 import { Character } from '../../shared/models/character.model';
+import { SelectedArmourService } from '../../core/services/selected-armour.service';
 
 @Component({
   selector: 'app-select-armour',
@@ -23,15 +24,18 @@ export class SelectArmourComponent implements OnInit {
 
   selectArmour = function (name) {
     this.selectedArmour = armour_types[name]
-    this.encumbrance = encumbrance_penalty(this.selectedArmour, 100, this.skills['armour']['level'], this.profile.str)
+    this.encumbrance = encumbrance_penalty(this.selectedArmour, 100, this.skills['armour']['level'], this.profile.str)*19/100
+    this.selectedArmourService.selectArmour(this.selectedArmour)
   }
   selectShield = function (name) {
     this.selectedShield = armour_types[name]
-    this.shieldPen = adjusted_shield_penalty(this.selectedShield, 100, this.skills['shields']['level'])
+    this.shieldPen = adjusted_shield_penalty(this.selectedShield, 100, this.skills['shields']['level'])*19/100
+    this.selectedArmourService.selectShield(this.selectedShield)
   }
   constructor(
     private skillsService : SkillsService,
     private profileService : ProfileService,
+    private selectedArmourService : SelectedArmourService,
   ) { }
 
   ngOnInit() {

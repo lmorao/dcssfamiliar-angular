@@ -228,6 +228,10 @@ export class CfParserService {
       if (/Slings/.test(skillsText)) {skillsTemp['slings']['level'] = this._getSkill("Slings",skillsText)}
       if (/Spellcasting/.test(skillsText)) {skillsTemp['spellcasting']['level'] = this._getSkill("Spellcasting",skillsText)}
 
+      if (/Armour/.test(skillsText)) {skillsTemp['armour']['level'] = this._getSkill("Armour",skillsText)}
+      if (/Dodging/.test(skillsText)) {skillsTemp['dodging']['level'] = this._getSkill("Dodging",skillsText)}
+      if (/Shields/.test(skillsText)) {skillsTemp['shields']['level'] = this._getSkill("Shields",skillsText)}
+
       if (/Conjurations/.test(skillsText)) {skillsTemp['conjurations']['level'] = this._getSkill("Conjurations",skillsText)}
       if (/Hexes/.test(skillsText)) {skillsTemp['hexes']['level'] = this._getSkill("Hexes",skillsText)}
       if (/Charms/.test(skillsText)) {skillsTemp['charms']['level'] = this._getSkill("Charms",skillsText)}
