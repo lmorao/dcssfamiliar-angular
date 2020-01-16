@@ -2,18 +2,48 @@
     <div class=panel-title>
       <p>Armour Selection</p>
     </div>
-    <div><span class=attr>Armour Penalty: </span>{{encumbrance | number:'1.0-0'}}</div>
-    <div><span class=attr>Shield Penalty: </span>{{shieldPen | number:'1.0-0'}}</div>
+    <div><span class=attr>Armour Penalty: 
+
+
+    </span>{{encumbrance | number:'1.0-0'}}</div>
+    <div><span class=attr>Shield Penalty: 
+
+
+    </span>{{shieldPen | number:'1.0-0'}}</div>
 <div ngbDropdown class="">
-  <button class="btn btn-outline-primary" id="armourDropdown" ngbDropdownToggle >{{selectedArmour.name}}</button>
+  <button class="btn btn-outline-primary" id="armourDropdown" ngbDropdownToggle >
+
+      <span *ngIf="selectedArmour['name'] != 'no armour'">
+      <img src="https://raw.githubusercontent.com/crawl/crawl/master/crawl-ref/source/rltiles/item/armour/{{selectedArmour.img}}.png">
+      </span>
+    {{selectedArmour.name}}</button>
   <div ngbDropdownMenu aria-labelledby="armourDropdown">
-    <button *ngFor="let item of armourList" ngbDropdownItem (click)="selectArmour(item)">{{item}}</button>
+
+    <button ngbDropdownItem (click)="selectArmour('no armour')">no armour</button>
+
+    <button *ngFor="let item of armourList" ngbDropdownItem (click)="selectArmour(item)">
+      <img src="https://raw.githubusercontent.com/crawl/crawl/master/crawl-ref/source/rltiles/item/armour/{{armour_types[item].img}}.png">
+      {{item}}</button>
+      <div class="dropdown-divider"></div>
+
+    <button *ngFor="let item of dragonArmourList" ngbDropdownItem (click)="selectArmour(item)">
+      <img src="https://raw.githubusercontent.com/crawl/crawl/master/crawl-ref/source/rltiles/item/armour/{{armour_types[item].img}}.png">
+      {{item}}</button>
   </div>
 </div>
 
 <div ngbDropdown class="">
-  <button class="btn btn-outline-primary" id="armourDropdown" ngbDropdownToggle >{{selectedShield.name}}</button>
+  <button class="btn btn-outline-primary" id="armourDropdown" ngbDropdownToggle >
+
+      <span *ngIf="selectedShield['name'] != 'no shield'">
+      <img src="https://raw.githubusercontent.com/crawl/crawl/master/crawl-ref/source/rltiles/item/armour/shields/{{selectedShield.img}}.png">
+      </span>
+    {{selectedShield.name}}</button>
   <div ngbDropdownMenu aria-labelledby="armourDropdown">
-    <button *ngFor="let item of shieldList" ngbDropdownItem (click)="selectShield(item)">{{item}}</button>
+    <button ngbDropdownItem (click)="selectShield('no shield')">no shield</button>
+    <button *ngFor="let item of shieldList" ngbDropdownItem (click)="selectShield(item)">
+
+      <img src="https://raw.githubusercontent.com/crawl/crawl/master/crawl-ref/source/rltiles/item/armour/shields/{{armour_types[item].img}}.png">
+      {{item}}</button>
   </div>
 </div>

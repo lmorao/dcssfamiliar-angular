@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { armour_types, armour_types_list, shield_types_list } from 'src/app/weapon_types';
+import { armour_types, armour_types_list,armour_types_list_dragon , shield_types_list } from 'src/app/weapon_types';
 import { encumbrance_penalty, adjusted_shield_penalty } from 'src/app/skill_functions';
 import { SkillsService } from '../../core/services/skills.service';
 import { ProfileService } from '../../core/services/profile.service';
@@ -16,7 +16,9 @@ export class SelectArmourComponent implements OnInit {
   selectedArmour = {name: "robe", encumbrance:0}
   selectedShield = {name: "no shield", encumbrance:0}
   armourList = armour_types_list
+  dragonArmourList = armour_types_list_dragon
   shieldList = shield_types_list
+  armour_types = armour_types
   encumbrance = 0
   shieldPen = 0
   skills = new Skills

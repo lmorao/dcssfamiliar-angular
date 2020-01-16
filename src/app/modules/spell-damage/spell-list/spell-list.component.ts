@@ -40,7 +40,7 @@ export class SpellListComponent implements OnInit {
     if (t =="earth magic") { return "Erth" }
     if (t =="poison magic") { return "Pois" }
   }
-  power = function (spell, apply_int = true, fail_rate = false,limited = true, scale=1, enhancers = 0, brilliance = false, wildMagic=0, subDueMagic = 0) {
+  power = function (spell, apply_int = true, fail_rate = false,limited = true, scale=1, enhancers = 0, brilliance = 0, wildMagic=0, subDueMagic = 0) {
     //brilliance is either 0 or 3
     var mut = 1
     var bMut = 1
@@ -75,7 +75,7 @@ export class SpellListComponent implements OnInit {
       raw_power /=100
       res = raw_power
     } else {
-      if (brilliance == true) {
+      if (this.profile.brilliance == 1) {
         raw_power += 600
       }
       if (apply_int) {
@@ -97,6 +97,20 @@ export class SpellListComponent implements OnInit {
       if (res > spell.power) {res = spell.power}
     }
     return res
+  }
+  _apply_spellcasting_success_boosts = function (chance) {
+    var fail_reduce = 100
+    if (this.profile.wiz > 0) {
+      fail_reduce = Math.floor(fail_reduce * 6/(7 + this.profile.wiz))
+    }
+    if (this.profile.brilliance > 0) {
+      fail_reduce= Math.floor(fail_reduce/2)
+    }
+    if (fail_reduce <50) {
+      fail_reduce = 50
+    }
+    return Math.floor(chance * fail_reduce/100)
+
   }
 
   raw_spell_fail = function (spell) {
@@ -120,12 +134,27 @@ export class SpellListComponent implements OnInit {
     //chance2 += you.props[SAP_MAGIC_KEY].get_int() * 12;
     //chance2 += you.duration[DUR_VERTIGO] ? 7 : 0;
     // Apply the effects of Vehumet and items of wizardry.
-    //chance2 = _apply_spellcasting_success_boosts(spell, chance2);
+    chance2 = this._apply_spellcasting_success_boosts( chance2);
 
     if (chance2 <0) {chance2 =0 }
     if (chance2 >100) {chance2 =100 }
 
     return chance2
+  }
+  power_bars = function (power) {
+    var res
+    if (0<=power && power<9)     {res = "#........."}
+    if (10<power && power<14)    {res = "##........"}
+    if (15<power && power<24)    {res = "###......."}
+    if (25<power && power<34)    {res = "####......"}
+    if (35<power && power<49)    {res = "#####....."}
+    if (50<power && power<74)    {res = "######...."}
+    if (75<power && power<99)    {res = "#######..."}
+    if (100<power && power<149)  {res = "########.."}
+    if (150<power && power<199)  {res = "#########."}
+    if (200<power)       {res = "##########"}
+    return res
+
   }
 
   _get_true_fail_rate = function (raw_fail) {

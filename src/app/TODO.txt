@@ -1,4 +1,8 @@
 
+spelllist wizardry doesn't affect power
+parse the armour
+add missing spell notes
+
 races that have two words
 share-url title
 oklob imunities missing

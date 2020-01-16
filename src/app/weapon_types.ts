@@ -115,19 +115,19 @@ export function brand_color (brand) {
 }
 export const armour_types = {
 
-"no armour" : {"name": "no armour",  armour: 0, encumbrance:   0, price:    0},
-"animal skin" : {"name": "animal skin",  armour: 2, encumbrance:   0, price:    3},
-"robe" : {"name" :"robe",  armour: 2, encumbrance: 0},
-"leather armour" : {name: "leather armour",  armour: 3, encumbrance: -40,  price: 20},
-"ring mail" : {name: "ring mail",  armour: 5, encumbrance: -70 },
-"scale mail" : {name: "scale mail", armour: 6, encumbrance: -100},
-"chain mail" : {name: "chain mail", armour: 8, encumbrance: -150},
-"plate armour" : {name: "plate armour",  armour: 10, encumbrance: -180},
-"crystal plate armour" :{ name: "crystal plate armour",armour: 14, encumbrance:-230},
+"no armour" : {"name": "no armour",  armour: 0, encumbrance:   0, price:    0, img: "../../player/base/lorc_f6"},
+"animal skin" : {"name": "animal skin",  armour: 2, encumbrance:   0, price:    3, img: "animal_skin1"},
+"robe" : {"name" :"robe",  armour: 2, encumbrance: 0, img: "robe1"},
+"leather armour" : {name: "leather armour",  armour: 3, encumbrance: -40,  price: 20, img: "leather_armour1"},
+"ring mail" : {name: "ring mail",  armour: 5, encumbrance: -70 , img: "ring_mail1"},
+"scale mail" : {name: "scale mail", armour: 6, encumbrance: -100, img: "scale_mail1"},
+"chain mail" : {name: "chain mail", armour: 8, encumbrance: -150, img: "chain_mail1"},
+"plate armour" : {name: "plate armour",  armour: 10, encumbrance: -180, img: "plate1"},
+"crystal plate" :{ name: "crystal plate",armour: 14, encumbrance:-230, img: "crystal_plate"},
 
-"troll leather armour" :{ name: "troll leather armour",armour: 4, encumbrance:-40} ,
+"troll leather" :{ name: "troll leather",armour: 4, encumbrance:-40, img: "troll_leather_armour"} ,
 
-"cloak" : {name: "cloak",  armour: 1, encumbrance: 0},
+"cloak" : {name: "cloak",  armour: 1, encumbrance: 0, img: ""},
 "scarf" : {name: "scarf",  armour: 0, encumbrance: 0},
 "gloves" : {name: "gloves",armour: 1, encumbrance: 0},
 
@@ -138,24 +138,26 @@ export const armour_types = {
 "centaur barding" : {name: "centaur barding",  armour: 4, encumbrance: -60},
 "naga barding" : {name: "naga barding",  armour: 4, encumbrance: -60} ,
 
-"no shield" : {name: "no shield",armour: 0, encumbrance: 0},
-"buckler" : {name: "buckler",armour: 3, encumbrance: -8},
-"shield" : {name: "shield",armour: 8, encumbrance: -30} ,
-"large shield" : {name: "large shield",amour: 13, encumbrance: -50},
+"no shield" : {name: "no shield",armour: 0, encumbrance: 0, img: "../../../player/base/lorc_f6"},
+"buckler" : {name: "buckler",armour: 3, encumbrance: -8 , img: "buckler2"},
+"shield" : {name: "shield",armour: 8, encumbrance: -30, img: "shield2"} ,
+"large shield" : {name: "large shield",amour: 13, encumbrance: -50, img: "large_shield2"},
 
 // Following all ARM_ entries for the benefit of util/gather_items
-"steam": {armour: 5, encumbrance:   0},
-"acid": { armour: 6, encumbrance:  -50},
-"quicksilver": { armour:          9, encumbrance:  -70},
-"swamp": { armour: 7, encumbrance:  -70},
-"fire": { armour: 8, encumbrance: -110},
-"ice": { armour: 9, encumbrance: -110},
-"pearl": { armour: 10, encumbrance: -110},
-"storm": { armour: 10, encumbrance: -150},
-"shadow": { armour: 10, encumbrance: -150},
-"gold": { armour: 12, encumbrance: -230},
+"steam": {name: "steam", armour: 5, encumbrance:   0, img: "silver_dragon_scale_mail"},
+"acid": {name: "acid", armour: 6, encumbrance:  -50, img: "acid_dragon_armour"},
+"quicksilver": { name: "quicksilver", armour: 9, encumbrance:  -70, img: "quicksilver_dragon_scale_mail"},
+"swamp": { name: "swamp", armour: 7, encumbrance:  -70, img: "swamp_dragon_armour"},
+"fire": { name: "fire", armour: 8, encumbrance: -110, img: "red_dragon_scale_mail"},
+"ice": { name: "ice", armour: 9, encumbrance: -110, img: "ice_dragon_armour"},
+"pearl": { name: "pearl", armour: 10, encumbrance: -110, img: "pearl_dragon_armour"},
+"storm": { name: "storm", armour: 10, encumbrance: -150, img: "blue_dragon_scale_mail"},
+"shadow": { name: "shadow", armour: 10, encumbrance: -150, img: "shadow_dragon_scale_mail"},
+"gold": { name: "gold", armour: 12, encumbrance: -230, img: "gold_dragon_armour"},
 
 }
-export const armour_types_list  = ["no armour", "animal skin","robe","leather armour", "ring mail", "scale mail", "chain mail",
-"plate armour", "crystal plate armour", "troll leather armour"]
-export const shield_types_list  = ["no shield", "buckler", "shield", "large shield"]
+export const armour_types_list  = [ "animal skin", "robe","leather armour", "ring mail", "scale mail", "chain mail",
+"plate armour", "crystal plate", "troll leather"]
+export const armour_types_list_dragon  = ["steam", "acid", "quicksilver","swamp", "fire", "ice", "pearl",
+"storm", "shadow", "gold"]
+export const shield_types_list  = [ "buckler", "shield", "large shield"]

@@ -7,7 +7,7 @@ export const unrands = [
     
      {title: "Singing Sword" , hint: "Singing" ,category: "double sword", "slaying":"+7", brand: "slicing"},
 
-     {title: "Arga" , hint: "Arga" ,category: "broad axe", "slaying":"+8", brand: "speed", img: "artefact/unrand_arga.png},
+     {title: "Arga" , hint: "Arga" ,category: "broad axe", "slaying":"+8", brand: "speed", img: "artefact/unrand_arga.png"},
      {title: "obsidian axe" , hint: "bsidian" ,category: "broad axe", "slaying":"+14", brand: "chopping"},
      {title: "Wrath" , hint: "Wrath" ,category: "battleaxe", "slaying":"+8", brand: "antimagic"},
 ]

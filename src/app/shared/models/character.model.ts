@@ -8,4 +8,6 @@ export function Character(xl = 1, str=12, int=13, dex=9) {
       this.name='Unnamed';
       this.title='Foretold';
       this.species="Slime";
+      this.brilliance=0;
+      this.wiz=0;
 }

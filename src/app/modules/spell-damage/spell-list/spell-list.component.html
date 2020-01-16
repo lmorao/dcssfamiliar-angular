@@ -5,77 +5,88 @@
     </div>
   </span>
 
-      <mat-list style="overflow:auto; padding-top:0px">
-        <mat-list-item >
-            <div class="image" >
-            </div>
-            <span class="left"> Name  </span>
-            <span class="left"> Power  </span>
-            <span class="left" [ngbTooltip]="AvgDmg" placement="bottom"> Avg Dmg</span>
-            <span class="left" [ngbTooltip]="MaxDmg" placement="bottom"> Max Dmg </span>
-            <span class="left"> Fail </span>
-            <span class="left"> Level </span>
-            <span class="left"> School </span>
-            <span class="left" hidden=true> Range </span>
-            <span class="left" hidden=true> Noise </span>
-        </mat-list-item>
-      </mat-list>
-      <mat-list style="overflow:auto; height:310px; padding-top:0px">
-        <mat-list-item *ngFor="let spell of spellList ; let i = index" (click)="targetSpell()">
-          <ng-template #damageFormula>
-            <div class=panel>
-            Formula: ({{spell.ndice}} +  <font color="yellow">{{max_spell_dam_dice(spell, power(spell,true,false,true))|number:'1.0-2'}}</font>)/2
-            </div>
+  <mat-list style=" padding-top:0px">
+    <mat-list-item class=test2>
+        <div class="image" >
+        </div>
+        <span class="left"> Name  </span>
+        <span class="left"> Power  </span>
+        <span class="left" [ngbTooltip]="AvgDmg" placement="right"> Avg Dmg</span>
+        <span class="left" [ngbTooltip]="MaxDmg" placement="right"> Max Dmg </span>
+        <span class="left"> Fail </span>
+        <span class="left"> Level </span>
+        <span class="left"> School </span>
+        <span class="left" hidden=true> Range </span>
+        <span class="left" hidden=true> Noise </span>
+    </mat-list-item>
+  </mat-list>
+  <mat-list style="overflow:auto; height:310px; padding-top:0px;">
+    <mat-list-item *ngFor="let spell of spellList ; let i = index" (click)="targetSpell()" style="position:static"
+    [ngbTooltip]='tipContent2'
+    placement="top"
+    >
+    <ng-template #tipContent2>
+      <div class="enemy-tooltip">
+        <span>
+        <font class=attr>Power:</font> {{power(spell, true,false,true)| number:'1.0-0'}}/{{spell.power}} 
+        <br>
+        <font class=attr>Avg Damage:</font> ({{spell.ndice}} +  <font color="yellow">{{max_spell_dam_dice(spell, power(spell,true,false,true))|number:'1.0-2'}}</font>)/2
+        <br>
+        <font class=attr>Max Damage:</font> {{spell.ndice}}d({{calcdice(spell,spell.pdice)|number:'1.0-2'}} + <font color="yellow">{{power(spell,true,false,true)}} </font>*{{calcdice(spell,spell.mdice/spell.ddice)|number:'1.0-2'}})
+        <br>
+</span>
+        <span *ngIf="spell.notes != ''">
+        <br>
+        <font class="attr">Notes: </font>{{spell.notes}}
+        </span>
+</div>
+
+    </ng-template>
+
+        <div class='image' >
+          <img src="https://raw.githubusercontent.com/crawl/crawl/master/crawl-ref/source/rltiles/{{spell.img}}">
+        </div>
+        <span class="left"> {{spell.display}} </span>
+        <span class="left"> {{power(spell, true,false,true)| number:'1.0-0'}}/{{spell.power}}  </span>
+
+
+        <span class= "left" > 
+          <span *ngIf="spell.ndice==1 && spell.ddice==1 && spell.mdice==1; then thenBlock1 else elseBlock1"> </span>
+          <ng-template #elseBlock1 >
+            <span >
+            {{ (spell.ndice + max_spell_dam_dice(spell, power(spell,true,false,true)) )/2| number:'1.0-0'}} 
+            </span>
           </ng-template>
-          <ng-template #maxDamageFormula>
-            <div class=panel>
-            Formula: {{spell.ndice}}d({{calcdice(spell,spell.pdice)|number:'1.0-2'}} + <font color="yellow">{{power(spell,true,false,true)}} </font>*{{calcdice(spell,spell.mdice/spell.ddice)|number:'1.0-2'}})
-            </div>
+          <ng-template #thenBlock1>
+            <span >
+            -
+            </span>
           </ng-template>
+        </span>
+        <span class= "left" > 
+          <span *ngIf="spell.ndice==1 && spell.ddice==1 && spell.mdice==1; then thenBlock2 else elseBlock2"> </span>
 
-            <div class='image' >
-              <img src="https://raw.githubusercontent.com/crawl/crawl/master/crawl-ref/source/rltiles/{{spell.img}}">
-            </div>
-            <span class="left"> {{spell.display}} </span>
-            <span class="left"> {{power(spell, true,false,true)| number:'1.0-0'}}/{{spell.power}}  </span>
-
-
-            <span class= "left" > 
-              <span *ngIf="spell.ndice==1 && spell.ddice==1 && spell.mdice==1; then thenBlock1 else elseBlock1"> </span>
-              <ng-template #elseBlock1 >
-                <span [ngbTooltip]="damageFormula">
-                {{ (spell.ndice + max_spell_dam_dice(spell, power(spell,true,false,true)) )/2| number:'1.0-0'}} 
-                </span>
-              </ng-template>
-              <ng-template #thenBlock1>
-                <span [ngbTooltip]="nothing">
-                -
-                </span>
-              </ng-template>
+          <ng-template #elseBlock2 >
+        <span > 
+          {{max_spell_dam_dice(spell, power(spell,true,false,true)) | number:'1.0-0'}} 
+        </span>
+        <span *ngIf="spell.notes != ''" >(*)</span>
+          </ng-template>
+          <ng-template #thenBlock2 >
+            <span >
+            -
             </span>
-            <span class= "left" > 
-              <span *ngIf="spell.ndice==1 && spell.ddice==1 && spell.mdice==1; then thenBlock2 else elseBlock2"> </span>
-
-              <ng-template #elseBlock2 >
-            <span [ngbTooltip]="maxDamageFormula"> 
-              {{max_spell_dam_dice(spell, power(spell,true,false,true)) | number:'1.0-0'}} 
-            </span>
-              </ng-template>
-              <ng-template #thenBlock2 >
-                <span [ngbTooltip]="nothing">
-                -
-                </span>
-              </ng-template>
-            </span>
+          </ng-template>
+        </span>
 
 
-            <span class="left"> {{fail(spell)| number:'1.0-0'}}&#8202;% </span>
-            <span class="left"> {{spell.level}} </span>
-            <span class="left" [ngStyle]='{"font-size": spell.type3 != "" ? "12px": ""}'> {{displaytype(spell.type1)}}<span *ngIf='spell.type2 !=""'>|{{displaytype(spell.type2)}}</span> <span *ngIf='spell.type3 !=""'>|{{displaytype(spell.type3)}}</span></span>
-            <span class="left" hidden=true>  </span>
-            <span class="left" hidden=true>  </span>
-        </mat-list-item>
-      </mat-list>
+        <span class="left"> {{fail(spell)| number:'1.0-0'}}&#8202;% </span>
+        <span class="left"> {{spell.level}} </span>
+        <span class="left" [ngStyle]='{"font-size": spell.type3 != "" ? "12px": ""}'> {{displaytype(spell.type1)}}<span *ngIf='spell.type2 !=""'>|{{displaytype(spell.type2)}}</span> <span *ngIf='spell.type3 !=""'>|{{displaytype(spell.type3)}}</span></span>
+        <span class="left" hidden=true>  </span>
+        <span class="left" hidden=true>  </span>
+    </mat-list-item>
+  </mat-list>
 </div>
 
 

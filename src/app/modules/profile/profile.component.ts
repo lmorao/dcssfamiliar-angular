@@ -23,6 +23,10 @@ export class ProfileComponent implements OnInit {
   moredex = function () {if (this.profile.str <53) {this.profile.dex +=1}; this.profileService.updateProfile(this.profile)}
   lessslaying = function () {if (this.profile.slaying >-8) {this.profile.slaying -=1}; this.profileService.updateProfile(this.profile)}
   moreslaying = function () {if (this.profile.slaying <25) {this.profile.slaying +=1}; this.profileService.updateProfile(this.profile)}
+  lesswiz = function () {if (this.profile.wiz >-3) {this.profile.wiz -=1}; this.profileService.updateProfile(this.profile)}
+  morewiz = function () {if (this.profile.wiz <3) {this.profile.wiz +=1}; this.profileService.updateProfile(this.profile)}
+  lessbrill = function () {if (this.profile.brilliance >0) {this.profile.brilliance -=1}; this.profileService.updateProfile(this.profile)}
+  morebrill = function () {if (this.profile.brilliance <1) {this.profile.brilliance +=1}; this.profileService.updateProfile(this.profile)}
 
   constructor(
     private profileService: ProfileService,

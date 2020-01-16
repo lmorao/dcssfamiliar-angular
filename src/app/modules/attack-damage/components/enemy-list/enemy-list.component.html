@@ -39,7 +39,8 @@ placement="top"
           Vulner: <span *ngFor="let vul of enemy.vul"><span [ngStyle]="{'color': getResColor(vul)}">{{vul}}</span>, </span><br>
 </div>
         </ng-template>
-        <span   style="padding-left:10px"  >
+        <span   
+        style="padding-left:10px"  >
                 <img src="https://raw.githubusercontent.com/crawl/crawl/master/crawl-ref/source/rltiles/{{enemy.image}}" 
                 [ngClass]="{  'selected' : enemy.name==selectedEnemy.name }"
                 > &nbsp; 
