@@ -13,8 +13,8 @@ import { SelectedArmourService } from '../../core/services/selected-armour.servi
   styleUrls: ['./select-armour.component.scss']
 })
 export class SelectArmourComponent implements OnInit {
-  selectedArmour = {name: "robe", encumbrance:0}
-  selectedShield = {name: "no shield", encumbrance:0}
+  selectedArmour = {name: "robe", encumbrance:0, img:"robe"}
+  selectedShield = {name: "no shield", encumbrance:0, img:"no shield"}
   armourList = armour_types_list
   dragonArmourList = armour_types_list_dragon
   shieldList = shield_types_list
