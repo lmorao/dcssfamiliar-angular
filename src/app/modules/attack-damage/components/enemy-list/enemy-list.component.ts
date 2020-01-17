@@ -57,7 +57,6 @@ export class EnemyListComponent implements OnInit {
     return '#babdb6'
     switch (true) {
       case (hd > this.profile.xl):
-        console.log('red');
         return 'red';
       case hd == this.profile.xl:
         return 'yellow';

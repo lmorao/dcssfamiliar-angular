@@ -60,6 +60,16 @@ export class CfParserService {
       var ring1 = /\+(\d+) ring of slaying/
       if (ring1.test(temp0)) { slaying = slaying + parseInt(ring1.exec(temp0)[1])}
       profile['slaying'] = slaying
+
+      var wiz = 0
+      for (var line=0; line < words.length; line +=1) {
+        var wizRe = /wiz/
+        if (wizRe.test(words[line])) {
+          wiz += 1
+        }
+      }
+      profile['wiz'] = wiz
+
     }
     return profile
 
@@ -133,7 +143,6 @@ export class CfParserService {
       var weapons = inventory.split(/[a-zA-Z] - (?:a|the)/)
       for (var line=0; line < weapons.length; line +=1) {
         var found1 = weapons[line]
-        console.log(weapons[line])
         var wtRe= "("
         wtRe += "dagger|quick blade|short sword|rapier"
         wtRe += "|falchion|long sword|scimitar|demon blade|eudemon blade|double sword|great sword|triple sword"
@@ -154,7 +163,6 @@ export class CfParserService {
           if (brandRe.test(weapons[line]))
           {
             var maBrand = brandRe.exec(weapons[line])[0]
-            console.log(maBrand)
             if (maBrand == "freeze") {maBrand = "freezing"}
             if (maBrand == "flame") {maBrand = "flaming"}
             if (maBrand == "elec") {maBrand = "electrocution"}
@@ -168,7 +176,6 @@ export class CfParserService {
             if (maBrand == "pierce") {maBrand = "vorpal"}
             if (maBrand == "slash") {maBrand = "vorpal"}
             if (maBrand == "slice" ) {maBrand = "vorpal"}
-            console.log(maBrand)
 
 
           } else {maBrand = ""}
@@ -179,9 +186,8 @@ export class CfParserService {
           var randRe= /\".*\"/
 
           var img
-          console.log(maType[3])
           if (maBrand == "") { 
-            if (/(?:triple sword|dagger|demon blade|club|demon_trident|double_sword|giant_club|giant_spiked_club|quarterstaff|whip)/.test(maType[3])) {
+            if (/(?:triple sword|dagger|demon blade|club|demon trident|double sword|giant club|giant spiked club|quarterstaff|whip|hand crossbow|triple crossbow)/.test(maType[3])) {
               img = weapon_types[maType[3]]['img'] + ".png" 
             } else {
               img = weapon_types[maType[3]]['img'] + "1.png" 
@@ -198,12 +204,10 @@ export class CfParserService {
           if (randRe.test(weapons[line])) { img = weapon_types[maType[3]]['img'] + "3.png" }
 
 
-          console.log(img)
           weaponList.push({name: maType[3], slaying: maType[1] + maType[2], brand: maBrand, img: img, title: "" })
         } else {
           for (var i =0; i<unrands.length; i++) {
             var reU = RegExp(unrands[i].hint)
-            console.log(unrands[i])
             if (reU.test(weapons[line])) {
               weaponList.push({name: unrands[i]['category'], slaying: unrands[i]['slaying'], brand:unrands[i]['brand'], title: unrands[i]['title'], img: weapon_types[unrands[i]['category']]['img'] + "3.png"})
 
@@ -237,7 +241,6 @@ export class CfParserService {
     //var temp =  /Level (\d+)\.?\d{0,2}\S*\s+Maces/.exec(txt)
     var temp =  new RegExp("Level (\\d+)\\.?\\d{0,2}\\(?(\\d+)?\\.?\\d*\\)?\\s+" + display, "g").exec(txt)
     var pos
-    console.log(temp)
     if (temp[2] != undefined) { pos = 2} else {pos = 1}
     return parseInt(temp[pos])
   }
@@ -286,7 +289,7 @@ export class CfParserService {
 
     var spellsTemp1 = new Array()
     var spellsTemp2 = new Array()
-    var re2 = /You know the following spells:(.*)Dungeon Overview and Level Annotations/
+    var re2 = /You (?:know|knew) the following spells:(.*)Dungeon Overview and Level Annotations/
     var re3 = /\S - (\S.*\S)\s+(?:Conj|Chrm|Hex|Tloc|Tmut|Pois|Air|Fire|Ice|Summ|Eart)/
     var re4 = /(\S.*\S)\s+(?:Conj|Chrm|Hex|Tloc|Tmut|Pois|Air|Fire|Ice|Summ|Eart)/
     if (re2.test(txt)){

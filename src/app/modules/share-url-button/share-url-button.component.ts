@@ -33,7 +33,6 @@ export class ShareUrlButtonComponent implements OnInit {
     this.weaponListService.get()
     this.selectedWeaponService.get()
 
-    console.log(this.skills, )
     var url  = environment.serverUrl + "/#/parse/"
     var temp1 = this.shareUrlService.createUrl(this.profile, this.skills, this.wl, this.sw)
     environment.debug(temp1)

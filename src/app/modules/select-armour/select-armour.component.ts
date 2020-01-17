@@ -13,7 +13,7 @@ import { SelectedArmourService } from '../../core/services/selected-armour.servi
   styleUrls: ['./select-armour.component.scss']
 })
 export class SelectArmourComponent implements OnInit {
-  selectedArmour = {name: "robe", encumbrance:0, img:"robe"}
+  selectedArmour = {name: "robe", encumbrance:0, img:"robe1"}
   selectedShield = {name: "no shield", encumbrance:0, img:"no shield"}
   armourList = armour_types_list
   dragonArmourList = armour_types_list_dragon
@@ -41,15 +41,19 @@ export class SelectArmourComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.selectArmour(this.selectedArmour.name)
-    this.selectShield(this.selectedShield.name)
-    this.skillsService.skills.subscribe (skills => {this.skills = skills;
-    })
-    this.profileService.profile.subscribe (profile => {this.profile = profile
-    })
     this.selectedArmourService.armour.subscribe (armour => {this.selectedArmour = armour
     })
     this.selectedArmourService.shield.subscribe (shield => {this.selectedShield = shield
+    })
+
+
+    this.skillsService.skills.subscribe (skills => {this.skills = skills;
+      this.selectArmour(this.selectedArmour['name'])
+      this.selectShield(this.selectedShield['name'])
+    })
+    this.profileService.profile.subscribe (profile => {this.profile = profile
+      this.selectArmour(this.selectedArmour['name'])
+      this.selectShield(this.selectedShield['name'])
     })
   }
 

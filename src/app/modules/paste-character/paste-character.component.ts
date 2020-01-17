@@ -47,10 +47,6 @@ export class PasteCharacterComponent implements OnInit {
       })
       spellList1.push(result[0])
     }
-    console.log("Starburst".includes)
-
-    console.log("parser spells1: ")
-    console.log(spellList1)
     //var url = this.shareUrlService.createUrl(profile, skills, weaponsArray[0], weaponsArray[1])
     //window.location.href = environment.serverUrl+ "/#/parse/" + url
     this.skillsService.updateSkills(skills)
