@@ -41,13 +41,15 @@ export class SelectArmourComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.selectArmour(this.selectedArmour.name)
+    this.selectShield(this.selectedShield.name)
     this.skillsService.skills.subscribe (skills => {this.skills = skills;
-      this.selectArmour(this.selectedArmour.name)
-      this.selectShield(this.selectedShield.name)
     })
     this.profileService.profile.subscribe (profile => {this.profile = profile
-      this.selectArmour(this.selectedArmour.name)
-      this.selectShield(this.selectedShield.name)
+    })
+    this.selectedArmourService.armour.subscribe (armour => {this.selectedArmour = armour
+    })
+    this.selectedArmourService.shield.subscribe (shield => {this.selectedShield = shield
     })
   }
 

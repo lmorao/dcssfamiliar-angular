@@ -5,6 +5,7 @@ import { CfParserService } from '../../core/services/cf-parser.service'
 
 import { SkillsService } from '../../core/services/skills.service'
 import { SelectedWeaponService } from '../../core/services/selected-weapon.service'
+import { SelectedArmourService } from '../../core/services/selected-armour.service'
 import { WeaponListService } from '../../core/services/weapon-list.service'
 import { ProfileService } from '../../core/services/profile.service'
 import { ShareUrlService } from 'src/app/core/services/share-url.service';
@@ -30,6 +31,8 @@ export class PasteCharacterComponent implements OnInit {
     var weaponsArray = this.parserService.parseWeapons(this.model.name)
     var profile = this.parserService.parseProfile(this.model.name)
     var enemyList = this.parserService.parseEnemies(this.model.name)
+    var armour = this.parserService.parseArmour(this.model.name)
+    var shield = this.parserService.parseShield(this.model.name)
     var spellList3 = this.parserService.parseSpells(this.model.name)[0]
     var spellList4 = this.parserService.parseSpells(this.model.name)[1]
     var spellList1 = new Array()
@@ -53,6 +56,8 @@ export class PasteCharacterComponent implements OnInit {
     this.skillsService.updateSkills(skills)
     this.weaponListService.updateWeaponList(weaponsArray[0])
     this.selectedWeaponService.selectWeapon(weaponsArray[1])
+    this.selectedArmourService.selectArmour(armour)
+    this.selectedArmourService.selectShield(shield)
     this.profileService.updateProfile(profile)
     this.enemyListService.updateEnemyList(enemyList)
     this.spellListService.updateSpellList1(spellList1)
@@ -65,6 +70,7 @@ export class PasteCharacterComponent implements OnInit {
     private parserService: CfParserService,
     private skillsService: SkillsService,
     private selectedWeaponService: SelectedWeaponService,
+    private selectedArmourService: SelectedArmourService,
     private weaponListService: WeaponListService,
     private profileService: ProfileService,
     private enemyListService: EnemyListService,

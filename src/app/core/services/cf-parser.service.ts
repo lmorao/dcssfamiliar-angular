@@ -7,7 +7,7 @@ import { Character } from '../../shared/models/character.model'
 import { monsters } from '../../monsters'
 
 import {environment} from '../../../environments/environment';
-import { weapon_types } from 'src/app/weapon_types';
+import { weapon_types, armour_types } from 'src/app/weapon_types';
 
 @Injectable({
   providedIn: 'root'
@@ -84,7 +84,7 @@ export class CfParserService {
       res = monsters[c4.exec(mon)[1].toLowerCase()]
     }
     return res
-      }
+  }
 
   parseEnemies = function (txt) {
     var caseRe = /There (?:were|are) no monsters in sight/
@@ -309,6 +309,34 @@ export class CfParserService {
 
     }
     return new Array(spellsTemp1,spellsTemp2)
+
+  }
+
+  parseArmour = function (txt) {
+    var re0 = /.*Inventory:/
+    if (re0.test(txt)) {
+      var temp0 = re0.exec(txt)[0];
+
+      var armour = "no armour"
+      var reA = /(?:animal skin|robe|leather armour|ring mail|scale mail|chain mail|plate armour|crystal plate|troll leather|steam|acid|quicksilver|swamp|fire|ice|pearl|storm|shadow|gold)/
+      if (reA.test(temp0)) {
+        armour = reA.exec(temp0)[0]
+        return armour_types[armour]
+      }
+    }
+  }
+  parseShield = function (txt) {
+    var re0 = /.*Inventory:/
+    if (re0.test(txt)) {
+      var temp0 = re0.exec(txt)[0];
+
+      var shield = "no shield"
+      var reA = /(?:buckler|large shield|shield)/
+      if (reA.test(temp0)) {
+        shield = reA.exec(temp0)[0]
+        return armour_types[shield]
+      }
+    }
 
   }
 

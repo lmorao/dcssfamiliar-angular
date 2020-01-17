@@ -5,8 +5,9 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root'
 })
 export class SelectedArmourService {
-  private armourSource = new BehaviorSubject({"name":"unarmed","slaying":"+0",brand:""});
-  private shieldSource = new BehaviorSubject({"name":"unarmed","slaying":"+0",brand:""});
+  private armourSource = new BehaviorSubject({name: "robe", encumbrance:0, img:"robe"});
+  private shieldSource = new BehaviorSubject({name: "no shield", encumbrance:0, img:"no shield"});
+
   armour = this.armourSource.asObservable();
   shield = this.shieldSource.asObservable();
 
@@ -14,6 +15,8 @@ export class SelectedArmourService {
     this.armourSource.next(weapon);
   }
   selectShield(weapon) {
+    console.log("Selecting shield: " + weapon)
+    console.log(weapon)
     this.shieldSource.next(weapon);
   }
   getArmour() {
