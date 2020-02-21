@@ -154,12 +154,12 @@ export class CfParserService {
         wtRe += "|shortbow|longbow"
         wtRe += "|hand crossbow|arbalest|triple crossbow"
         wtRe += ")"
-        var retype = new RegExp("(\\+|-)(\\d+)\\s+(?:vampiric\\s+)?" + wtRe)
+        var retype = new RegExp("(\\+|-)(\\d+)\\s+(?:vorpal\\s+)?(?:vampiric\\s+)?" + wtRe)
         var currentWeapon= /\(weapon\)/
 
         if (retype.test(weapons[line])) {
           var maType = retype.exec(weapons[line])
-          var brandRe = /(?:freezing|flaming|distortion|pain|draining|holy wrath|speed|vamp|electrocution|freeze|flame|elec|holy|protection|crushing|chopping|piercing|slashing|slicing|crush|chop|pierce|slash|slice)/
+          var brandRe = /(?:freezing|flaming|distortion|pain|draining|holy wrath|speed|vamp|electrocution|freeze|flame|elec|holy|protection|crushing|chopping|piercing|slashing|slicing|crush|chop|pierce|slash|slice|vorpal)/
           if (brandRe.test(weapons[line]))
           {
             var maBrand = brandRe.exec(weapons[line])[0]
@@ -239,10 +239,10 @@ export class CfParserService {
   }
   _getSkill = function (display, txt) {
     //var temp =  /Level (\d+)\.?\d{0,2}\S*\s+Maces/.exec(txt)
-    var temp =  new RegExp("Level (\\d+)\\.?\\d{0,2}\\(?(\\d+)?\\.?\\d*\\)?\\s+" + display, "g").exec(txt)
+    var temp =  new RegExp("Level (\\d+\\.?\\d{0,2})\\(?(\\d+)?\\.?\\d*\\)?\\s+" + display, "g").exec(txt)
     var pos
     if (temp[2] != undefined) { pos = 2} else {pos = 1}
-    return parseInt(temp[pos])
+    return parseFloat(temp[pos])
   }
   parseSkills = function (txt) {
     //skills
@@ -283,6 +283,7 @@ export class CfParserService {
 
 
     }
+    console.log(skillsTemp)
     return skillsTemp
   }
   parseSpells = function (txt) {
@@ -290,15 +291,15 @@ export class CfParserService {
     var spellsTemp1 = new Array()
     var spellsTemp2 = new Array()
     var re2 = /You (?:know|knew) the following spells:(.*)Dungeon Overview and Level Annotations/
-    var re3 = /\S - (\S.*\S)\s+(?:Conj|Chrm|Hex|Tloc|Tmut|Pois|Air|Fire|Ice|Summ|Eart)/
-    var re4 = /(\S.*\S)\s+(?:Conj|Chrm|Hex|Tloc|Tmut|Pois|Air|Fire|Ice|Summ|Eart)/
+    var re3 = /\S - (\S.*\.*\S)\s+(?:Conj|Chrm|Hex|Tloc|Tmut|Pois|Air|Fire|Ice|Summ|Eart|Necr)/
+    var re4 = /(\S.*\S)\s+(?:Conj|Chrm|Hex|Tloc|Tmut|Pois|Air|Fire|Ice|Summ|Eart|Necr)/
     if (re2.test(txt)){
       var spellsT = re2.exec(txt)[0]
       var a = spellsT.match(/(\S - )?((?:\S+ +)?\S+ +)?\S+ +\S+\s+\S+\s+\d+.\s+\d+\s+\S+/g)
-      //console.log(a)
 
       for (var i=0; i <= a.length ; i++) {
         if (re3.test(a[i])) {
+
           spellsTemp1.push(re3.exec(a[i])[1])
           //console.log(re3.exec(a[i])[1])
         }
@@ -306,7 +307,7 @@ export class CfParserService {
         {
           spellsTemp2.push(re4.exec(a[i])[1])
           //console.log(re4.exec(a[i])[1])
-        }
+        } 
 
       }
 
@@ -321,11 +322,14 @@ export class CfParserService {
       var temp0 = re0.exec(txt)[0];
 
       var armour = "no armour"
-      var reA = /(?:animal skin|robe|leather armour|ring mail|scale mail|chain mail|plate armour|crystal plate|troll leather|steam|acid|quicksilver|swamp|fire|ice|pearl|storm|shadow|gold)/
+      var reA = / (animal skin|robe|leather armour|ring mail|scale mail|chain mail|plate armour|crystal plate|troll leather|steam dragon|acid dragon|quicksilver dragon|swamp dragon|fire dragon|ice dragon|pearl dragon|storm dragon|shadow dragon|gold dragon)/
       if (reA.test(temp0)) {
-        armour = reA.exec(temp0)[0]
-        return armour_types[armour]
+        armour = reA.exec(temp0)[1]
+      } else {
+        armour = "no armour"
+
       }
+      return armour_types[armour]
     }
   }
   parseShield = function (txt) {
@@ -334,11 +338,11 @@ export class CfParserService {
       var temp0 = re0.exec(txt)[0];
 
       var shield = "no shield"
-      var reA = /(?:buckler|large shield|shield)/
+      var reA = / (buckler|large shield|shield)/
       if (reA.test(temp0)) {
-        shield = reA.exec(temp0)[0]
-        return armour_types[shield]
-      }
+        shield = reA.exec(temp0)[1]
+      } 
+     return armour_types[shield]
     }
 
   }
