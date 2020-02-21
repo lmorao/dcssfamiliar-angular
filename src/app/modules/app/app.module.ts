@@ -17,6 +17,7 @@ import { AppComponent } from './app.component';
 //import { WeaponDamageComponent } from '../attack-damage/components/weapon-damage/weapon-damage.component';
 import { AttackDamageModule } from '../attack-damage/attack-damage.module';
 import { SpellDamageModule } from '../spell-damage/spell-damage.module';
+import { EvocationsModule } from '../evocations/evocations.module';
 import { ProfileComponent } from '../profile/profile.component'
 import { SkillsMenuComponent } from '../skills-menu/skills-menu.component'
 import { InfoComponent } from '../info/info.component'
@@ -52,6 +53,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     AttackDamageModule,
     SpellDamageModule,
     NgbModule,
+    EvocationsModule,
 
 
   ],

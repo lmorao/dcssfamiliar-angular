@@ -26,8 +26,8 @@ export class SkillsMenuComponent implements OnInit {
   s_spells_temp = [ "necromancy"]
   wt = weapon_types
   selectedSkill = "unarmed"
-  lessb = function (skill) {if (this.s_melee[skill]['level'] >0) {this.s_melee[skill]['level'] -=1}; this.skillsService.updateSkills(this.s_melee)}
-  moreb = function (skill) {if (this.s_melee[skill]['level'] <27) {this.s_melee[skill]['level'] +=1}; this.skillsService.updateSkills(this.s_melee)}
+  lessb = function (skill) {if (this.s_melee[skill]['level'] >0) {this.s_melee[skill]['level'] = Math.floor(this.s_melee[skill]['level']-1) }; this.skillsService.updateSkills(this.s_melee)}
+  moreb = function (skill) {if (this.s_melee[skill]['level'] <27) {this.s_melee[skill]['level'] = Math.floor(this.s_melee[skill]['level'] + 1)}; this.skillsService.updateSkills(this.s_melee)}
 
   s_ranged = {
     bows:0,

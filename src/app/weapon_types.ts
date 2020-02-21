@@ -140,24 +140,24 @@ export const armour_types = {
 
 "no shield" : {name: "no shield",armour: 0, encumbrance: 0, img: "../../../player/base/lorc_f6"},
 "buckler" : {name: "buckler",armour: 3, encumbrance: -8 , img: "buckler2"},
-"shield" : {name: "shield",armour: 8, encumbrance: -30, img: "shield2"} ,
-"large shield" : {name: "large shield",amour: 13, encumbrance: -50, img: "large_shield2"},
+"shield" : {name: "shield",armour: 8, encumbrance: -30, img: "kite_shield2"} ,
+"large shield" : {name: "large shield",amour: 13, encumbrance: -50, img: "tower_shield2"},
 
 // Following all ARM_ entries for the benefit of util/gather_items
-"steam": {name: "steam", armour: 5, encumbrance:   0, img: "silver_dragon_scale_mail"},
-"acid": {name: "acid", armour: 6, encumbrance:  -50, img: "acid_dragon_armour"},
-"quicksilver": { name: "quicksilver", armour: 9, encumbrance:  -70, img: "quicksilver_dragon_scale_mail"},
-"swamp": { name: "swamp", armour: 7, encumbrance:  -70, img: "swamp_dragon_armour"},
-"fire": { name: "fire", armour: 8, encumbrance: -110, img: "red_dragon_scale_mail"},
-"ice": { name: "ice", armour: 9, encumbrance: -110, img: "ice_dragon_armour"},
-"pearl": { name: "pearl", armour: 10, encumbrance: -110, img: "pearl_dragon_armour"},
-"storm": { name: "storm", armour: 10, encumbrance: -150, img: "blue_dragon_scale_mail"},
-"shadow": { name: "shadow", armour: 10, encumbrance: -150, img: "shadow_dragon_scale_mail"},
-"gold": { name: "gold", armour: 12, encumbrance: -230, img: "gold_dragon_armour"},
+"steam dragon": {name: "steam dragon", armour: 5, encumbrance:   0, img: "silver_dragon_scale_mail"},
+"acid dragon": {name: "acid dragon", armour: 6, encumbrance:  -50, img: "acid_dragon_armour"},
+"quicksilver dragon": { name: "quicksilver dragon", armour: 9, encumbrance:  -70, img: "quicksilver_dragon_scale_mail"},
+"swamp dragon": { name: "swamp dragon", armour: 7, encumbrance:  -70, img: "swamp_dragon_armour"},
+"fire dragon": { name: "fire dragon", armour: 8, encumbrance: -110, img: "red_dragon_scale_mail"},
+"ice dragon": { name: "ice dragon", armour: 9, encumbrance: -110, img: "ice_dragon_armour"},
+"pearl dragon": { name: "pearl dragon", armour: 10, encumbrance: -110, img: "pearl_dragon_armour"},
+"storm dragon": { name: "storm dragon", armour: 10, encumbrance: -150, img: "blue_dragon_scale_mail"},
+"shadow dragon": { name: "shadow dragon", armour: 10, encumbrance: -150, img: "shadow_dragon_scale_mail"},
+"gold dragon": { name: "gold dragon", armour: 12, encumbrance: -230, img: "gold_dragon_armour"},
 
 }
 export const armour_types_list  = [ "animal skin", "robe","leather armour", "ring mail", "scale mail", "chain mail",
 "plate armour", "crystal plate", "troll leather"]
-export const armour_types_list_dragon  = ["steam", "acid", "quicksilver","swamp", "fire", "ice", "pearl",
-"storm", "shadow", "gold"]
+export const armour_types_list_dragon  = ["steam dragon", "acid dragon", "quicksilver dragon","swamp dragon", "fire dragon", "ice dragon", "pearl dragon",
+"storm dragon", "shadow dragon", "gold dragon"]
 export const shield_types_list  = [ "buckler", "shield", "large shield"]

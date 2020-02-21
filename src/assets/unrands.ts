@@ -5,7 +5,7 @@ export const unrands = [
      {title: "captain's cutlass" , hint: "captain" ,category: "rapier", "slaying":"+7", brand: "speed"},
     //Gyre Nimble
     
-     {title: "Singing Sword" , hint: "Singing" ,category: "double sword", "slaying":"+7", brand: "slicing"},
+     {title: "Singing Sword" , hint: "Singing" ,category: "double sword", "slaying":"+7", brand: "vorpal"},
 
      {title: "Arga" , hint: "Arga" ,category: "broad axe", "slaying":"+8", brand: "speed", img: "artefact/unrand_arga.png"},
      {title: "obsidian axe" , hint: "bsidian" ,category: "broad axe", "slaying":"+14", brand: "chopping"},

@@ -14,6 +14,7 @@ import { encumbrance_penalty, adjusted_shield_penalty } from 'src/app/skill_func
   styleUrls: ['./spell-list.component.scss']
 })
 export class SpellListComponent implements OnInit {
+  toggle = 0
   skills = new Skills()
   profile = new Character()
   armour_penalty = 0
@@ -219,6 +220,30 @@ export class SpellListComponent implements OnInit {
     var res =  ""
       res +=  spell.ndice + "d(" + this.calcdice(spell,spell.pdice) + " + " + '<font color:"red">' + this.power(spell,true,false,true) + '</font>' + "*" + this.calcdice(spell,spell.mdice/spell.ddice)
     return res
+  }
+  target_ev = 10
+  hitchance = function (spellhit,enemyev) {
+    var hit = 0
+    var miss = 0
+    for (var i=1;i<=spellhit;i++) {
+      for (var j=1;j<=enemyev;j++) {
+        for (var k=1;k <= j-1;k++) {
+          for (var l=1;l<=j-1;l++) {
+            if (Math.floor((k + l)/2)-1 <= i-1) {
+              hit++
+             } else {
+               miss ++
+             }
+
+          }
+        }
+
+      }
+    }
+    console.log("hit "+hit)
+    return hit/(hit+miss)*100
+
+
   }
 
   targetSpell = function () {}

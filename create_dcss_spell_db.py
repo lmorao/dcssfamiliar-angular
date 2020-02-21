@@ -1,9 +1,9 @@
 
 fixdict = {
-"SPELL_CAUSE_FEAR"               : [1,0,1,1],
-"SPELL_FIREBALL"                 : [1,0,1,1],
+"SPELL_CAUSE_FEAR"               : [1,0,1,1,"false", "Power multiplier of 3/2. Then it checks against the magic-resist of the target"],
+"SPELL_FIREBALL"                 : [1,0,1,1, "true", "Always hits as an explosion"],
 "SPELL_APPORTATION"              : [1,0,1,1],
-"SPELL_CONJURE_FLAME"            : [1,0,1,1],
+"SPELL_CONJURE_FLAME"            : [6,3.66,0,1, 'false', "Cloud damage is not dependent on power."],
 "SPELL_LIGHTNING_BOLT"           : [1,0,1,1],
 "SPELL_BOLT_OF_MAGMA"            : [1,0,1,1],
 "SPELL_SLOW"                     : [1,0,1,1],
@@ -12,25 +12,25 @@ fixdict = {
 "SPELL_DISJUNCTION"              : [1,0,1,1],
 "SPELL_FREEZING_CLOUD"           : [6,3.66,0,1, 'false', "Any freezing cloud damage per turn to a monster is the same. Power doesn't affect damage"],
 "SPELL_MEPHITIC_CLOUD"           : [1,0,1,1],
-"SPELL_RING_OF_FLAMES"           : [1,0,1,1],
+"SPELL_RING_OF_FLAMES"           : [6,3.66,0,1, 'false', "Cloud damage is not dependent on power. The power will determine the duration, formula is 6 + (power/10) + random(0,power)/5 so about 25 turns for 100 power. The maximum duration is 50 turns."],
 "SPELL_OLGREBS_TOXIC_RADIANCE"   : [1,0,1,1],
 "SPELL_TELEPORT_OTHER"           : [1,0,1,1],
 "SPELL_DEATHS_DOOR"              : [1,0,1,1],
 "SPELL_SUMMON_SMALL_MAMMAL"      : [1,0,1,1],
 "SPELL_AURA_OF_ABJURATION"       : [1,0,1,1],
-"SPELL_LEHUDIBS_CRYSTAL_SPEAR"   : [1,0,1,1],
-"SPELL_TORNADO"                  : [1,0,1,1],
-"SPELL_FIRE_STORM"               : [1,0,1,1],
+"SPELL_LEHUDIBS_CRYSTAL_SPEAR"   : [10,23,1,1, 'true'],
+"SPELL_TORNADO"                  : [9,0,1,15, 'false', "Damage depends on open spaces, distance from the targets and the duration left. The further away, and the longer its been active, the more confined space, the less damage it does. The damage is reduced by armour"],
+"SPELL_FIRE_STORM"               : [8,5,1,1, 'true', "This is a BEAM_LAVA, which means it bypasses some of the rF. This also generates clouds of fire that have a fixed damage, and the vortexes"],
 "SPELL_BLINK"                    : [1,0,1,1],
-"SPELL_ISKENDERUNS_MYSTIC_BLAST" : [1,0,1,1],
+"SPELL_ISKENDERUNS_MYSTIC_BLAST" : [2,6,1,3, 'true'],
 "SPELL_SUMMON_HORRIBLE_THINGS"   : [1,0,1,1],
 "SPELL_MALIGN_GATEWAY"           : [1,0,1,1],
 "SPELL_ANIMATE_DEAD"             : [1,0,1,1],
 "SPELL_ANIMATE_SKELETON"         : [1,0,1,1],
-"SPELL_VAMPIRIC_DRAINING"        : [1,0,1,1],
-"SPELL_HAUNT"                    : [1,0,1,1],
+"SPELL_VAMPIRIC_DRAINING"        : [1,7.5,1,2, "false", "Can only drain if the target doesn't have negative resistance (rN). The spell can't drain more than the target's hp. The formula is approximated"],
+"SPELL_HAUNT"                    : [1,0,1,1, "false", "Total summoned: 2*log2(1+ (random(pow)/10 + random(pow)/10)/2), so about 5-6 summons at 100 power"],
 "SPELL_BORGNJORS_REVIVIFICATION" : [1,0,1,1],
-"SPELL_FREEZE"                   : [1,0,1,1],
+"SPELL_FREEZE"                   : [1,3,1,3, 'false', "Ignores AC and EV"],
 "SPELL_SUMMON_ICE_BEAST"         : [3,0,1,13,'false',  "Number presented is the summoned beast's HD (ingore the avg dmg). The beasts hit damage will be 5 + Cold(HD + 1dice(HD*2) - 1), think of it as 5 + 2*HD cold"],
 "SPELL_OZOCUBUS_ARMOUR"          : [1,0,1,1],
 "SPELL_CALL_IMP"                 : [1,0,1,1],
@@ -54,7 +54,7 @@ fixdict = {
 "SPELL_NECROMUTATION"            : [1,0,1,1],
 "SPELL_DEATH_CHANNEL"            : [1,0,1,1],
 "SPELL_DEFLECT_MISSILES"         : [1,0,1,1],
-"SPELL_AIRSTRIKE"                : [1,0,1,1],
+"SPELL_AIRSTRIKE"                : [5,2,1,7, "true", "Damage: 8 + empty_space + random(2+power/7). empty_space only starts counting after 3 spaces, so if there are 8 spaces around the target it adds 5 damage. It does extra damage to flying. The damage is reduced by armour."],
 "SPELL_SHADOW_CREATURES"         : [1,0,1,1],
 "SPELL_CONFUSING_TOUCH"          : [1,0,1,1],
 "SPELL_PASSWALL"                 : [1,0,1,1],
@@ -69,7 +69,7 @@ fixdict = {
 "SPELL_DISCHARGE"                : [1,0,1,1],
 "SPELL_CORONA"                   : [1,0,1,1],
 "SPELL_INTOXICATE"               : [1,0,1,1],
-"SPELL_LRD"                      : [1,0,1,1],
+"SPELL_LRD"                      : [3,5,1,5, "false", "The damage is an explosion reduced by armour. If cast directly on a monster it will do the damage without ac reduction + the normal explosion as if it was from a wall. It will do a third more for certain targets like bone, iron, etc."],
 "SPELL_SIMULACRUM"               : [1,0,1,1],
 "SPELL_CONJURE_BALL_LIGHTNING"   : [1,0,1,1],
 "SPELL_CHAIN_LIGHTNING"          : [1,0,1,1],
@@ -78,7 +78,7 @@ fixdict = {
 "SPELL_MONSTROUS_MENAGERIE"      : [1,0,1,1],
 "SPELL_GOLUBRIAS_PASSAGE"        : [1,0,1,1],
 "SPELL_FULMINANT_PRISM"          : [1,0,1,1],
-"SPELL_IOOD"                     : [1,0,1,1],
+"SPELL_IOOD"                     : [9,0,1,4, "false", "Less damage if less than 4, 50% power at 1 space, 70% at 2 and 90% at 3."],
 "SPELL_LEDAS_LIQUEFACTION"       : [1,0,1,1],
 "SPELL_SUMMON_HYDRA"             : [1,0,1,1],
 "SPELL_DARKNESS"                 : [1,0,1,1],
@@ -105,7 +105,7 @@ fixdict = {
 "SPELL_INFESTATION"              : [1,0,1,1],
 "SPELL_BECKONING"                : [1,0,1,1],
 "SPELL_POISONOUS_VAPOURS"        : [1,0,1,1],
-"SPELL_IGNITION"                 : [1,0,1,1],
+"SPELL_IGNITION"                 : [3,10,1,3, "true", "shoots a beam_fire and is an explosion that will always hit"],
 "SPELL_STARBURST"                : [6,18,2,3, 'true', "Fires a bolt of fire in 8 directions, damage displayed is from bolt of fire."],
 "SPELL_FOXFIRE"                  : [1,3,1,3],
 "SPELL_HAILSTORM"                : [3,10,1,2, 'true', "Casts in a circle around the caster 2 spaces away, each tile damage calculated separetely"],
@@ -188,6 +188,25 @@ for spell in spells[2:]:
         zapd[db]['calcdice'] = 'true'
     else:
         zapd[db]['calcdice'] = 'false'
+
+    zapd[db]['hitp'] = 0
+    zapd[db]['hitm'] = 0
+    zapd[db]['hitd'] = 1
+    m = re.search("tohit_calculator<(\d+), (\d+), (\d+)>",s[4])
+    if m:
+        zapd[db]['hitp'] = m.group(1)
+        zapd[db]['hitm'] = m.group(2)
+        zapd[db]['hitd'] = m.group(3)
+    m = re.search("tohit_calculator<(\d+)>",s[4])
+    if m:
+        zapd[db]['hitp'] = m.group(1)
+        zapd[db]['hitm'] = 0
+        zapd[db]['hitd'] = 1
+    m = re.search("tohit_calculator<AUTOMATIC_HIT>",s[4])
+    if m:
+        zapd[db]['hitp'] = 100
+        zapd[db]['hitm'] = 0
+        zapd[db]['hitd'] = 1
     
 
 
@@ -246,6 +265,12 @@ for spell in spells:
         d = zapd[find_zap(db)]['ddice']
         calcdice  = zapd[find_zap(db)]['calcdice']
         notes = ""
+        if db in fixdict:
+            if len(t2) >5:
+                notes = t2[5]
+        hitp = zapd[find_zap(db)]['hitp']
+        hitm = zapd[find_zap(db)]['hitm']
+        hitd = zapd[find_zap(db)]['hitd']
     else:
         calcdice  = 'false' 
         notes = ""
@@ -255,6 +280,9 @@ for spell in spells:
             p = t2[1]
             m = t2[2]
             d = t2[3]
+            hitp = 0
+            hitm = 0
+            hitd = 1
             if len(t2) >4:
                 calcdice = t2[4]
             if len(t2) >5:
@@ -262,12 +290,15 @@ for spell in spells:
         else:
             n=m=d = 1
             p = 0
+            hitp = 0
+            hitm = 0
+            hitd = 1
     if db in img_d:
         img = qu(img_d[db])
     else: 
         img = qu("")
-    temp = """{}: {{db: {}, display: {}, type1: {}, type2: {}, type3: {}, flags: {}, level: {}, power: {}, rini: {}, rmax: {}, noise: {}, noise_e: {}, img: {}, ndice: {}, pdice: {}, mdice: {}, ddice: {}, calcdice: {}, notes: {}}},"""\
-    .format(qu(db),qu(db),display,qu(type1),qu(type2),qu(type3),qu(flags),level,power,rini,rmax,no,noe, img, n, p, m, d, calcdice, qu(notes))
+    temp = """{}: {{db: {}, display: {}, type1: {}, type2: {}, type3: {}, flags: {}, level: {}, power: {}, rini: {}, rmax: {}, noise: {}, noise_e: {}, img: {}, ndice: {}, pdice: {}, mdice: {}, ddice: {}, calcdice: {}, hitp: {}, hitm: {}, hitd : {}, notes: {}}},"""\
+    .format(qu(db),qu(db),display,qu(type1),qu(type2),qu(type3),qu(flags),level,power,rini,rmax,no,noe, img, n, p, m, d, calcdice, hitp, hitm, hitd, qu(notes))
     if n ==1 and p ==0 and m ==1 and n ==1:
         fixlist.append(db)
     print(temp)

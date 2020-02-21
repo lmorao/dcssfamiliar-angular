@@ -1,7 +1,7 @@
 <div class="panel">
   <span>
     <div class=panel-title>
-      <p>Spell List <font color='grey'> some spell dmg missing</font></p>
+      <p>Spell List</p>
     </div>
   </span>
 
@@ -12,7 +12,8 @@
         <span class="left"> Name  </span>
         <span class="left"> Power  </span>
         <span class="left" [ngbTooltip]="AvgDmg" placement="right"> Avg Dmg</span>
-        <span class="left" [ngbTooltip]="MaxDmg" placement="right"> Max Dmg </span>
+        <span class="left" [ngbTooltip]="AvgDmg" placement="right"> Hit</span>
+        <span *ngIf='toggle==1' class="left" [ngbTooltip]="MaxDmg" placement="right"> Max Dmg </span>
         <span class="left"> Fail </span>
         <span class="left"> Level </span>
         <span class="left"> School </span>
@@ -30,9 +31,9 @@
         <span>
         <font class=attr>Power:</font> {{power(spell, true,false,true)| number:'1.0-0'}}/{{spell.power}} 
         <br>
-        <font class=attr>Avg Damage:</font> ({{spell.ndice}} +  <font color="yellow">{{max_spell_dam_dice(spell, power(spell,true,false,true))|number:'1.0-2'}}</font>)/2
+        <font class=attr>Avg Damage Roll:</font> ({{spell.ndice}} +  <font color="yellow">{{max_spell_dam_dice(spell, power(spell,true,false,true))|number:'1.0-2'}}</font>)/2
         <br>
-        <font class=attr>Max Damage:</font> {{spell.ndice}}d({{calcdice(spell,spell.pdice)|number:'1.0-2'}} + <font color="yellow">{{power(spell,true,false,true)}} </font>*{{calcdice(spell,spell.mdice/spell.ddice)|number:'1.0-2'}})
+        <font class=attr>Max Damage Roll:</font> {{spell.ndice}}d({{calcdice(spell,spell.pdice)|number:'1.0-2'}} + <font color="yellow">{{power(spell,true,false,true)}} </font>*{{calcdice(spell,spell.mdice/spell.ddice)|number:'1.0-2'}})
         <br>
 </span>
         <span *ngIf="spell.notes != ''">
@@ -50,35 +51,53 @@
         <span class="left"> {{power(spell, true,false,true)| number:'1.0-0'}}/{{spell.power}}  </span>
 
 
-        <span class= "left" > 
+        <span class="left">
           <span *ngIf="spell.ndice==1 && spell.ddice==1 && spell.mdice==1; then thenBlock1 else elseBlock1"> </span>
-          <ng-template #elseBlock1 >
-            <span >
-            {{ (spell.ndice + max_spell_dam_dice(spell, power(spell,true,false,true)) )/2| number:'1.0-0'}} 
+          <ng-template #elseBlock1>
+            <span>
+              {{ (spell.ndice + max_spell_dam_dice(spell, power(spell,true,false,true)) )/2| number:'1.0-0'}}
             </span>
+            <span *ngIf="spell.notes != ''">(*)</span>
           </ng-template>
           <ng-template #thenBlock1>
-            <span >
-            -
+            <span>
+              -
             </span>
           </ng-template>
         </span>
-        <span class= "left" > 
+        <span class="left">
+          <span *ngIf="spell.hitd==1 && spell.hitm==0 && spell.hitp==0; then thenBlock3 else elseBlock3"> </span>
+          <ng-template #elseBlock3>
+            <span>
+              {{ hitchance(spell.hitp+power(spell,true,false,true)*spell.hitm/spell.hitd, 15)| number:'1.0-0'}}
+            </span>
+            <span *ngIf="spell.notes != ''">(*)</span>
+          </ng-template>
+          <ng-template #thenBlock3>
+            <span>
+              100%
+            </span>
+          </ng-template>
+        </span>
+
+
+
+
+        <!--
+        <span *ngIf='toggle==1' class="left">
           <span *ngIf="spell.ndice==1 && spell.ddice==1 && spell.mdice==1; then thenBlock2 else elseBlock2"> </span>
-
-          <ng-template #elseBlock2 >
-        <span > 
-          {{max_spell_dam_dice(spell, power(spell,true,false,true)) | number:'1.0-0'}} 
-        </span>
-        <span *ngIf="spell.notes != ''" >(*)</span>
+          <ng-template #elseBlock2>
+            <span>
+              {{max_spell_dam_dice(spell, power(spell,true,false,true)) | number:'1.0-0'}}
+            </span>
           </ng-template>
-          <ng-template #thenBlock2 >
-            <span >
-            -
+          <ng-template #thenBlock2>
+            <span>
+              -
             </span>
           </ng-template>
         </span>
-
+        -->
 
         <span class="left"> {{fail(spell)| number:'1.0-0'}}&#8202;% </span>
         <span class="left"> {{spell.level}} </span>
@@ -92,13 +111,15 @@
 
 <!-- Tooltips-->
 <ng-template #AvgDmg>
-  <div class=panel style="width:300px">
+  <div class=panel style="width:340px">
+    Average damage with the current spell power.
   Formula: (number_of_dice + <font color="yellow">Max_dice_roll_with_current_power</font>)/2
   </div>
 </ng-template>
 
 <ng-template #MaxDmg>
-  <div class=panel style="width:300px">
+  <div class=panel style="width:340px">
+  Max damage roll with the current spell power.
   Formula: n*d(a/n+ <font color="yellow">pow</font>*m/d/n)
   </div>
 </ng-template>
