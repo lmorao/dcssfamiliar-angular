@@ -114,8 +114,9 @@ export class WeaponDamageComponent implements OnInit {
         this.brand_damage = 
         this.damage_per_turn(this.skills['necromancy']['level']/2, this.calc_w_speed(weapon))}
       if (weapon.brand =="electrocution") {
+        console.log( this.dice_exp(13))
         this.brand_damage =  
-        this.damage_per_turn(0.33 * (7 + this.dice_exp(13)),this.calc_w_speed(weapon) )}
+        this.damage_per_turn(0.33 * (8 + this.dice_exp(13)),this.calc_w_speed(weapon) )}
       if (weapon.brand =="distortion") {
         this.brand_damage = 
         this.damage_per_turn(0.33*(1+7)/2+0.22*14.5, this.calc_w_speed(weapon))
