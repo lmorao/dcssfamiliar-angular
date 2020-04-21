@@ -2,7 +2,15 @@
 <div class="panel" >
   <div >
   <div class="title-box2 panel-title" >
-    Hand Weapons
+    <span>Hand Weapons</span>
+    <span><!--New search-->
+      <div class="input-group mb-3">
+        <input type="text" class="form-control" placeholder="Search weapon" aria-label="Search weapon" aria-describedby="button-addon2"> <!--How do I get the variable content into the ts?-->
+        <div class="input-group-append">
+          <button class="btn btn-outline-secondary" type="button" id="button-addon2" onclick="">Add</button>
+        </div>
+      </div>
+    </span><!--End search-->
   </div>
   <mat-list style="overflow:auto; height:360px">
     <mat-list-item *ngFor="let weapon of weapons ; let i = index" (click)="selectWeapon(weapon)">

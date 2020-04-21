@@ -3,6 +3,7 @@ import { Weapon } from '../../../../shared/models/weapon.model'
 import { SelectedWeaponService } from '../../../../core/services/selected-weapon.service'
 import { WeaponListService } from '../../../../core/services/weapon-list.service'
 import {  brand_color } from '../../../../weapon_types'
+import { WeaponListDB } from '../../../../weapon_types'
 
 @Component({
   selector: 'weapon-list',
@@ -23,6 +24,14 @@ export class WeaponListComponent implements OnInit {
     return brand_color(brand)
 
   }
+
+  
+  getWeapon = function(weapon) {
+    return WeaponListDB.prototype.getWeapon(weapon);
+  }
+  searchedWeapon = {
+    name: this.getWeapon(search)[name], slaying: "+0", brand: ""
+  };
 
   selectWeapon (weapon) {
     this.selectedWeaponService.selectWeapon(weapon)

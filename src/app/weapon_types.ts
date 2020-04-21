@@ -1,3 +1,15 @@
+import { OnChange } from '@angular/core';
+
+export class WeaponListDB implements OnChange {
+  getWeapon (weapon) {
+    //let regie = RegExp ( "/\"([A-Z]*)\"\w+" );
+    let regie = RegExp ( "*" );
+    if ( regie.test(weapon_types[weapon]) ) {
+       return weapon_types[weapon];
+    }
+  }
+}
+
 export const weapon_types = {
    "unarmed": {'category': "unarmed", "name": 'unarmed', 'damage': '3', 'hit':'+6', 'speed': {base: 10, min: 5},'ohms':'little', 'thms':'little','damage_type':"piercing", 'prob':''},
 
