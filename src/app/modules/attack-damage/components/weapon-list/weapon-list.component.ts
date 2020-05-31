@@ -24,14 +24,18 @@ export class WeaponListComponent implements OnInit {
 
   brands = brands
   pluses = ['-4','-3','-2','-1','+0','+1','+2','+3','+4','+5','+6','+7','+8','+9']
-  searchResults = Object.keys(weapon_types)
+  searchResults = Object.keys(weapon_types).slice(1)
 
   weapons = [
     {name: 'unarmed', slaying:"+0", brand:""},
   ];
   addWeaponToList = function () {
-    if (this.selectedBrand != "Brand" && this.weaponSearched != "Weapon" && this.searchedSlaying != "Plus") {
-      this.weapons.splice(1,0,{name: this.weaponSearched, slaying:this.searchedSlaying, brand:this.selectedBrand, img: weapon_image(this.weaponSearched, this.selectedBrand)})
+    var brand = this.selectedBrand
+    var slaying = this.searchedSlaying
+    var weapon = this.weaponSearched
+    if (brand != "Brand" && weapon != "Weapon" && slaying != "Plus") {
+      if (brand == "None") {brand = ""}
+      this.weapons.splice(1,0,{name: weapon, slaying:slaying, brand:brand, img: weapon_image(weapon, brand)})
     }
   }
 
@@ -77,6 +81,7 @@ export class WeaponListComponent implements OnInit {
   selectSearchWeapon = function (weapon) {
     this.weaponSearched = weapon
     this.searchResults = Object.keys(weapon_types)
+    if (weapon.match(/trishula|eudemon|sacred/)) {this.selectedBrand = "holy wrath"}
   }
   selectSearchedSlaying = function (plus) {
     this.searchedSlaying = plus

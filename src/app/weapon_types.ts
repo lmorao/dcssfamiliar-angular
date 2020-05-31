@@ -203,7 +203,7 @@ export function weapon_image (weapon_name,maBrand,randart=false) {
     }
   }
   if (maBrand != "") {
-    if (/(?:trishula|sacred scourge|blessed blade)/.test(weapon_name)) {
+    if (/(?:trishula|sacred scourge|blessed blade|eudemon blade)/.test(weapon_name)) {
      img = weapon_types[weapon_name]['img'] + ".png" 
     } else {
 
