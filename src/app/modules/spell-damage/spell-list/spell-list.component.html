@@ -12,7 +12,9 @@
         <span class="left"> Name  </span>
         <span class="left"> Power  </span>
         <span class="left" [ngbTooltip]="AvgDmg" placement="right"> Avg Dmg</span>
+        <!--
         <span class="left" [ngbTooltip]="AvgDmg" placement="right"> Hit</span>
+        -->
         <span *ngIf='toggle==1' class="left" [ngbTooltip]="MaxDmg" placement="right"> Max Dmg </span>
         <span class="left"> Fail </span>
         <span class="left"> Level </span>
@@ -65,6 +67,7 @@
             </span>
           </ng-template>
         </span>
+        <!--
         <span class="left">
           <span *ngIf="spell.hitd==1 && spell.hitm==0 && spell.hitp==0; then thenBlock3 else elseBlock3"> </span>
           <ng-template #elseBlock3>
@@ -79,6 +82,7 @@
             </span>
           </ng-template>
         </span>
+        -->
 
 
 
