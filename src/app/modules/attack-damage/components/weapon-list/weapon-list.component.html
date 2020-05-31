@@ -1,35 +1,104 @@
 
 <div class="panel" >
-  <div >
-  <div class="title-box2 panel-title" >
-    <span>Hand Weapons</span>
-    <span><!--New search-->
-      <div class="input-group mb-3">
-        <input type="text" class="form-control" placeholder="Search weapon" aria-label="Search weapon" aria-describedby="button-addon2"> <!--How do I get the variable content into the ts?-->
-        <div class="input-group-append">
-          <button class="btn btn-outline-secondary" type="button" id="button-addon2" onclick="">Add</button>
-        </div>
-      </div>
-    </span><!--End search-->
-  </div>
-  <mat-list style="overflow:auto; height:360px">
-    <mat-list-item *ngFor="let weapon of weapons ; let i = index" (click)="selectWeapon(weapon)">
-        <img *ngIf='weapon.name != "unarmed"'  src="https://raw.githubusercontent.com/crawl/crawl/master/crawl-ref/source/rltiles/item/weapon/{{weapon.img}}">
-        <img *ngIf='weapon.name == "unarmed"' filter="opacity(50%)" src="https://raw.githubusercontent.com/crawl/crawl/master/crawl-ref/source/rltiles/gui/skills/unarmed_combat.png">
-        <span style="padding-left:8px"
-        [ngClass]="{  'selected' : weapon.name==selectedWeapon.name && weapon.slaying==selectedWeapon.slaying && weapon.brand==selectedWeapon.brand}"> 
-          <span *ngIf="weapon.name != 'unarmed'" 
 
-        [ngClass]="{  'selected' : weapon.name==selectedWeapon.name && weapon.slaying==selectedWeapon.slaying && weapon.brand==selectedWeapon.brand}"> 
-            a {{weapon.slaying}}
-          </span> 
-          {{weapon.name}}
-          </span> 
-        <span *ngIf="weapon.brand" 
-        [ngStyle]="{'color': brand_color(weapon.brand) }">
-        &nbsp;({{weapon.brand|slice:0:7}})
-        </span>
-    </mat-list-item>
-  </mat-list>
-</div>
+  <div class="title-box2 panel-title" style="height:45px">
+    <div class="row">
+    <div class="col">
+      <div style="float:left;">
+        Hand Weapons
+      </div>
+      <div style="float:right;color:greenyellow;padding-right:15px;cursor:pointer" (click)="showAdd=!showAdd">
+        <font *ngIf="!showAdd" style="font-size: 22px;">&#x2295;</font>
+        <font *ngIf="showAdd" style="font-size: 22px;">&#x2296;</font>
+        Add Weapon
+      </div>
+    </div>
+    </div>
+  </div>
+
+    <div *ngIf="showAdd">
+        <div style="padding-left:15px;">
+          <div >
+            Add a weapon to the list
+          </div>
+          <br>
+          <div ngbDropdown class="d-inline-block">
+            <button class="btn btn-outline-primary" id="dropdownBasic2" ngbDropdownToggle
+            style="width:100px" > 
+              {{weaponSearched|slice:0:7}} 
+            </button>
+            <div ngbDropdownMenu aria-labelledby="dropdownBasic2" class=panel 
+            [ngStyle]="{'height':searchResults.length * 32 + 52 + 'px'}"
+            >
+                <div style='padding-left:5px;padding-right:5px'>
+                <input [(ngModel)]="searchWeaponInput"
+                name="searchInput"
+                (keyup)="calculateResults()" type="text" 
+                placeholder="Search weapon" aria-label="Search weapon">
+                </div>
+
+                <button *ngFor="let weaponSearch of searchResults" ngbDropdownItem
+                (click)="selectSearchWeapon(weaponSearch)"
+                >
+                <font style="color:greenyellow">{{weaponSearch}}</font></button>
+            </div>
+          </div>
+
+          <div ngbDropdown class="d-inline-block">
+            <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle
+            style="width:100px" >
+              <font [ngStyle]="{'color': brand_color(selectedBrand) }" >{{selectedBrand|slice:0:7}}</font>
+            </button>
+            <div ngbDropdownMenu aria-labelledby="dropdownBasic1" class=panel style="height:340px">
+              <button *ngFor="let brand of brands" ngbDropdownItem
+              (click)="selectBrand(brand)"
+              >
+                <font [ngStyle]="{'color': brand_color(brand) }" >{{brand}}</font></button>
+            </div>
+          </div>
+
+          <div ngbDropdown class="d-inline-block">
+            <button class="btn btn-outline-primary" id="dropdownBasic3" ngbDropdownToggle
+            style="width:75px"
+            >
+              {{searchedSlaying|slice:0:7}}
+            </button>
+            <div ngbDropdownMenu aria-labelledby="dropdownBasic3" class=panel
+            [ngStyle]="{'height':pluses.length * 33 + 'px'}"
+            >
+              <button *ngFor="let plus of pluses" ngbDropdownItem (click)="selectSearchedSlaying(plus)" > 
+                <font style="color:greenyellow">{{plus}}</font>
+              </button>
+            </div>
+          </div>
+          <div class="d-inline-block">
+            <button class="btn btn-outline-success" (click)="addWeaponToList()">
+              Add
+            </button>
+          </div>
+        
+        </div>
+
+    </div>
+  <div>
+    <mat-list style="overflow:auto; height:360px">
+      <mat-list-item *ngFor="let weapon of weapons ; let i = index" (click)="selectWeapon(weapon)">
+          <img *ngIf='weapon.name != "unarmed"'  src="https://raw.githubusercontent.com/crawl/crawl/master/crawl-ref/source/rltiles/item/weapon/{{weapon.img}}">
+          <img *ngIf='weapon.name == "unarmed"' filter="opacity(50%)" src="https://raw.githubusercontent.com/crawl/crawl/master/crawl-ref/source/rltiles/gui/skills/unarmed_combat.png">
+          <span style="padding-left:8px"
+          [ngClass]="{  'selected' : weapon.name==selectedWeapon.name && weapon.slaying==selectedWeapon.slaying && weapon.brand==selectedWeapon.brand}"> 
+            <span *ngIf="weapon.name != 'unarmed'" 
+
+          [ngClass]="{  'selected' : weapon.name==selectedWeapon.name && weapon.slaying==selectedWeapon.slaying && weapon.brand==selectedWeapon.brand}"> 
+              a {{weapon.slaying}}
+            </span> 
+            {{weapon.name}}
+            </span> 
+          <span *ngIf="weapon.brand" 
+          [ngStyle]="{'color': brand_color(weapon.brand) }">
+          &nbsp;({{weapon.brand|slice:0:7}})
+          </span>
+      </mat-list-item>
+    </mat-list>
+  </div>
 </div>
