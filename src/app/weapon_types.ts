@@ -1,3 +1,29 @@
+import { OnChanges } from '@angular/core';
+
+/*
+export class WeaponListDB implements OnChanges {
+  getWeapon (weapon) {
+    //let regie = RegExp ( "/\"([A-Z]*)\"\w+" );
+    let regie = RegExp ( "*" );
+    if ( regie.test(weapon_types[weapon]) ) {
+       return weapon_types[weapon];
+    }
+  }
+}
+*/
+export function weapon_types_string () {
+  // Returns a string with all weapon types separated by a comma
+  var result = ""
+  var keys = Object.keys(weapon_types)
+  for (var i = 0; i <=keys.length;i++){
+    result += keys[i]
+    result += ','
+
+  }
+  return result
+
+}
+
 export const weapon_types = {
    "unarmed": {'category': "unarmed", "name": 'unarmed', 'damage': '3', 'hit':'+6', 'speed': {base: 10, min: 5},'ohms':'little', 'thms':'little','damage_type':"piercing", 'prob':''},
 
@@ -85,6 +111,9 @@ export const colors = {
   "blue light to replacement": "#00b8e6",
 }
 
+export const brands = ['None','flaming','freezing','holy wrath','electrocution','pain','distortion','speed','protection','draining']
+
+
 export function brand_color (brand) {
   switch (brand) {
     case "flaming":
@@ -107,6 +136,8 @@ export function brand_color (brand) {
       return "brown";
     case "draining":
       return "purple";
+    case "None":
+      return "white";
     case "":
       return "";
 
@@ -161,3 +192,27 @@ export const armour_types_list  = [ "animal skin", "robe","leather armour", "rin
 export const armour_types_list_dragon  = ["steam dragon", "acid dragon", "quicksilver dragon","swamp dragon", "fire dragon", "ice dragon", "pearl dragon",
 "storm dragon", "shadow dragon", "gold dragon"]
 export const shield_types_list  = [ "buckler", "shield", "large shield"]
+
+export function weapon_image (weapon_name,maBrand,randart=false) {
+  var img
+  if (maBrand == "") { 
+    if (/(?:triple sword|dagger|demon blade|club|demon trident|double sword|giant club|giant spiked club|quarterstaff|whip|hand crossbow|triple crossbow)/.test(weapon_name)) {
+      img = weapon_types[weapon_name]['img'] + ".png" 
+    } else {
+      img = weapon_types[weapon_name]['img'] + "1.png" 
+    }
+  }
+  if (maBrand != "") {
+    if (/(?:trishula|sacred scourge|blessed blade)/.test(weapon_name)) {
+     img = weapon_types[weapon_name]['img'] + ".png" 
+    } else {
+
+     img = weapon_types[weapon_name]['img'] + "2.png" 
+    }
+  }
+  if (randart == true) {
+    var randRe= /\".*\"/
+    img = weapon_types[weapon_name]['img'] + "3.png"
+  }
+  return img
+}
