@@ -1,9 +1,52 @@
 <div class="panel">
-  <span>
     <div class=panel-title>
-      <p>Spell List</p>
+    <div class="row">
+    <div class="col">
+      <div style="float:left;">
+      Spell List
+      </div>
+      <div style="float:right;color:greenyellow;padding-right:15px;cursor:pointer" (click)="showAdd=!showAdd">
+        <font *ngIf="!showAdd" style="font-size: 22px;">&#x2295;</font>
+        <font *ngIf="showAdd" style="font-size: 22px;">&#x2296;</font>
+        Add Spell
+      </div>
     </div>
-  </span>
+    </div>
+    </div>
+
+    <div *ngIf="showAdd">
+        <div style="padding-left:15px;">
+          <div >
+            Add a spell to the list:
+          </div>
+          <br>
+          <div ngbDropdown class="d-inline-block">
+            <button class="btn btn-outline-primary" id="dropdownBasic2" ngbDropdownToggle
+            style="width:100px" > 
+              {{searchedSpell}} 
+            </button>
+            <div ngbDropdownMenu aria-labelledby="dropdownBasic2" class=panel 
+            [ngStyle]="{'height':searchResults.length * 40 + 52 + 'px'}"
+            >
+                <div style='padding-left:5px;padding-right:5px'>
+                <input [(ngModel)]="searchedInputSpell"
+                name="searchInput"
+                (keyup)="calculateResults()" type="text" 
+                placeholder="Search Spell" aria-label="Search weapon">
+                </div>
+
+                <button *ngFor="let spellResult of searchResults" ngbDropdownItem
+                (click)="addSpell(spellResult)"
+                >
+
+                <img src="https://raw.githubusercontent.com/crawl/crawl/master/crawl-ref/source/rltiles/{{spellResult.img}}" (error)="altImage(this)">
+                <font style="color:#AA6839">{{spellResult.display}}</font></button>
+            </div>
+          </div>
+      </div>
+    </div>
+
+
 
   <mat-list style=" padding-top:0px">
     <mat-list-item class=test2>

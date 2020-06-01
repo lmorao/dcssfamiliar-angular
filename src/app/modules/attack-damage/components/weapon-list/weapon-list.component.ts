@@ -57,7 +57,6 @@ export class WeaponListComponent implements OnInit {
   };
   calculateResults = function () {
     var results = []
-    console.log(this.searchWeaponInput)
     var re = new RegExp (this.searchWeaponInput, "g") 
     var keys = Object.keys(weapon_types)
     for (var i=0;i<=keys.length;i++){
@@ -68,7 +67,6 @@ export class WeaponListComponent implements OnInit {
           results.push(keys[i])
       } else {
         if (re.test(keys[i])) {
-          console.log(re)
           results.push(keys[i])
         }
       }
@@ -90,7 +88,6 @@ export class WeaponListComponent implements OnInit {
     this.searchWeaponInput = searchResult 
     //this.searchWeaponInput = "" 
     this.calculateResults()
-
   }
 
   selectWeapon (weapon) {
