@@ -19,6 +19,39 @@ export class SpellListComponent implements OnInit {
   profile = new Character()
   armour_penalty = 0
   shield_penalty = 0
+  searchedSpell = "Spell"
+  searchedInputSpell = ""
+
+  altImage = function (ele) {
+    ele.src = "https://github.com/crawl/crawl/blob/master/crawl-ref/source/rltiles/gui/spells/memorise.png"
+  }
+  tempFunc = function (db) {
+    var result = []
+    var keys = Object.keys(db)
+    for (var i=0;i<keys.length;i++) {
+      result.push(db[keys[i]])
+    }
+    return result
+  }
+  searchResults = this.tempFunc(spell_db)
+
+  calculateResults = function () {
+    var result = []
+    var input = this.searchedInputSpell
+    var spell_list = Object.keys(spell_db)
+    for (var i=0;i<spell_list.length;i++) {
+      var real = spell_db[spell_list[i]]
+      var re = new RegExp(input,'gi')
+      if (re.test(real.display)) {
+        result.push(real)
+      } 
+    }
+    this.searchResults = result
+  }
+  addSpell = function (spell) {
+    this.spellList.splice(0,0,spell)
+  }
+  
   diceAvg = function (number) {
     return (number -1) /2
   }
@@ -53,7 +86,10 @@ export class SpellListComponent implements OnInit {
     var raw_power = 0
     if (enhancers >3) {enhancers = 3}
 
+    if (spell.type1 == "none") {schools =1}
+    else {
     schools = this.skills[spell.type1]['level']
+    }
     var div = 1
     if (spell.type2 != "") {
       schools += this.skills[spell.type2]['level']

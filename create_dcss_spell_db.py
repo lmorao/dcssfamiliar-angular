@@ -296,7 +296,7 @@ for spell in spells:
     if db in img_d:
         img = qu(img_d[db])
     else: 
-        img = qu("")
+        img = qu("gui/commands/help.png")
     temp = """{}: {{db: {}, display: {}, type1: {}, type2: {}, type3: {}, flags: {}, level: {}, power: {}, rini: {}, rmax: {}, noise: {}, noise_e: {}, img: {}, ndice: {}, pdice: {}, mdice: {}, ddice: {}, calcdice: {}, hitp: {}, hitm: {}, hitd : {}, notes: {}}},"""\
     .format(qu(db),qu(db),display,qu(type1),qu(type2),qu(type3),qu(flags),level,power,rini,rmax,no,noe, img, n, p, m, d, calcdice, hitp, hitm, hitd, qu(notes))
     if n ==1 and p ==0 and m ==1 and n ==1:
