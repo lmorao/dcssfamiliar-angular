@@ -21,6 +21,7 @@ export class SpellListComponent implements OnInit {
   shield_penalty = 0
   searchedSpell = "Spell"
   searchedInputSpell = ""
+  showAdd = false
 
   altImage = function (ele) {
     ele.src = "https://github.com/crawl/crawl/blob/master/crawl-ref/source/rltiles/gui/spells/memorise.png"
