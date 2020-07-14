@@ -127,6 +127,9 @@ export class WeaponDamageComponent implements OnInit {
       }
       if (weapon.brand =="protection") {this.brand_damage = 0}
       if (weapon.brand =="poison") {this.brand_damage = 0}
+      if (weapon.brand =="None") {this.brand_damage = 0}
+      if (weapon.brand =="vamp") {this.brand_damage = 0}
+      if (weapon.brand =="antimagic") {this.brand_damage = 0}
     } else {
       this.brand_damage = 0
     }
