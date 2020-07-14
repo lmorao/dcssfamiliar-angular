@@ -154,12 +154,12 @@ export class CfParserService {
         wtRe += "|shortbow|longbow"
         wtRe += "|hand crossbow|arbalest|triple crossbow"
         wtRe += ")"
-        var retype = new RegExp("(\\+|-)(\\d+)\\s+(?:vorpal\\s+)?(?:vampiric\\s+)?" + wtRe)
+        var retype = new RegExp("(\\+|-)(\\d+)\\s+(?:vorpal\\s+)?(?:vampiric\\s+)?(?:antimagic\\s+)?" + wtRe)
         var currentWeapon= /\(weapon\)/
 
         if (retype.test(weapons[line])) {
           var maType = retype.exec(weapons[line])
-          var brandRe = /(?:freezing|flaming|distortion|pain|draining|holy wrath|speed|vamp|electrocution|freeze|flame|elec|holy|protection|crushing|chopping|piercing|slashing|slicing|crush|chop|pierce|slash|slice|vorpal)/
+          var brandRe = /(?:freezing|flaming|distortion|pain|draining|holy wrath|speed|vamp|antimagic|electrocution|freeze|flame|elec|holy|protection|crushing|chopping|piercing|slashing|slicing|crush|chop|pierce|slash|slice|vorpal)/
           if (brandRe.test(weapons[line]))
           {
             var maBrand = brandRe.exec(weapons[line])[0]

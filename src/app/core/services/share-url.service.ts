@@ -197,6 +197,7 @@ export class ShareUrlService {
     if (weapon.brand == "protection") { brand = "h" }
     if (weapon.brand == "vamp") { brand = "i" }
     if (weapon.brand == "draining") { brand = "j" }
+    if (weapon.brand == "antimagic") { brand = "k" }
     
     res += brand
     return res
@@ -271,6 +272,7 @@ export class ShareUrlService {
     if (brand == "h" ) { res.brand = "protection"}
     if (brand == "i" ) { res.brand = "vamp"}
     if (brand == "j" ) { res.brand = "draining"}
+    if (brand == "k" ) { res.brand = "antimagic"}
  
     return res
 

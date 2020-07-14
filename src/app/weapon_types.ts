@@ -132,6 +132,10 @@ export function brand_color (brand) {
       return "silver";
     case "vorpal":
       return "white";
+    case "vamp":
+      return "darkred";
+    case "antimagic":
+      return "white";
     case "protection":
       return "brown";
     case "draining":
