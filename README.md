@@ -1,27 +1,34 @@
+
 # DcssfamiliarAngular
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.20.
+<p>
+  <a href="https://dcssfamiliar.com">
+	<img src="https://raw.githubusercontent.com/ezmonkey4/dcssfamiliar-angular/master/src/assets/images/DCSS_logo.png" alt="dcssfamiliar logo">
+  </a>
+</p>
+
+
+https://dcssfamiliar.com
+This website serves as a damage calculator tool for an old dungeon crawl game: https://crawl.develz.org 
+
+## Tool Features
+
+### Weapon damage calculator
+
+The tool calculates damage based weapon, brand, skills, stats, slaying and enemy armor.
+
+#### Limitations
+
+* It does not account for evasion. This is actually a big part of the calculation that is missing, but right now I don't have time to do the work.
+
+* There may be some errors on aproximations (like divisions)  when I converted the C++ to javascript
+
+### Spell damage calculator
+
+The tool displays spell power based on skills and items used.
 
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.20.
