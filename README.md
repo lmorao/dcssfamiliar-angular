@@ -1,14 +1,17 @@
 
 # DcssfamiliarAngular
 
-<p>
+<div>
   <a href="https://dcssfamiliar.com">
 	<img src="https://raw.githubusercontent.com/ezmonkey4/dcssfamiliar-angular/master/src/assets/images/DCSS_logo.png" alt="dcssfamiliar logo">
+            <h1 style="float:center"> <font size="26" color="red">familiar</font></h1>
   </a>
-</p>
+
+</div>
 
 
-https://dcssfamiliar.com
+https://dcssfamiliar.com  
+
 This website serves as a damage calculator tool for an old dungeon crawl game: https://crawl.develz.org 
 
 ## Tool Features
