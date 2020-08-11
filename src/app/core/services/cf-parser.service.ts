@@ -52,7 +52,7 @@ export class CfParserService {
       var words = temp0.split(/ /)
       var slaying = 0
       for (var line=0; line < words.length; line +=1) {
-        var slayRe = /Slay[\+-](\d+)/
+        var slayRe = /Slay([\+-]\d+)/
         if (slayRe.test(words[line])) {
           slaying = parseInt(slayRe.exec(words[line])[1]) + slaying
         }
