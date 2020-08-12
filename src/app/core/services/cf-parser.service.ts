@@ -194,7 +194,7 @@ export class CfParserService {
             }
           }
           if (maBrand != "") {
-            if (/(?:trishula|sacred scourge|blessed blade)/.test(maType[3])) {
+            if (/(?:trishula|sacred scourge|blessed blade|eudemon)/.test(maType[3])) {
              img = weapon_types[maType[3]]['img'] + ".png" 
             } else {
 
