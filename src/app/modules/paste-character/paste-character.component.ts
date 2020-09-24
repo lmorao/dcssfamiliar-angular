@@ -45,7 +45,11 @@ export class PasteCharacterComponent implements OnInit {
           return spell_db[key].display ==spellList3[i]
         }
       })
-      spellList1.push(result[0])
+      if (result[0] == undefined) {
+        spellList1.push('SPELL_NO_SPELL')
+      } else {
+        spellList1.push(result[0])
+      }
     }
     //var url = this.shareUrlService.createUrl(profile, skills, weaponsArray[0], weaponsArray[1])
     //window.location.href = environment.serverUrl+ "/#/parse/" + url
